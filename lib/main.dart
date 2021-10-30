@@ -27,34 +27,33 @@ class Home extends StatefulWidget {
 
 class _Home extends State<StatefulWidget> {
   int _count = 0;
+
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 1: Search',
       style: optionStyle,
     ),
     Text(
-      'Index 2: Settings',
+      'Index 2: Delete',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 3: Settings',
       style: optionStyle,
     ),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      title: 'PAP Unnamed Keyboard',
       home: Scaffold(
         appBar: AppBar(
           title: const Center(
@@ -62,35 +61,72 @@ class _Home extends State<StatefulWidget> {
           ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
+              bottom: Radius.circular(30),
             ),
           ),
         ),
         body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  <Widget>[
+              _widgetOptions.elementAt(_selectedIndex),
+              Text('You have pressed the button $_count times.')
+              ]
+          ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.blue,
+        bottomNavigationBar: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: BottomAppBar(
+            color: Colors.blue,
+            shape: const CircularNotchedRectangle(),
+            notchMargin: 5,
+            child: SizedBox(
+              height: 60.0,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(
+                    icon: const Icon(
+                      Icons.vpn_key,
+                      color: Colors.white,
+                    ),
+                    tooltip: 'Home',
+                    onPressed: () => setState(() => _selectedIndex = 0),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    tooltip: 'Search',
+                    onPressed: () => setState(() => _selectedIndex = 1),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      semanticLabel: "hey",
+                    ),
+                    tooltip: 'Delete',
+                    onPressed: () => setState(() => _selectedIndex = 2),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                    ),
+                    tooltip: 'Settings',
+                    onPressed: () => setState(() => _selectedIndex = 3),
+                  ),
+                ],
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              label: 'Business',
-              backgroundColor: Colors.green,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-              backgroundColor: Colors.pink,
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber[800],
-          onTap: _onItemTapped,
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => setState(() => _count++),
