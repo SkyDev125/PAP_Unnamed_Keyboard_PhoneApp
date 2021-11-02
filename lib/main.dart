@@ -78,6 +78,7 @@ class _Home extends State<StatefulWidget> {
 
   void reorderData(int oldIndex, int newIndex) {
     setState(() {
+      HapticFeedback.heavyImpact();
       if (newIndex > oldIndex) {
         newIndex--;
       }
@@ -105,14 +106,24 @@ class _Home extends State<StatefulWidget> {
           ),
         ),
         body: ReorderableListView.builder(
-          padding: const EdgeInsets.only(top: 88, bottom: 65),
+          padding: EdgeInsets.only(
+              top: (MediaQuery.of(context).size.height) / 8.2,
+              bottom: (MediaQuery.of(context).size.height) / 9.5),
           onReorder: reorderData,
           itemCount: _cardsList.length,
           itemBuilder: (BuildContext context, int index) {
             final card = _cardsList[index];
+            //GestureDetector(
+            //  onLongPress: () {
+            //    setState(() {
+            //      HapticFeedback.heavyImpact();
+            //    });
+            //  },
+            //);
             return Dismissible(
                 key: ValueKey(card),
                 confirmDismiss: (DismissDirection direction) async {
+                  HapticFeedback.heavyImpact();
                   return await showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -136,16 +147,17 @@ class _Home extends State<StatefulWidget> {
                     },
                   );
                 },
+                direction: DismissDirection.endToStart,
                 background: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(30)),
-                    child: Container(
-                        color: const Color(0xB2FF4D4D),
-                        child: const Align(
-                          alignment: Alignment(0.8, 0),
-                            //todo: add text behind icon
-                          child: Icon(Icons.delete, size: 35),
-                        ),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                  child: Container(
+                    color: const Color(0xB2FF4D4D),
+                    child: const Align(
+                      alignment: Alignment(0.8, 0),
+                      //todo: add text behind icon
+                      child: Icon(Icons.delete, size: 35),
                     ),
+                  ),
                 ),
                 onDismissed: (direction) {
                   setState(() {
@@ -205,8 +217,10 @@ class _Home extends State<StatefulWidget> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          //onPressed: () => setState(() => _count++),
-          onPressed: () => setState(() => _cardsList.add(_card())),
+          onPressed: () => setState(() {
+            _cardsList.add(_card());
+            HapticFeedback.heavyImpact();
+          }),
           tooltip: 'Increment Counter',
           child: const Icon(Icons.add),
         ),
