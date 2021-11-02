@@ -72,8 +72,7 @@ class _Home extends State<StatefulWidget> {
         ]),
       ),
       shape: const RoundedRectangleBorder(
-          borderRadius:
-          BorderRadius.all(Radius.circular(30))),
+          borderRadius: BorderRadius.all(Radius.circular(30))),
     );
   }
 
@@ -106,7 +105,7 @@ class _Home extends State<StatefulWidget> {
           ),
         ),
         body: ReorderableListView.builder(
-          padding: const EdgeInsets.only(top: 85, bottom: 65),
+          padding: const EdgeInsets.only(top: 88, bottom: 65),
           onReorder: reorderData,
           itemCount: _cardsList.length,
           itemBuilder: (BuildContext context, int index) {
@@ -137,13 +136,28 @@ class _Home extends State<StatefulWidget> {
                     },
                   );
                 },
-                background: Container(color: const Color(0xB2FF4D4D)),
+                background: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    child: Container(
+                        color: const Color(0xB2FF4D4D),
+                        child: const Align(
+                          alignment: Alignment(0.8, 0),
+                            //todo: add text behind icon
+                          child: Icon(Icons.delete, size: 35),
+                        ),
+                    ),
+                ),
                 onDismissed: (direction) {
                   setState(() {
                     _cardsList.removeAt(index);
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('$index dismissed')));
+                    SnackBar(
+                      content: Text('$index dismissed'),
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                    ),
+                  );
                 },
                 child: _cardsList[index]);
           },
