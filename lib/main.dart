@@ -1,3 +1,13 @@
+//TODO: Check information about 2FA
+//TODO: Enhance the deletion of a widget
+//TODO: Document the whole code, every single line
+//TODO: Organize the code for better readability
+//TODO: Set configuration of Passwords and 2FA(if possible)
+//TODO: Research about bluetooth or nfc connection between app and raspberry pi
+//TODO: Implement the data receive and sent of information based on NFT or Bluetooth
+//TODO: Figure a way to save the app data so it wont be lost if closed. (save widget)
+//TODO: Get rid of the useless menu's and figure out something better
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -34,37 +44,16 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<StatefulWidget> {
-  //int _count = 0;
-
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Search',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Delete',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
-  ];
+  final List<Widget> _cardsList = [];
 
-  final List<Widget> _cardList = [
-    const Card(
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 80),
-      ),
-    )
+  var bottomAppBarMenuIcons = [
+    Icons.vpn_key,
+    Icons.search_sharp,
+    Icons.delete,
+    Icons.settings
   ];
+  var bottomAppBarMenuTooltips = ["Home", "Search", "Delete", "Settings"];
 
   Widget _card() {
     return Card(
@@ -83,12 +72,17 @@ class _Home extends State<StatefulWidget> {
         ]),
       ),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(30),
-          top: Radius.circular(30),
-        ),
-      ),
+          borderRadius:
+          BorderRadius.all(Radius.circular(30))),
     );
+  }
+
+  void reorderData(int oldIndex, int newIndex) {
+    setState(() {
+      if (newIndex > oldIndex) {
+        newIndex--;
+      }
+    });
   }
 
   @override
@@ -111,28 +105,55 @@ class _Home extends State<StatefulWidget> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: _cardList +
-                  const <Widget>[
-                    Card(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 60),
-                      ),
-                    ),
-                  ],
-            ),
-          ),
+        body: ReorderableListView.builder(
+          padding: const EdgeInsets.only(top: 85, bottom: 65),
+          onReorder: reorderData,
+          itemCount: _cardsList.length,
+          itemBuilder: (BuildContext context, int index) {
+            final card = _cardsList[index];
+            return Dismissible(
+                key: ValueKey(card),
+                confirmDismiss: (DismissDirection direction) async {
+                  return await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                        title: const Text("Confirm"),
+                        content: const Text(
+                            "Are you sure you wish to delete this PassWord?"),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: const Text("DELETE")),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: const Text("CANCEL"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                background: Container(color: const Color(0xB2FF4D4D)),
+                onDismissed: (direction) {
+                  setState(() {
+                    _cardsList.removeAt(index);
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('$index dismissed')));
+                },
+                child: _cardsList[index]);
+          },
         ),
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: Color(0x0f000000),
-                blurRadius: 10,
+                color: Color(0x1a000000),
+                blurRadius: 20,
               ),
             ],
           ),
@@ -150,36 +171,20 @@ class _Home extends State<StatefulWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    IconButton(
-                      icon: const Icon(
-                        Icons.vpn_key,
+                    for (int i = 0; i < 4; i++)
+                      IconButton(
+                        icon: Icon(
+                          bottomAppBarMenuIcons[i],
+                          color: _selectedIndex == i
+                              ? Theme.of(context).colorScheme.secondary
+                              : Theme.of(context).iconTheme.color,
+                        ),
+                        tooltip: bottomAppBarMenuTooltips[i],
+                        splashRadius: 650,
+                        splashColor: Theme.of(context).colorScheme.secondary,
+                        onPressed: () => setState(() => _selectedIndex = i),
                       ),
-                      tooltip: 'Home',
-                      onPressed: () => setState(() => _selectedIndex = 0),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.search_sharp,
-                      ),
-                      tooltip: 'Search',
-                      onPressed: () => setState(() => _selectedIndex = 1),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.delete,
-                        semanticLabel: "hey",
-                      ),
-                      tooltip: 'Delete',
-                      onPressed: () => setState(() => _selectedIndex = 2),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.settings,
-                      ),
-                      tooltip: 'Settings',
-                      onPressed: () => setState(() => _selectedIndex = 3),
-                    ),
-                  ],
+                  ], //
                 ),
               ),
             ),
@@ -187,7 +192,7 @@ class _Home extends State<StatefulWidget> {
         ),
         floatingActionButton: FloatingActionButton(
           //onPressed: () => setState(() => _count++),
-          onPressed: () => setState(() => _cardList.add(_card())),
+          onPressed: () => setState(() => _cardsList.add(_card())),
           tooltip: 'Increment Counter',
           child: const Icon(Icons.add),
         ),
