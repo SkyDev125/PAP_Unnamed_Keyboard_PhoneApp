@@ -9,7 +9,6 @@ class FloatActionButton extends StatefulWidget {
 }
 
 class _FloatActionButtonState extends State<FloatActionButton> {
-
   Widget _card() {
     return Card(
       elevation: 10,
@@ -34,10 +33,12 @@ class _FloatActionButtonState extends State<FloatActionButton> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-          //onPressed: () => setState(() => _count++),
-          onPressed: () => setState(() => cardsList.add(_card())),
-          tooltip: 'Add Account',
-          child: const Icon(Icons.add),
-        );
+      //onPressed: () => setState(() => _count++),
+      onPressed: () {
+        cardsList.add(_card());
+      },
+      tooltip: 'Add Account',
+      child: const Icon(Icons.add),
+    );
   }
 }

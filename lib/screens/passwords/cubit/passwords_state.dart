@@ -1,10 +1,7 @@
 part of 'passwords_cubit.dart';
 
-@immutable
-abstract class PasswordsState {}
-
-class PasswordsInitial extends PasswordsState {}
-
-class PasswordsFloatButton extends PasswordsState {}
-
-class PasswordsNavBarButtons extends PasswordsState {}
+@freezed
+class PasswordsState with _$PasswordsState {
+  const factory PasswordsState.initial() = _Initial;
+  const factory PasswordsState.floatActionButton() = _floatActionButton;
+}

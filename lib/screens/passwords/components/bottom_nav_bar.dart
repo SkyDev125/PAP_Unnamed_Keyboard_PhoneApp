@@ -49,7 +49,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         splashColor: Theme.of(context).colorScheme.secondary,
                         onPressed: () => setState(() {
                           selectedIndex = i;
-                          
                         }),
                       ),
                   ], //

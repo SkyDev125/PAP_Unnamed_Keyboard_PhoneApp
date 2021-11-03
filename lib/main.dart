@@ -8,13 +8,16 @@
 //TODO: Figure a way to save the app data so it wont be lost if closed. (save widget)
 //TODO: Get rid of the useless menu's and figure out something better
 
-
 import 'package:flutter/material.dart';
-
 import 'routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'screens/passwords/cubit/passwords_cubit.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(BlocProvider(
+    create: (context) => PasswordsCubit(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

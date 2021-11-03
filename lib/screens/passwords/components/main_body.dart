@@ -20,7 +20,7 @@ class MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     return ReorderableListView.builder(
-      padding: const EdgeInsets.only(top: 88, bottom: 65),
+      padding: const EdgeInsets.only(top: 88, bottom: 65, left: 10, right: 10),
       onReorder: reorderData,
       itemCount: cardsList.length,
       itemBuilder: (BuildContext context, int index) {
