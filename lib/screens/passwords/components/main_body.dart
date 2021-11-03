@@ -9,7 +9,6 @@ class MainBody extends StatefulWidget {
 }
 
 class MainBodyState extends State<MainBody> {
-
   void reorderData(int oldIndex, int newIndex) {
     setState(() {
       if (newIndex > oldIndex) {
@@ -21,63 +20,68 @@ class MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     return ReorderableListView.builder(
-          padding: const EdgeInsets.only(top: 88, bottom: 65),
-          onReorder: reorderData,
-          itemCount: cardsList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final card = cardsList[index];
-            return Dismissible(
-                key: ValueKey(card),
-                confirmDismiss: (DismissDirection direction) async {
-                  return await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        title: const Text("Confirm"),
-                        content: const Text(
-                            "Are you sure you wish to delete this PasrsWord?"),
-                        actions: <Widget>[
-                          TextButton(
-                              onPressed: () => Navigator.of(context).pop(true),
-                              child: const Text("DELETE")),
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(false),
-                            child: const Text("CANCEL"),
-                          ),
-                        ],
-                      );
-                    },
+      padding: const EdgeInsets.only(top: 88, bottom: 65),
+      onReorder: reorderData,
+      itemCount: cardsList.length,
+      itemBuilder: (BuildContext context, int index) {
+        final card = cardsList[index];
+        return Dismissible(
+            direction: DismissDirection.endToStart,
+            key: ValueKey(card),
+            confirmDismiss: (DismissDirection direction) async {
+              return await showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                    title: const Text("Confirm", style: TextStyle(fontSize: 25)),
+                    content: const Text(
+                        "Are you sure you wish to delete this PassWord?", style: TextStyle(fontSize: 20)),
+                    actions: <Widget>[ 
+                      TextButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          child: const Text("DELETE", style: TextStyle(fontSize: 20))),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text("CANCEL", style: TextStyle(fontSize: 20)),
+                      ),
+                    ],
                   );
                 },
-                background: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                  child: Container(
-                    color: const Color(0xB2FF4D4D),
-                    child: const Align(
-                      alignment: Alignment(0.8, 0),
-                      //todo: add text behind icon
-                      child: Icon(Icons.delete, size: 35),
-                    ),
-                  ),
+              );
+            },
+            background: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(30)),
+              child: Container(
+                color: const Color(0xB2FF4D4D),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text("REMOVE", style: TextStyle(fontSize: 20)),
+                    Icon(Icons.delete, size: 40),
+                    Padding(padding: EdgeInsets.only(right: 30))
+                  ],
                 ),
-                onDismissed: (direction) {
-                  setState(() {
-                    cardsList.removeAt(index);
-                    //TODO: add cubit
-                  });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('$index dismissed'),
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                    ),
-                  );
-                },
-                child: cardsList[index]);
-          },
-        );
+              ),
+            ),
+            onDismissed: (direction) {
+              setState(() {
+                cardsList.removeAt(index);
+                //TODO: add cubit
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('$index dismissed'),
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                ),
+              );
+            },
+            child: cardsList[index]);
+      },
+    );
   }
 }

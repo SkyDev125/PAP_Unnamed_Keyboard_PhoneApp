@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'components/main_body.dart';
 import 'components/bottom_nav_bar.dart';
@@ -11,7 +12,11 @@ class PasswordsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light.copyWith(
+        systemNavigationBarColor: Theme.of(context).bottomAppBarColor,
+      ),
+      child: const Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: TopAppBar(),
@@ -19,6 +24,7 @@ class PasswordsPage extends StatelessWidget {
       bottomNavigationBar: BottomNavBar(),
       floatingActionButton: FloatActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    ),
     );
   }
 }

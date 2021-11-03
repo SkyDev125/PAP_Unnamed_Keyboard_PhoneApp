@@ -1,7 +1,7 @@
-//TODO: Check information about 2FA
-//TODO: Enhance the deletion of a widget
+//TODO: Figure out how to use cubits and blocs
 //TODO: Document the whole code, every single line
 //TODO: Organize the code for better readability
+//TODO: Check information about 2FA
 //TODO: Set configuration of Passwords and 2FA(if possible)
 //TODO: Research about bluetooth or nfc connection between app and raspberry pi
 //TODO: Implement the data receive and sent of information based on NFT or Bluetooth
