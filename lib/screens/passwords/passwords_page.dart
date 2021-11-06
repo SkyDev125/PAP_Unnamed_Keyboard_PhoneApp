@@ -16,6 +16,7 @@ class PasswordsPage extends StatelessWidget {
       value: SystemUiOverlayStyle.light.copyWith(
         systemNavigationBarColor: Theme.of(context).bottomAppBarColor,
       ),
+      
       child: const Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,

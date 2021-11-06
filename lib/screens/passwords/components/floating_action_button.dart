@@ -1,5 +1,7 @@
 import 'package:first_app/components/variables.dart';
+import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 class FloatActionButton extends StatefulWidget {
   const FloatActionButton({Key? key}) : super(key: key);
@@ -36,6 +38,7 @@ class _FloatActionButtonState extends State<FloatActionButton> {
       //onPressed: () => setState(() => _count++),
       onPressed: () {
         cardsList.add(_card());
+        context.read<PasswordsBloc>().add(const PasswordsEvent.cardAdd());
       },
       tooltip: 'Add Account',
       child: const Icon(Icons.add),
