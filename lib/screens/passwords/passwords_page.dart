@@ -27,8 +27,8 @@ class PasswordsPage extends StatelessWidget {
       child: const Scaffold(
 
       //Enable widgets get behind top and bottom App Bar, so they dont clip through                                                      
-      extendBodyBehindAppBar: true,   
-      extendBody: true,
+      extendBodyBehindAppBar: true,   //Behind top App Bar
+      extendBody: true,               //Behind bottom App Bar
       
       //Imported Widgets                                                      
       appBar: TopAppBar(),                                                                                                           
