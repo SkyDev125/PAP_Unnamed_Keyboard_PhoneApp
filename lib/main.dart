@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
         ),  
       ),  
       darkTheme: ThemeData.dark().copyWith(),             //Dark Theme
+      //TODO: Set Colour of the text in the text buttons to the correct accent colour in the dark theme.
       
       //Set routes of the application (pages)
       routes: routes,                                   

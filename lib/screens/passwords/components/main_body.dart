@@ -50,7 +50,12 @@ class MainBodyState extends State<MainBody> {
         //total items in the list and start building the widgets inside
         return ReorderableListView.builder(
           padding:
-              const EdgeInsets.only(top: 88, bottom: 65, left: 10, right: 10),
+              EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top+15, 
+                bottom: MediaQuery.of(context).padding.bottom+30, 
+                left: MediaQuery.of(context).padding.left+10,
+                right: MediaQuery.of(context).padding.right+10,
+                ),
           onReorder: reorderData,
           itemCount: cardsList.length,
 
