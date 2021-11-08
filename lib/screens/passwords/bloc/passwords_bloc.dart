@@ -13,5 +13,10 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
       emit(const PasswordsState.loading());
       emit(const PasswordsState.loaded());
     });
+
+    on<PasswordsAllCardsRemoved>((event, emit) async {
+      emit(const PasswordsState.loading());
+      emit(const PasswordsState.initial());
+    });
   }
 }

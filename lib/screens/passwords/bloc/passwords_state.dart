@@ -1,3 +1,5 @@
+// RUN THIS for developing with bloc: 
+//flutter pub run build_runner watch --delete-conflicting-outputs
 part of 'passwords_bloc.dart';
 
 @freezed

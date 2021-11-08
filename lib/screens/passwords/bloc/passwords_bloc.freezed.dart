@@ -20,6 +20,10 @@ class _$PasswordsEventTearOff {
   PasswordsCardAdd cardAdd() {
     return const PasswordsCardAdd();
   }
+
+  PasswordsAllCardsRemoved allCardsRemoved() {
+    return const PasswordsAllCardsRemoved();
+  }
 }
 
 /// @nodoc
@@ -30,32 +34,38 @@ mixin _$PasswordsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() cardAdd,
+    required TResult Function() allCardsRemoved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? cardAdd,
+    TResult Function()? allCardsRemoved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? cardAdd,
+    TResult Function()? allCardsRemoved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PasswordsCardAdd value) cardAdd,
+    required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +130,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() cardAdd,
+    required TResult Function() allCardsRemoved,
   }) {
     return cardAdd();
   }
@@ -128,6 +139,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? cardAdd,
+    TResult Function()? allCardsRemoved,
   }) {
     return cardAdd?.call();
   }
@@ -136,6 +148,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? cardAdd,
+    TResult Function()? allCardsRemoved,
     required TResult orElse(),
   }) {
     if (cardAdd != null) {
@@ -148,6 +161,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(PasswordsCardAdd value) cardAdd,
+    required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
   }) {
     return cardAdd(this);
   }
@@ -156,6 +170,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
   }) {
     return cardAdd?.call(this);
   }
@@ -164,6 +179,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
     required TResult orElse(),
   }) {
     if (cardAdd != null) {
@@ -175,6 +191,112 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
 
 abstract class PasswordsCardAdd implements PasswordsEvent {
   const factory PasswordsCardAdd() = _$PasswordsCardAdd;
+}
+
+/// @nodoc
+abstract class $PasswordsAllCardsRemovedCopyWith<$Res> {
+  factory $PasswordsAllCardsRemovedCopyWith(PasswordsAllCardsRemoved value,
+          $Res Function(PasswordsAllCardsRemoved) then) =
+      _$PasswordsAllCardsRemovedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$PasswordsAllCardsRemovedCopyWithImpl<$Res>
+    extends _$PasswordsEventCopyWithImpl<$Res>
+    implements $PasswordsAllCardsRemovedCopyWith<$Res> {
+  _$PasswordsAllCardsRemovedCopyWithImpl(PasswordsAllCardsRemoved _value,
+      $Res Function(PasswordsAllCardsRemoved) _then)
+      : super(_value, (v) => _then(v as PasswordsAllCardsRemoved));
+
+  @override
+  PasswordsAllCardsRemoved get _value =>
+      super._value as PasswordsAllCardsRemoved;
+}
+
+/// @nodoc
+
+class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
+  const _$PasswordsAllCardsRemoved();
+
+  @override
+  String toString() {
+    return 'PasswordsEvent.allCardsRemoved()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is PasswordsAllCardsRemoved);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() cardAdd,
+    required TResult Function() allCardsRemoved,
+  }) {
+    return allCardsRemoved();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? cardAdd,
+    TResult Function()? allCardsRemoved,
+  }) {
+    return allCardsRemoved?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cardAdd,
+    TResult Function()? allCardsRemoved,
+    required TResult orElse(),
+  }) {
+    if (allCardsRemoved != null) {
+      return allCardsRemoved();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PasswordsCardAdd value) cardAdd,
+    required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
+  }) {
+    return allCardsRemoved(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+  }) {
+    return allCardsRemoved?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    required TResult orElse(),
+  }) {
+    if (allCardsRemoved != null) {
+      return allCardsRemoved(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PasswordsAllCardsRemoved implements PasswordsEvent {
+  const factory PasswordsAllCardsRemoved() = _$PasswordsAllCardsRemoved;
 }
 
 /// @nodoc

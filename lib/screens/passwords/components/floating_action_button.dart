@@ -1,6 +1,7 @@
 import 'package:first_app/components/variables.dart';
 import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
 import 'package:flutter/material.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
 class FloatActionButton extends StatefulWidget {

@@ -84,6 +84,9 @@ class MainBodyState extends State<MainBody> {
                 onDismissed: (direction) {
                   setState(() {
                     cardsList.removeAt(index);
+                    if(cardsList.isEmpty){
+                      context.read<PasswordsBloc>().add(const PasswordsEvent.allCardsRemoved());
+                    }
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
