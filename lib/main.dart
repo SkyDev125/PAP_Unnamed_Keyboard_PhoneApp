@@ -1,5 +1,3 @@
-//TODO 1: Document the whole code, every single line
-//TODO 2: Organize the code for better readability
 //TODO 3: Check information about 2FA
 //TODO 4: Make a menu for the floating action button
 //TODO 5: Set configuration of Passwords and 2FA(if possible)
