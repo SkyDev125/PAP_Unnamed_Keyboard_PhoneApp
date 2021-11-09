@@ -41,12 +41,18 @@ class MyApp extends StatelessWidget {
       //Set application Themes                 
       theme: ThemeData.light().copyWith(                  //Light Theme
         colorScheme: ColorScheme.fromSwatch().copyWith(   //Override Color Schemne
-          primary: Colors.blue,                           //Set Primary Color (AppBar)
-          secondary: Colors.blue,                         //Set Secondary Color (Buttons, active button, snackbar)
+          primary: Colors.blue,                           //Change Primary Color (AppBar)
+          secondary: Colors.blue,                         //Change Secondary Color (Buttons, active button, snackbar)
         ),  
-      ),  
-      darkTheme: ThemeData.dark().copyWith(),             //Dark Theme
-      //TODO: Set Colour of the text in the text buttons to the correct accent colour in the dark theme.
+      ),
+
+      darkTheme: ThemeData.dark().copyWith(                                                     //Dark Theme
+        textButtonTheme: TextButtonThemeData(                                                   //Override Text Button Theme
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.tealAccent),               //Change Text Color           
+            overlayColor: MaterialStateProperty.all<Color>(Colors.tealAccent.withOpacity(0.3)), //Change splash color
+            )),
+      ),
       
       //Set routes of the application (pages)
       routes: routes,                                   

@@ -3,6 +3,7 @@ import 'package:first_app/components/variables.dart';
 
 //Import the files needed for widgets
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 //Import the files needed for the event handler
 // ignore: implementation_imports
@@ -56,6 +57,7 @@ class _FloatActionButtonState extends State<FloatActionButton> {
       //onPressed: () => setState(() => _count++),
       onPressed: () {
         cardsList.add(_card());
+        HapticFeedback.heavyImpact();
         context.read<PasswordsBloc>().add(const PasswordsEvent.cardAdd());
       },
       tooltip: 'Add Account',
