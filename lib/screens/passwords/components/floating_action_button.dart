@@ -1,5 +1,6 @@
 //Import the files needed for the variables
 import 'package:first_app/components/variables.dart';
+import 'package:first_app/screens/passwords_setup/passwords_page.dart';
 
 //Import the files needed for widgets
 import 'package:flutter/material.dart';
@@ -8,7 +9,9 @@ import 'package:flutter/services.dart';
 //Import the files needed for the event handler
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
-import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
+
+//Imports needed for the Pages
+import '/screens/passwords/bloc/passwords_bloc.dart';
 
 //Create the widget Float Action Button Class
 class FloatActionButton extends StatefulWidget {
@@ -59,6 +62,7 @@ class _FloatActionButtonState extends State<FloatActionButton> {
         cardsList.add(_card());
         HapticFeedback.heavyImpact();
         context.read<PasswordsBloc>().add(const PasswordsEvent.cardAdd());
+        Navigator.pushNamed(context, PasswordsSetupPage.routeName);
       },
       tooltip: 'Add Account',
       child: const Icon(Icons.add),

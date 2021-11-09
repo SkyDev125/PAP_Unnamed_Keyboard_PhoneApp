@@ -1,6 +1,5 @@
 //Import files necessary for Bloc (event/state manager) and freezed (easier development with bloc)
 import 'package:bloc/bloc.dart';
-import 'package:first_app/components/variables.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 //Import files that are part of this one
@@ -11,6 +10,7 @@ part 'passwords_state.dart';
 //React to events and emit states
 class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
   PasswordsBloc() : super(const PasswordsState.initial()) {
+
     //Run on Passwords Card Add event
     on<PasswordsCardAdd>((event, emit) async {
       emit(const PasswordsState.loading());
