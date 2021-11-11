@@ -28,7 +28,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           //Set the box shadow's color and blur radius
           BoxShadow(
             color: Color(0x1a000000),
-            blurRadius: 20,
+            blurRadius: 10,
           ),
         ],
       ),

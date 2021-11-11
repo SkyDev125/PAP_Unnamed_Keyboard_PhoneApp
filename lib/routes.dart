@@ -2,8 +2,9 @@
 import 'package:flutter/widgets.dart';
 
 //Import the Pages
+import 'screens/2fa_setup/passwords_page.dart';
+import 'screens/password_setup/passwords_page.dart';
 import 'screens/passwords/passwords_page.dart';
-import 'screens/passwords_setup/passwords_page.dart';
 import 'screens/settings/passwords_page.dart';
 
 //Configure the pages that will exist in the application (when a button is pressed and a new scaffold is needed)
@@ -15,6 +16,7 @@ final Map<String, WidgetBuilder> routes = {
   PasswordsPage.routeName: (context) => const PasswordsPage(),
 
   //Go to the other pages
-  PasswordsSetupPage.routeName: (context) => const PasswordsSetupPage(), 
+  TwoFAsetupPage.routeName: (context) => const TwoFAsetupPage(),
+  PasswordSetupPage.routeName: (context) => const PasswordSetupPage(), 
   SettingsPage.routeName: (context) => const SettingsPage(),   
 };

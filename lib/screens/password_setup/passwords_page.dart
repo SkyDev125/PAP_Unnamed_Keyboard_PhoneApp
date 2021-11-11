@@ -7,10 +7,10 @@ import 'components/main_body.dart';               //Main Body widget
 import 'components/top_app_bar.dart';             //Top App Bar Widget
 
 //Set main class of this Page
-class PasswordsSetupPage extends StatelessWidget {
-  const PasswordsSetupPage({Key? key}) : super(key: key);
+class PasswordSetupPage extends StatelessWidget {
+  const PasswordSetupPage({Key? key}) : super(key: key);
 
-  static String routeName = "/PasswordsSetup";  //Setting the route name to "/" makes it the default page so the app starts here
+  static String routeName = "/password_setup";  //Setting the route name to "/" makes it the default page so the app starts here
 
   @override                                                             
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class PasswordsSetupPage extends StatelessWidget {
     //Start Widget Sequence but change the navigation bar color first                                  
     return AnnotatedRegion<SystemUiOverlayStyle>(                       
       value: SystemUiOverlayStyle.light.copyWith(                       
-        systemNavigationBarColor: Theme.of(context).scaffoldBackgroundColor 
+        systemNavigationBarColor: Theme.of(context).scaffoldBackgroundColor,  
       ),
       
       //Create the main scaffold (main page widget, house for all other widgets)
@@ -26,11 +26,10 @@ class PasswordsSetupPage extends StatelessWidget {
 
       //Enable widgets get behind top and bottom App Bar, so they dont clip through                                                      
       extendBodyBehindAppBar: true,   //Behind top App Bar
-      extendBody: true,               //Behind bottom App Bar
       
       //Imported Widgets                                                      
       appBar: TopAppBar(),                                                                                                           
-      body: MainBody(),                                                        
+      body: MainBody(),                                                         
     ),
     );
   }

@@ -15,7 +15,7 @@ class TopAppBar extends StatelessWidget with PreferredSizeWidget {
 
           //Center the title
           title: const Center(
-            child: Text('Settings'),
+            child: Text('Password Setup'),
           ),
 
           //Round the bottom corners

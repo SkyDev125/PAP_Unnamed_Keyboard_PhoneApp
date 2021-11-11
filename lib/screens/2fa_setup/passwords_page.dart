@@ -7,10 +7,10 @@ import 'components/main_body.dart';               //Main Body widget
 import 'components/top_app_bar.dart';             //Top App Bar Widget
 
 //Set main class of this Page
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+class TwoFAsetupPage extends StatelessWidget {
+  const TwoFAsetupPage({Key? key}) : super(key: key);
 
-  static String routeName = "/settings";  //Setting the route name to "/" makes it the default page so the app starts here
+  static String routeName = "/twofa_setup";  //Setting the route name to "/" makes it the default page so the app starts here
 
   @override                                                             
   Widget build(BuildContext context) {
