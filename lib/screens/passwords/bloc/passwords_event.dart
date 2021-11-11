@@ -7,11 +7,16 @@ part of 'passwords_bloc.dart';
 //Freeze the class to make development easier
 @freezed
 class PasswordsEvent with _$PasswordsEvent {
-
   //Set events to be called:
   const factory PasswordsEvent.cardAdd() =
       PasswordsCardAdd; //Passwords Card added event
 
   const factory PasswordsEvent.allCardsRemoved() =
       PasswordsAllCardsRemoved; //Passwords All cards removed event
+}
+
+@freezed
+class SpeedDialEvent with _$SpeedDialEvent {
+  const factory SpeedDialEvent.close() = SpeedDialClose;
+  const factory SpeedDialEvent.open() = SpeedDialOpen;
 }

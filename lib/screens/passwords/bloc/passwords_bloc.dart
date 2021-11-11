@@ -1,6 +1,5 @@
 //Import files necessary for Bloc (event/state manager) and freezed (easier development with bloc)
 import 'package:bloc/bloc.dart';
-import 'package:first_app/components/variables.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 //Import files that are part of this one
@@ -21,6 +20,19 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
     on<PasswordsAllCardsRemoved>((event, emit) async {
       emit(const PasswordsState.loading());
       emit(const PasswordsState.initial());
+    });
+  }
+}
+
+class SpeedDialBloc extends Bloc<SpeedDialEvent, SpeedDialState> {
+  SpeedDialBloc() : super(const SpeedDialState.closed()) {
+    //Run when speedDial is closed
+    on<SpeedDialClose>((event, emit) async {
+      emit(const SpeedDialState.closed());
+    });
+    //Run when speedDial is opened
+    on<SpeedDialOpen>((event, emit) async {
+      emit(const SpeedDialState.opened());
     });
   }
 }

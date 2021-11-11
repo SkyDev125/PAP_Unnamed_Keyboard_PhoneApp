@@ -300,6 +300,291 @@ abstract class PasswordsAllCardsRemoved implements PasswordsEvent {
 }
 
 /// @nodoc
+class _$SpeedDialEventTearOff {
+  const _$SpeedDialEventTearOff();
+
+  SpeedDialClose close() {
+    return const SpeedDialClose();
+  }
+
+  SpeedDialOpen open() {
+    return const SpeedDialOpen();
+  }
+}
+
+/// @nodoc
+const $SpeedDialEvent = _$SpeedDialEventTearOff();
+
+/// @nodoc
+mixin _$SpeedDialEvent {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() close,
+    required TResult Function() open,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? close,
+    TResult Function()? open,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? close,
+    TResult Function()? open,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SpeedDialClose value) close,
+    required TResult Function(SpeedDialOpen value) open,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SpeedDialClose value)? close,
+    TResult Function(SpeedDialOpen value)? open,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SpeedDialClose value)? close,
+    TResult Function(SpeedDialOpen value)? open,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SpeedDialEventCopyWith<$Res> {
+  factory $SpeedDialEventCopyWith(
+          SpeedDialEvent value, $Res Function(SpeedDialEvent) then) =
+      _$SpeedDialEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SpeedDialEventCopyWithImpl<$Res>
+    implements $SpeedDialEventCopyWith<$Res> {
+  _$SpeedDialEventCopyWithImpl(this._value, this._then);
+
+  final SpeedDialEvent _value;
+  // ignore: unused_field
+  final $Res Function(SpeedDialEvent) _then;
+}
+
+/// @nodoc
+abstract class $SpeedDialCloseCopyWith<$Res> {
+  factory $SpeedDialCloseCopyWith(
+          SpeedDialClose value, $Res Function(SpeedDialClose) then) =
+      _$SpeedDialCloseCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SpeedDialCloseCopyWithImpl<$Res>
+    extends _$SpeedDialEventCopyWithImpl<$Res>
+    implements $SpeedDialCloseCopyWith<$Res> {
+  _$SpeedDialCloseCopyWithImpl(
+      SpeedDialClose _value, $Res Function(SpeedDialClose) _then)
+      : super(_value, (v) => _then(v as SpeedDialClose));
+
+  @override
+  SpeedDialClose get _value => super._value as SpeedDialClose;
+}
+
+/// @nodoc
+
+class _$SpeedDialClose implements SpeedDialClose {
+  const _$SpeedDialClose();
+
+  @override
+  String toString() {
+    return 'SpeedDialEvent.close()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is SpeedDialClose);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() close,
+    required TResult Function() open,
+  }) {
+    return close();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? close,
+    TResult Function()? open,
+  }) {
+    return close?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? close,
+    TResult Function()? open,
+    required TResult orElse(),
+  }) {
+    if (close != null) {
+      return close();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SpeedDialClose value) close,
+    required TResult Function(SpeedDialOpen value) open,
+  }) {
+    return close(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SpeedDialClose value)? close,
+    TResult Function(SpeedDialOpen value)? open,
+  }) {
+    return close?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SpeedDialClose value)? close,
+    TResult Function(SpeedDialOpen value)? open,
+    required TResult orElse(),
+  }) {
+    if (close != null) {
+      return close(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SpeedDialClose implements SpeedDialEvent {
+  const factory SpeedDialClose() = _$SpeedDialClose;
+}
+
+/// @nodoc
+abstract class $SpeedDialOpenCopyWith<$Res> {
+  factory $SpeedDialOpenCopyWith(
+          SpeedDialOpen value, $Res Function(SpeedDialOpen) then) =
+      _$SpeedDialOpenCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SpeedDialOpenCopyWithImpl<$Res>
+    extends _$SpeedDialEventCopyWithImpl<$Res>
+    implements $SpeedDialOpenCopyWith<$Res> {
+  _$SpeedDialOpenCopyWithImpl(
+      SpeedDialOpen _value, $Res Function(SpeedDialOpen) _then)
+      : super(_value, (v) => _then(v as SpeedDialOpen));
+
+  @override
+  SpeedDialOpen get _value => super._value as SpeedDialOpen;
+}
+
+/// @nodoc
+
+class _$SpeedDialOpen implements SpeedDialOpen {
+  const _$SpeedDialOpen();
+
+  @override
+  String toString() {
+    return 'SpeedDialEvent.open()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is SpeedDialOpen);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() close,
+    required TResult Function() open,
+  }) {
+    return open();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? close,
+    TResult Function()? open,
+  }) {
+    return open?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? close,
+    TResult Function()? open,
+    required TResult orElse(),
+  }) {
+    if (open != null) {
+      return open();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SpeedDialClose value) close,
+    required TResult Function(SpeedDialOpen value) open,
+  }) {
+    return open(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SpeedDialClose value)? close,
+    TResult Function(SpeedDialOpen value)? open,
+  }) {
+    return open?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SpeedDialClose value)? close,
+    TResult Function(SpeedDialOpen value)? open,
+    required TResult orElse(),
+  }) {
+    if (open != null) {
+      return open(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SpeedDialOpen implements SpeedDialEvent {
+  const factory SpeedDialOpen() = _$SpeedDialOpen;
+}
+
+/// @nodoc
 class _$PasswordsStateTearOff {
   const _$PasswordsStateTearOff();
 
@@ -715,4 +1000,289 @@ class _$_PasswordsLoaded implements _PasswordsLoaded {
 
 abstract class _PasswordsLoaded implements PasswordsState {
   const factory _PasswordsLoaded() = _$_PasswordsLoaded;
+}
+
+/// @nodoc
+class _$SpeedDialStateTearOff {
+  const _$SpeedDialStateTearOff();
+
+  _SpeedDialClosed closed() {
+    return const _SpeedDialClosed();
+  }
+
+  _SpeedDialOpened opened() {
+    return const _SpeedDialOpened();
+  }
+}
+
+/// @nodoc
+const $SpeedDialState = _$SpeedDialStateTearOff();
+
+/// @nodoc
+mixin _$SpeedDialState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() closed,
+    required TResult Function() opened,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? closed,
+    TResult Function()? opened,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? closed,
+    TResult Function()? opened,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SpeedDialClosed value) closed,
+    required TResult Function(_SpeedDialOpened value) opened,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SpeedDialClosed value)? closed,
+    TResult Function(_SpeedDialOpened value)? opened,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SpeedDialClosed value)? closed,
+    TResult Function(_SpeedDialOpened value)? opened,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SpeedDialStateCopyWith<$Res> {
+  factory $SpeedDialStateCopyWith(
+          SpeedDialState value, $Res Function(SpeedDialState) then) =
+      _$SpeedDialStateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SpeedDialStateCopyWithImpl<$Res>
+    implements $SpeedDialStateCopyWith<$Res> {
+  _$SpeedDialStateCopyWithImpl(this._value, this._then);
+
+  final SpeedDialState _value;
+  // ignore: unused_field
+  final $Res Function(SpeedDialState) _then;
+}
+
+/// @nodoc
+abstract class _$SpeedDialClosedCopyWith<$Res> {
+  factory _$SpeedDialClosedCopyWith(
+          _SpeedDialClosed value, $Res Function(_SpeedDialClosed) then) =
+      __$SpeedDialClosedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SpeedDialClosedCopyWithImpl<$Res>
+    extends _$SpeedDialStateCopyWithImpl<$Res>
+    implements _$SpeedDialClosedCopyWith<$Res> {
+  __$SpeedDialClosedCopyWithImpl(
+      _SpeedDialClosed _value, $Res Function(_SpeedDialClosed) _then)
+      : super(_value, (v) => _then(v as _SpeedDialClosed));
+
+  @override
+  _SpeedDialClosed get _value => super._value as _SpeedDialClosed;
+}
+
+/// @nodoc
+
+class _$_SpeedDialClosed implements _SpeedDialClosed {
+  const _$_SpeedDialClosed();
+
+  @override
+  String toString() {
+    return 'SpeedDialState.closed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _SpeedDialClosed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() closed,
+    required TResult Function() opened,
+  }) {
+    return closed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? closed,
+    TResult Function()? opened,
+  }) {
+    return closed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? closed,
+    TResult Function()? opened,
+    required TResult orElse(),
+  }) {
+    if (closed != null) {
+      return closed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SpeedDialClosed value) closed,
+    required TResult Function(_SpeedDialOpened value) opened,
+  }) {
+    return closed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SpeedDialClosed value)? closed,
+    TResult Function(_SpeedDialOpened value)? opened,
+  }) {
+    return closed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SpeedDialClosed value)? closed,
+    TResult Function(_SpeedDialOpened value)? opened,
+    required TResult orElse(),
+  }) {
+    if (closed != null) {
+      return closed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SpeedDialClosed implements SpeedDialState {
+  const factory _SpeedDialClosed() = _$_SpeedDialClosed;
+}
+
+/// @nodoc
+abstract class _$SpeedDialOpenedCopyWith<$Res> {
+  factory _$SpeedDialOpenedCopyWith(
+          _SpeedDialOpened value, $Res Function(_SpeedDialOpened) then) =
+      __$SpeedDialOpenedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SpeedDialOpenedCopyWithImpl<$Res>
+    extends _$SpeedDialStateCopyWithImpl<$Res>
+    implements _$SpeedDialOpenedCopyWith<$Res> {
+  __$SpeedDialOpenedCopyWithImpl(
+      _SpeedDialOpened _value, $Res Function(_SpeedDialOpened) _then)
+      : super(_value, (v) => _then(v as _SpeedDialOpened));
+
+  @override
+  _SpeedDialOpened get _value => super._value as _SpeedDialOpened;
+}
+
+/// @nodoc
+
+class _$_SpeedDialOpened implements _SpeedDialOpened {
+  const _$_SpeedDialOpened();
+
+  @override
+  String toString() {
+    return 'SpeedDialState.opened()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _SpeedDialOpened);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() closed,
+    required TResult Function() opened,
+  }) {
+    return opened();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? closed,
+    TResult Function()? opened,
+  }) {
+    return opened?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? closed,
+    TResult Function()? opened,
+    required TResult orElse(),
+  }) {
+    if (opened != null) {
+      return opened();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SpeedDialClosed value) closed,
+    required TResult Function(_SpeedDialOpened value) opened,
+  }) {
+    return opened(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_SpeedDialClosed value)? closed,
+    TResult Function(_SpeedDialOpened value)? opened,
+  }) {
+    return opened?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SpeedDialClosed value)? closed,
+    TResult Function(_SpeedDialOpened value)? opened,
+    required TResult orElse(),
+  }) {
+    if (opened != null) {
+      return opened(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SpeedDialOpened implements SpeedDialState {
+  const factory _SpeedDialOpened() = _$_SpeedDialOpened;
 }

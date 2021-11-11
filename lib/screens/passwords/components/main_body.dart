@@ -5,9 +5,9 @@ import 'package:first_app/components/variables.dart';
 import 'package:flutter/material.dart';
 
 //Import the files needed for the event handler
+import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
-import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
 
 //Create the widget Main Body Class
 class MainBody extends StatefulWidget {
@@ -31,7 +31,7 @@ class MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
 
-    //Sets the state of the bloc (event/state handler)
+    //Sets the state of the bloc (event/state handler) (Listens for the state)
     final state = context.watch<PasswordsBloc>().state;
 
     //returns the Widget based on the state defined by the bloc

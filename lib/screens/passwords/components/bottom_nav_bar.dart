@@ -45,6 +45,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: BottomAppBar(
           //Create a notch around the Float Action Button (FAB) and define its size
           shape: const CircularNotchedRectangle(),
+          clipBehavior: Clip.hardEdge,
           notchMargin: 10,
 
           //Create SizedBox to define Bottom App Bar's height

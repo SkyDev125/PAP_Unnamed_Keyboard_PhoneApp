@@ -56,15 +56,24 @@ class _FloatActionButtonState extends State<FloatActionButton> {
   @override
   Widget build(BuildContext context) {
     void passwordAdd() {
-      //cardsList.add(_card());
-      //context.read<PasswordsBloc>().add(const PasswordsEvent.cardAdd());
       Navigator.pushNamed(context, PasswordSetupPage.routeName);
     }
 
     void twoFAadd() {
-      //cardsList.add(_card());
-      //context.read<PasswordsBloc>().add(const PasswordsEvent.cardAdd());
       Navigator.pushNamed(context, TwoFAsetupPage.routeName);
+    }
+
+    //cardsList.add(_card());
+    //context.read<PasswordsBloc>().add(const PasswordsEvent.cardAdd());
+
+    void onOpen() {
+      HapticFeedback.heavyImpact();
+      context.read<SpeedDialBloc>().add(const SpeedDialEvent.open());
+    }
+
+    void onClose() {
+      HapticFeedback.heavyImpact();
+      context.read<SpeedDialBloc>().add(const SpeedDialEvent.close());
     }
 
     //Return FAB with tooltip, Icon and its action once pressed
@@ -75,8 +84,9 @@ class _FloatActionButtonState extends State<FloatActionButton> {
         childPadding: const EdgeInsets.all(5),
         spaceBetweenChildren: 4,
         tooltip: 'Add Account',
-        onOpen: () => HapticFeedback.heavyImpact(),
-        onClose: () => HapticFeedback.heavyImpact(),
+        onOpen: () => onOpen(),
+        onClose: () => onClose(),
+        overlayColor: Theme.of(context).scaffoldBackgroundColor,
         children: [
           SpeedDialChild(
             child: const Icon(Icons.password),
