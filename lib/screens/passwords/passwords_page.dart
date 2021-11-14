@@ -56,7 +56,36 @@ class PasswordsPage extends StatelessWidget {
 
         //If SpeedDial is opened
         opened: () {
-      //Start Widget Sequence but change the navigation bar color first
+      
+      //Check if lightmode is enabled
+      if(MediaQuery.of(context).platformBrightness == Brightness.light) {
+
+        //Start Widget Sequence but change the navigation bar color first
+      return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light.copyWith(
+            systemNavigationBarColor: const Color.fromRGBO(251, 251, 251, 1),
+          ),
+
+          //Create the main scaffold (main page widget, house for all other widgets)
+          child: const Scaffold(
+            //Enable widgets get behind top and bottom App Bar, so they dont clip through
+            extendBodyBehindAppBar: true, //Behind top App Bar
+            extendBody: true, //Behind bottom App Bar
+
+            //Imported Widgets
+            appBar: TopAppBar(),
+            body: MainBody(),
+            bottomNavigationBar: BottomNavBar(),
+
+            //Set FAB(Float Action Button) widget(imported) and its location on the bottom app bar
+            floatingActionButton: FloatActionButton(),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+          ));
+      } else {
+        //if darkmode is enabled run this
+
+        //Start Widget Sequence but change the navigation bar color first
       return AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light.copyWith(
             systemNavigationBarColor: const Color.fromRGBO(51, 51, 51, 1),
@@ -78,6 +107,8 @@ class PasswordsPage extends StatelessWidget {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
           ));
+
+      }
     });
   }
 }

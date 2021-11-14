@@ -1,10 +1,8 @@
-//TODO 3: Check information about 2FA
-//TODO 4: Make a menu for the floating action button
-//TODO 5: Set configuration of Passwords and 2FA(if possible)
-//TODO 6: Research about bluetooth or nfc connection between app and raspberry pi
-//TODO 7: Implement the data receive and sent of information based on NFC or Bluetooth
-//TODO 8: Figure a way to save the app data so it wont be lost if closed. (save widget)
-//TODO 9: Get rid of the useless menu's and figure out something better
+//TODO 1: Set configuration of Passwords and 2FA(if possible)
+//TODO 2: Research about bluetooth or nfc connection between app and raspberry pi
+//TODO 3: Implement the data receive and sent of information based on NFC or Bluetooth
+//TODO 4: Figure a way to save the app data so it wont be lost if closed. (save widget)
+//TODO 5: Get rid of the useless menu's and figure out something better
 
 //Import the files needed for the application
 import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
@@ -15,7 +13,7 @@ import 'routes.dart';
 //Create main function which will run when the application starts
 void main() {
   //Run AppLoop
-  runApp(MultiBlocProvider(                   
+  runApp(MultiBlocProvider(
     //Assign the state-event managers
     providers: [
       BlocProvider(
@@ -48,18 +46,24 @@ class MyApp extends StatelessWidget {
       title: 'PAP Unnamed Project',
 
       //Set application Themes
+      //Light Theme
       theme: ThemeData.light().copyWith(
-        //Light Theme
         colorScheme: ColorScheme.fromSwatch().copyWith(
           //Override Color Schemne
-          primary: Colors.blue, //Change Primary Color (AppBar)
-          secondary: Colors
-              .blue, //Change Secondary Color (Buttons, active button, snackbar)
+          primary: const Color(0xFF1d6fb4), //Change Primary Color (AppBar)
+          secondary: const Color(0xFF1d6fb4), //Change Secondary Color (Buttons, active button, snackbar)
         ),
       ),
 
+      //Dark Theme
       darkTheme: ThemeData.dark().copyWith(
-        //Dark Theme
+        
+        //colorScheme: ColorScheme.fromSwatch().copyWith(
+          //Override Color Schemne
+          //primary: const Color(0xFF424242), //Change Primary Color (AppBar)
+          //secondary: const Color(0xFF1d6fb4), //Change Secondary Color (Buttons, active button, snackbar)
+        //),
+
         textButtonTheme: TextButtonThemeData(
             //Override Text Button Theme
             style: ButtonStyle(
