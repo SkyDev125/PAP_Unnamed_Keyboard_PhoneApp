@@ -51,18 +51,28 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch().copyWith(
           //Override Color Schemne
           primary: const Color(0xFF1d6fb4), //Change Primary Color (AppBar)
-          secondary: const Color(0xFF1d6fb4), //Change Secondary Color (Buttons, active button, snackbar)
+          secondary: const Color(
+              0xFF1d6fb4), //Change Secondary Color (Buttons, active button, snackbar)
         ),
       ),
 
       //Dark Theme
       darkTheme: ThemeData.dark().copyWith(
-        
         //colorScheme: ColorScheme.fromSwatch().copyWith(
-          //Override Color Schemne
-          //primary: const Color(0xFF424242), //Change Primary Color (AppBar)
-          //secondary: const Color(0xFF1d6fb4), //Change Secondary Color (Buttons, active button, snackbar)
+        //Override Color Schemne
+        //primary: const Color(0xFF424242), //Change Primary Color (AppBar)
+        //secondary: const Color(0xFF1d6fb4), //Change Secondary Color (Buttons, active button, snackbar)
         //),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            //Override Text Button Theme
+            style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(
+              Colors.tealAccent), //Change Text Color
+          backgroundColor:
+              MaterialStateProperty.all<Color>(const Color(0xFF424242)),
+          overlayColor: MaterialStateProperty.all<Color>(
+              Colors.tealAccent.withOpacity(0.3)), //Change splash color
+        )),
 
         textButtonTheme: TextButtonThemeData(
             //Override Text Button Theme

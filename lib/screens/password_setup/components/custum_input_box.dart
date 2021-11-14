@@ -1,18 +1,43 @@
+import 'package:first_app/components/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class MyCustomInputBox extends StatefulWidget {
   String label;
   String inputHint;
+  int identifier;
 
-  MyCustomInputBox({Key? key, required this.label, required this.inputHint})
-      : super(key: key);
+  MyCustomInputBox({
+    Key? key,
+    required this.label,
+    required this.inputHint,
+    required this.identifier,
+  }) : super(key: key);
   @override
   _MyCustomInputBoxState createState() => _MyCustomInputBoxState();
 }
 
 class _MyCustomInputBoxState extends State<MyCustomInputBox> {
   bool isSubmitted = false;
+
+  final _formFieldKey = GlobalKey<FormFieldState>();
+  final TextEditingController _textEditingController = TextEditingController();
+
+  bool websiteOnline = false;
+
+  Future<void> requestGET(value) async {
+    try {
+      final response = await http.get(Uri.parse("http://" + value));
+      switch (response.statusCode) {
+        case 200:
+        case 201:
+          websiteOnline = true;
+      }
+    } catch (err) {
+      websiteOnline = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +60,63 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
         Padding(
           padding: const EdgeInsets.fromLTRB(40, 0, 40, 15),
           child: TextFormField(
+            controller: _textEditingController,
+            key: _formFieldKey,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
+              } else {
+                if (widget.identifier == 0) {
+                  if (websiteOnline) {
+                    return null;
+                  }
+                  return 'Website is Unreacheable';
+                }
               }
-              return null;
             },
-
+            onSaved: (value) {
+              switch (widget.identifier) {
+                case 0:
+                  passwordsFormURL.add(value);
+                  break;
+                case 1:
+                  passwordsFormUsername.add(value);
+                  break;
+                case 2:
+                  passwordsFormPassword.add(value);
+                  break;
+              }
+            },
             cursorColor: Theme.of(context).colorScheme.secondary,
             obscureText: widget.label == 'Password' ? true : false,
             // this can be changed based on usage -
             // such as - onChanged or onFieldSubmitted
-            //TODO: Change to add regex
-            onChanged: (value) {
-              setState(() {
-                isSubmitted = true;
-              });
+            onChanged: (value) async {
+              if (widget.identifier == 0) {
+                await requestGET(value);
+              }
+
+              if (_formFieldKey.currentState!.validate()) {
+                setState(() {
+                  isSubmitted = true;
+                });
+              } else {
+                setState(() {
+                  isSubmitted = false;
+                });
+              }
             },
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             decoration: InputDecoration(
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.error),
+              ),
               hintText: widget.inputHint,
-              hintStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 27, horizontal: 25),
               focusColor: Theme.of(context).colorScheme.secondary,
@@ -83,6 +143,7 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
                       child: Icon(Icons.check),
                     ),
             ),
+            textInputAction: TextInputAction.next,
           ),
         ),
         //

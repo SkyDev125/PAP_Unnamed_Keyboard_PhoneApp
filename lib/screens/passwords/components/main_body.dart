@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 //Import the files needed for the event handler
 import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
-import 'package:flutter/services.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
@@ -30,14 +29,14 @@ class MainBodyState extends State<MainBody> {
 
   @override
   Widget build(BuildContext context) {
-
     //Sets the state of the bloc (event/state handler) (Listens for the state)
     final state = context.watch<PasswordsBloc>().state;
 
     //returns the Widget based on the state defined by the bloc
     return state.when(
       //Initial state, show logo in center
-      initial: () => Center(child: Image.asset('assets/app_image_dark/gift.png')),
+      initial: () =>
+          Center(child: Image.asset('assets/app_image_dark/gift.png')),
 
       //Wait for reordable list to load and show loading progress indicator
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -131,6 +130,9 @@ class MainBodyState extends State<MainBody> {
                 onDismissed: (direction) {
                   setState(() {
                     cardsList.removeAt(index);
+                    passwordsFormPassword.removeAt(index);
+                    passwordsFormUsername.removeAt(index);
+                    passwordsFormURL.removeAt(index);
                     if (cardsList.isEmpty) {
                       context
                           .read<PasswordsBloc>()
@@ -141,7 +143,9 @@ class MainBodyState extends State<MainBody> {
                   //Create a snackbar once deleted, set its content, color and rounded corners
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('$index dismissed'),
+                      content: Text('$index dismissed',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
