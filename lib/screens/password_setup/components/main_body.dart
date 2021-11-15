@@ -44,7 +44,7 @@ class MainBodyState extends State<MainBody> {
           child: Row(children: <Widget>[
             const Padding(padding: EdgeInsets.only(left: 15,),),
             IconButton(
-              //TODO: Change Icon to url (favicon)
+              //TODO: Change Icon to url (favicon) - cached_network_image plugin take a look at this tomorrow please
               icon: const Icon(Icons.open_in_browser),
               tooltip: 'Open in browser',
               iconSize: 30,
