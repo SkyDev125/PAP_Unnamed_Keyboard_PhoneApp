@@ -131,6 +131,7 @@ class MainBodyState extends State<MainBody> {
 
                         cardsList.add(_card());
 
+                        //TODO:Solve Delay with this
                         Navigator.of(context).pop();
 
                         context
