@@ -599,6 +599,10 @@ class _$PasswordsStateTearOff {
   _PasswordsLoaded loaded() {
     return const _PasswordsLoaded();
   }
+
+  _PasswordsCardsLoaded cardsLoaded() {
+    return const _PasswordsCardsLoaded();
+  }
 }
 
 /// @nodoc
@@ -611,6 +615,7 @@ mixin _$PasswordsState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() cardsLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -618,6 +623,7 @@ mixin _$PasswordsState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -625,6 +631,7 @@ mixin _$PasswordsState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -633,6 +640,7 @@ mixin _$PasswordsState {
     required TResult Function(_PasswordsInitial value) initial,
     required TResult Function(_PasswordsLoading value) loading,
     required TResult Function(_PasswordsLoaded value) loaded,
+    required TResult Function(_PasswordsCardsLoaded value) cardsLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -640,6 +648,7 @@ mixin _$PasswordsState {
     TResult Function(_PasswordsInitial value)? initial,
     TResult Function(_PasswordsLoading value)? loading,
     TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -647,6 +656,7 @@ mixin _$PasswordsState {
     TResult Function(_PasswordsInitial value)? initial,
     TResult Function(_PasswordsLoading value)? loading,
     TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -713,6 +723,7 @@ class _$_PasswordsInitial implements _PasswordsInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() cardsLoaded,
   }) {
     return initial();
   }
@@ -723,6 +734,7 @@ class _$_PasswordsInitial implements _PasswordsInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
   }) {
     return initial?.call();
   }
@@ -733,6 +745,7 @@ class _$_PasswordsInitial implements _PasswordsInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -747,6 +760,7 @@ class _$_PasswordsInitial implements _PasswordsInitial {
     required TResult Function(_PasswordsInitial value) initial,
     required TResult Function(_PasswordsLoading value) loading,
     required TResult Function(_PasswordsLoaded value) loaded,
+    required TResult Function(_PasswordsCardsLoaded value) cardsLoaded,
   }) {
     return initial(this);
   }
@@ -757,6 +771,7 @@ class _$_PasswordsInitial implements _PasswordsInitial {
     TResult Function(_PasswordsInitial value)? initial,
     TResult Function(_PasswordsLoading value)? loading,
     TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
   }) {
     return initial?.call(this);
   }
@@ -767,6 +782,7 @@ class _$_PasswordsInitial implements _PasswordsInitial {
     TResult Function(_PasswordsInitial value)? initial,
     TResult Function(_PasswordsLoading value)? loading,
     TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -824,6 +840,7 @@ class _$_PasswordsLoading implements _PasswordsLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() cardsLoaded,
   }) {
     return loading();
   }
@@ -834,6 +851,7 @@ class _$_PasswordsLoading implements _PasswordsLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
   }) {
     return loading?.call();
   }
@@ -844,6 +862,7 @@ class _$_PasswordsLoading implements _PasswordsLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -858,6 +877,7 @@ class _$_PasswordsLoading implements _PasswordsLoading {
     required TResult Function(_PasswordsInitial value) initial,
     required TResult Function(_PasswordsLoading value) loading,
     required TResult Function(_PasswordsLoaded value) loaded,
+    required TResult Function(_PasswordsCardsLoaded value) cardsLoaded,
   }) {
     return loading(this);
   }
@@ -868,6 +888,7 @@ class _$_PasswordsLoading implements _PasswordsLoading {
     TResult Function(_PasswordsInitial value)? initial,
     TResult Function(_PasswordsLoading value)? loading,
     TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
   }) {
     return loading?.call(this);
   }
@@ -878,6 +899,7 @@ class _$_PasswordsLoading implements _PasswordsLoading {
     TResult Function(_PasswordsInitial value)? initial,
     TResult Function(_PasswordsLoading value)? loading,
     TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -935,6 +957,7 @@ class _$_PasswordsLoaded implements _PasswordsLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() cardsLoaded,
   }) {
     return loaded();
   }
@@ -945,6 +968,7 @@ class _$_PasswordsLoaded implements _PasswordsLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
   }) {
     return loaded?.call();
   }
@@ -955,6 +979,7 @@ class _$_PasswordsLoaded implements _PasswordsLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -969,6 +994,7 @@ class _$_PasswordsLoaded implements _PasswordsLoaded {
     required TResult Function(_PasswordsInitial value) initial,
     required TResult Function(_PasswordsLoading value) loading,
     required TResult Function(_PasswordsLoaded value) loaded,
+    required TResult Function(_PasswordsCardsLoaded value) cardsLoaded,
   }) {
     return loaded(this);
   }
@@ -979,6 +1005,7 @@ class _$_PasswordsLoaded implements _PasswordsLoaded {
     TResult Function(_PasswordsInitial value)? initial,
     TResult Function(_PasswordsLoading value)? loading,
     TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
   }) {
     return loaded?.call(this);
   }
@@ -989,6 +1016,7 @@ class _$_PasswordsLoaded implements _PasswordsLoaded {
     TResult Function(_PasswordsInitial value)? initial,
     TResult Function(_PasswordsLoading value)? loading,
     TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1000,6 +1028,123 @@ class _$_PasswordsLoaded implements _PasswordsLoaded {
 
 abstract class _PasswordsLoaded implements PasswordsState {
   const factory _PasswordsLoaded() = _$_PasswordsLoaded;
+}
+
+/// @nodoc
+abstract class _$PasswordsCardsLoadedCopyWith<$Res> {
+  factory _$PasswordsCardsLoadedCopyWith(_PasswordsCardsLoaded value,
+          $Res Function(_PasswordsCardsLoaded) then) =
+      __$PasswordsCardsLoadedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$PasswordsCardsLoadedCopyWithImpl<$Res>
+    extends _$PasswordsStateCopyWithImpl<$Res>
+    implements _$PasswordsCardsLoadedCopyWith<$Res> {
+  __$PasswordsCardsLoadedCopyWithImpl(
+      _PasswordsCardsLoaded _value, $Res Function(_PasswordsCardsLoaded) _then)
+      : super(_value, (v) => _then(v as _PasswordsCardsLoaded));
+
+  @override
+  _PasswordsCardsLoaded get _value => super._value as _PasswordsCardsLoaded;
+}
+
+/// @nodoc
+
+class _$_PasswordsCardsLoaded implements _PasswordsCardsLoaded {
+  const _$_PasswordsCardsLoaded();
+
+  @override
+  String toString() {
+    return 'PasswordsState.cardsLoaded()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _PasswordsCardsLoaded);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loaded,
+    required TResult Function() cardsLoaded,
+  }) {
+    return cardsLoaded();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
+  }) {
+    return cardsLoaded?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? cardsLoaded,
+    required TResult orElse(),
+  }) {
+    if (cardsLoaded != null) {
+      return cardsLoaded();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PasswordsInitial value) initial,
+    required TResult Function(_PasswordsLoading value) loading,
+    required TResult Function(_PasswordsLoaded value) loaded,
+    required TResult Function(_PasswordsCardsLoaded value) cardsLoaded,
+  }) {
+    return cardsLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_PasswordsInitial value)? initial,
+    TResult Function(_PasswordsLoading value)? loading,
+    TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
+  }) {
+    return cardsLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PasswordsInitial value)? initial,
+    TResult Function(_PasswordsLoading value)? loading,
+    TResult Function(_PasswordsLoaded value)? loaded,
+    TResult Function(_PasswordsCardsLoaded value)? cardsLoaded,
+    required TResult orElse(),
+  }) {
+    if (cardsLoaded != null) {
+      return cardsLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PasswordsCardsLoaded implements PasswordsState {
+  const factory _PasswordsCardsLoaded() = _$_PasswordsCardsLoaded;
 }
 
 /// @nodoc

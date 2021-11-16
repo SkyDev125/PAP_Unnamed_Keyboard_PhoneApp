@@ -22,6 +22,8 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
     //Run on Passwords Card Add event
     on<PasswordsCardAdd>((event, emit) async {
       emit(const PasswordsState.loading());
+      cardsListLoading = cardsList.length+1;
+      emit(const PasswordsState.loaded());
 
       //Define _card Widget to be created
       int cardsNumber = cardsList.length;
@@ -34,6 +36,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
         Widget _card() {
           return Card(
             elevation: 10,
+            key: UniqueKey(),
 
             //Set Card padding bottom and top
             child: Padding(
@@ -90,6 +93,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
         Widget _card() {
           return Card(
             elevation: 10,
+            key: UniqueKey(),
 
             //Set Card padding bottom and top
             child: Padding(
@@ -109,7 +113,8 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
                         (context, url, downloadProgress) =>
                             CircularProgressIndicator(
                                 value: downloadProgress.progress),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                   //icon: const Icon(Icons.open_in_browser_rounded),
                   tooltip: 'Open in browser',
@@ -146,7 +151,8 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
 
         cardsList.add(_card());
       }
-      emit(const PasswordsState.loaded());
+
+      emit(const PasswordsState.cardsLoaded());
     });
 
     //Run on Passwords All cards removed

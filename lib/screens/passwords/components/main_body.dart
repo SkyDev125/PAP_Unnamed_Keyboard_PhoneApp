@@ -34,134 +34,244 @@ class MainBodyState extends State<MainBody> {
 
     //returns the Widget based on the state defined by the bloc
     return state.when(
-      //Initial state, show logo in center
-      initial: () =>
-          Center(child: Image.asset('assets/app_image_dark/gift.png')),
+        //Initial state, show logo in center
+        initial: () =>
+            Center(child: Image.asset('assets/app_image_dark/gift.png')),
 
-      //Wait for reordable list to load and show loading progress indicator
-      loading: () => const Center(child: CircularProgressIndicator()),
+        //Wait for reordable list to load and show loading progress indicator
+        loading: () => const Center(child: CircularProgressIndicator()),
 
-      //Return the reordable list once loaded
-      loaded: () {
-        if (snackbarOn == 1) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          snackbarOn = 0;
-        }
-        //Define Reordable list padding, onreorder function,
-        //total items in the list and start building the widgets inside
-        return ReorderableListView.builder(
-          padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top + 15,
-            bottom: MediaQuery.of(context).padding.bottom + 30,
-            left: MediaQuery.of(context).padding.left + 10,
-            right: MediaQuery.of(context).padding.right + 10,
-          ),
-          onReorder: reorderData,
-          itemCount: cardsList.length,
+        //Return the reordable list once loaded
+        loaded: () {
 
-          //Runs for each item in the itemCount (above)
-          itemBuilder: (BuildContext context, int index) {
-            //Sets the current widget
-            final card = cardsList[index];
+          //TODO: Check how to make the condition work inside the child (when this changes to a dismissible) - make this dismissible
+          return ReorderableListView.builder(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top + 15,
+                bottom: MediaQuery.of(context).padding.bottom + 30,
+                left: MediaQuery.of(context).padding.left + 10,
+                right: MediaQuery.of(context).padding.right + 10,
+              ),
+              onReorder: reorderData,
+              itemCount: cardsListLoading,
 
-            //Returns the dismissible inside the card, so it can be dismissed
-            return Dismissible(
-                direction: DismissDirection
-                    .endToStart, //Direction of where widget can be dismissed (right to left)
-                key: ValueKey(card), //Unique Identifier for the widget
+              //Runs for each item in the itemCount (above)
+              itemBuilder: (BuildContext context, int index) {
+                if (cardsListLoading > 1) {
+                  if (index < cardsListLoading - 1) {
+                    return cardsList[index];
+                  } else {
+                    return Card(
+                      key: UniqueKey(),
+                      elevation: 10,
 
-                //Run to confirm the dismission, exhibit a dialogBox for comfirmation
-                confirmDismiss: (DismissDirection direction) async {
-                  return await showDialog(
-                    context: context,
+                      //Set Card padding bottom and top
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16, top: 16),
 
-                    //Build the dialogBox
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        //Set its shape to round and the title
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        title: const Text("Confirm",
-                            style: TextStyle(fontSize: 25)),
-
-                        //Define the content in the middle of the box
-                        content: const Text(
-                            "Are you sure you wish to delete this PassWord?",
-                            style: TextStyle(fontSize: 20)),
-
-                        //Set the buttons for the user to confirm
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () =>
-                                Navigator.of(context).pop(false), //Dont Confirm
-                            child: const Text("CANCEL",
-                                style: TextStyle(fontSize: 20)),
+                        //Set Card row with its Icon Button and content
+                        child: Row(children: <Widget>[
+                          const Padding(
+                            padding: EdgeInsets.only(
+                              left: 15,
+                            ),
                           ),
-                          TextButton(
-                              onPressed: () =>
-                                  Navigator.of(context).pop(true), //Confirm
-                              child: const Text("DELETE",
-                                  style: TextStyle(fontSize: 20))),
-                        ],
-                      );
-                    },
+                          IconButton(
+                            icon: const CircularProgressIndicator(),
+                            //icon: const Icon(Icons.open_in_browser_rounded),
+                            tooltip: 'Open in browser',
+                            iconSize: 30,
+                            onPressed: () async {},
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(
+                              left: 15,
+                            ),
+                          ),
+                          Flexible(
+                              child: Text(
+                            passwordsFormURL[index],
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          )),
+                        ]),
+                      ),
+
+                      //Make Card corners round with a 30 radius
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                    );
+                  }
+                } else {
+                  return Card(
+                    key: UniqueKey(),
+                    elevation: 10,
+
+                    //Set Card padding bottom and top
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 16, top: 16),
+
+                      //Set Card row with its Icon Button and content
+                      child: Row(children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            left: 15,
+                          ),
+                        ),
+                        IconButton(
+                          icon: const CircularProgressIndicator(),
+                          //icon: const Icon(Icons.open_in_browser_rounded),
+                          tooltip: 'Open in browser',
+                          iconSize: 30,
+                          onPressed: () async {},
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            left: 15,
+                          ),
+                        ),
+                        Flexible(
+                            child: Text(
+                          passwordsFormURL[index],
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                      ]),
+                    ),
+
+                    //Make Card corners round with a 30 radius
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
                   );
-                },
+                }
+              });
+        },
+        
+        //Update the reordable list once card finishes to load
+        cardsLoaded: () {
+          if (snackbarOn == 1) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            snackbarOn = 0;
+          }
+          //Define Reordable list padding, onreorder function,
+          //total items in the list and start building the widgets inside
+          return ReorderableListView.builder(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).padding.top + 15,
+              bottom: MediaQuery.of(context).padding.bottom + 30,
+              left: MediaQuery.of(context).padding.left + 10,
+              right: MediaQuery.of(context).padding.right + 10,
+            ),
+            onReorder: reorderData,
+            itemCount: cardsList.length,
 
-                //Set Background of Dismissible
-                background: ClipRRect(
-                  //Cut corners to be equal to the rounded card
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+            //Runs for each item in the itemCount (above)
+            itemBuilder: (BuildContext context, int index) {
+              //Sets the current widget
+              final card = cardsList[index];
 
-                  //TODO: Search about slideable flutter to use instead of this
-                  //Set Color and Icon for dismissible
-                  child: Container(
-                    color: const Color(0xB2FF4D4D),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Text("REMOVE", style: TextStyle(fontSize: 20)),
-                        Icon(Icons.delete, size: 40),
-                        Padding(padding: EdgeInsets.only(right: 30))
-                      ],
+              //Returns the dismissible inside the card, so it can be dismissed
+              return Dismissible(
+                  direction: DismissDirection
+                      .endToStart, //Direction of where widget can be dismissed (right to left)
+                  key: ValueKey(card), //Unique Identifier for the widget
+
+                  //Run to confirm the dismission, exhibit a dialogBox for comfirmation
+                  confirmDismiss: (DismissDirection direction) async {
+                    return await showDialog(
+                      context: context,
+
+                      //Build the dialogBox
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          //Set its shape to round and the title
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30))),
+                          title: const Text("Confirm",
+                              style: TextStyle(fontSize: 25)),
+
+                          //Define the content in the middle of the box
+                          content: const Text(
+                              "Are you sure you wish to delete this PassWord?",
+                              style: TextStyle(fontSize: 20)),
+
+                          //Set the buttons for the user to confirm
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.of(context)
+                                  .pop(false), //Dont Confirm
+                              child: const Text("CANCEL",
+                                  style: TextStyle(fontSize: 20)),
+                            ),
+                            TextButton(
+                                onPressed: () =>
+                                    Navigator.of(context).pop(true), //Confirm
+                                child: const Text("DELETE",
+                                    style: TextStyle(fontSize: 20))),
+                          ],
+                        );
+                      },
+                    );
+                  },
+
+                  //Set Background of Dismissible
+                  background: ClipRRect(
+                    //Cut corners to be equal to the rounded card
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
+
+                    //TODO: Search about slideable flutter to use instead of this
+                    //Set Color and Icon for dismissible
+                    child: Container(
+                      color: const Color(0xB2FF4D4D),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text("REMOVE", style: TextStyle(fontSize: 20)),
+                          Icon(Icons.delete, size: 40),
+                          Padding(padding: EdgeInsets.only(right: 30))
+                        ],
+                      ),
                     ),
                   ),
-                ),
 
-                //Run once Dismissed, set the state and run accordingly
-                onDismissed: (direction) {
-                  setState(() {
-                    cardsList.removeAt(index);
-                    passwordsFormPassword.removeAt(index);
-                    passwordsFormUsername.removeAt(index);
-                    passwordsFormURL.removeAt(index);
-                    if (cardsList.isEmpty) {
-                      context
-                          .read<PasswordsBloc>()
-                          .add(const PasswordsEvent.allCardsRemoved());
-                    }
-                  });
+                  //Run once Dismissed, set the state and run accordingly
+                  onDismissed: (direction) {
+                    setState(() {
+                      cardsList.removeAt(index);
+                      passwordsFormPassword.removeAt(index);
+                      passwordsFormUsername.removeAt(index);
+                      passwordsFormURL.removeAt(index);
+                      if (cardsList.isEmpty) {
+                        context
+                            .read<PasswordsBloc>()
+                            .add(const PasswordsEvent.allCardsRemoved());
+                      }
+                    });
 
-                  //Create a snackbar once deleted, set its content, color and rounded corners
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('$index dismissed',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                    ),
-                  );
-                },
+                    //Create a snackbar once deleted, set its content, color and rounded corners
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('$index dismissed',
+                            textAlign: TextAlign.center,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.secondary,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                      ),
+                    );
+                  },
 
-                //Card to be dismissed
-                child: cardsList[index]);
-          },
-        );
-      },
-    );
+                  //Card to be dismissed
+                  child: cardsList[index]);
+            },
+          );
+        });
   }
 }

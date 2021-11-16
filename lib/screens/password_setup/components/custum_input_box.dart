@@ -62,6 +62,7 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
           child: TextFormField(
             controller: _textEditingController,
             key: _formFieldKey,
+            //TODO: Check why this is buggy as hell
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';

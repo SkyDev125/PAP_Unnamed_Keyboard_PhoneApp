@@ -11,6 +11,7 @@ class PasswordsState with _$PasswordsState {
   const factory PasswordsState.initial() = _PasswordsInitial; //Initial state
   const factory PasswordsState.loading() = _PasswordsLoading; //Loading state
   const factory PasswordsState.loaded() = _PasswordsLoaded; //Loaded state
+  const factory PasswordsState.cardsLoaded() = _PasswordsCardsLoaded; //Cards
 }
 
 @freezed
