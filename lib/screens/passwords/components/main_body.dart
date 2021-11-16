@@ -43,6 +43,10 @@ class MainBodyState extends State<MainBody> {
 
       //Return the reordable list once loaded
       loaded: () {
+        if (snackbarOn == 1) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          snackbarOn = 0;
+        }
         //Define Reordable list padding, onreorder function,
         //total items in the list and start building the widgets inside
         return ReorderableListView.builder(

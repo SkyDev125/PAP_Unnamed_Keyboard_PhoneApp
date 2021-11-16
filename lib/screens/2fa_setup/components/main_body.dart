@@ -1,4 +1,5 @@
 //Import the files needed for widgets
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 //Create the widget Main Body Class
@@ -22,12 +23,7 @@ class MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
         return const Center(
-          child: Text(
-            'Hello, How are you?',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          child: Image(image: CachedNetworkImageProvider("http://google.com/favicon.ico"),)
         );
   }
 }

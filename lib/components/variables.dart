@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //Index for buttons
 int selectedIndex = 0;
+int snackbarOn = 0;
 
 //CardList to store the cards for the Passwords page
 final List<Widget> cardsList = [];
@@ -10,3 +11,5 @@ final List<Widget> cardsList = [];
 List passwordsFormURL = [];
 List passwordsFormUsername = [];
 List passwordsFormPassword = [];
+
+var cardPasswordsIcon = [];
