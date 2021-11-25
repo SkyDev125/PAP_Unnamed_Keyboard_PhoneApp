@@ -1,6 +1,7 @@
 import 'package:first_app/components/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 
 // ignore: must_be_immutable
 class MyCustomInputBox extends StatefulWidget {
@@ -40,6 +41,33 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
   }
 
   @override
+  void dispose() {
+    _debounce.cancel();
+    super.dispose();
+  }
+
+  Timer _debounce = Timer(const Duration(milliseconds: 0), () {});
+
+  _onSearchChanged(String value) {
+    if (_debounce.isActive) _debounce.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () async {
+      if (widget.identifier == 0) {
+        await requestGET(value);
+      }
+
+      if (_formFieldKey.currentState!.validate()) {
+        setState(() {
+          isSubmitted = true;
+        });
+      } else {
+        setState(() {
+          isSubmitted = false;
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -62,7 +90,6 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
           child: TextFormField(
             controller: _textEditingController,
             key: _formFieldKey,
-            //TODO: Check why this is buggy as hell
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
@@ -92,21 +119,7 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
             obscureText: widget.label == 'Password' ? true : false,
             // this can be changed based on usage -
             // such as - onChanged or onFieldSubmitted
-            onChanged: (value) async {
-              if (widget.identifier == 0) {
-                await requestGET(value);
-              }
-
-              if (_formFieldKey.currentState!.validate()) {
-                setState(() {
-                  isSubmitted = true;
-                });
-              } else {
-                setState(() {
-                  isSubmitted = false;
-                });
-              }
-            },
+            onChanged: (value) => _onSearchChanged(value),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             decoration: InputDecoration(
               errorBorder: OutlineInputBorder(

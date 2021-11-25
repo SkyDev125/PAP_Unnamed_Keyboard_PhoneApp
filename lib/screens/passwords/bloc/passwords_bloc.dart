@@ -22,74 +22,139 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
     //Run on Passwords Card Add event
     on<PasswordsCardAdd>((event, emit) async {
       emit(const PasswordsState.loading());
-      cardsListLoading = cardsList.length+1;
+      cardsListLoading = cardsList.length + 1;
       emit(const PasswordsState.loaded());
 
-      //Define _card Widget to be created
-      int cardsNumber = cardsList.length;
-      var iconUrl = (await favicon.Favicon.getBest(
-          'http://' + passwordsFormURL[cardsNumber]));
+      try {
+        //Define _card Widget to be created
+        int cardsNumber = cardsList.length;
+        var iconUrl = (await favicon.Favicon.getBest(
+            'http://' + passwordsFormURL[cardsNumber]));
 
-      final File _file = File(iconUrl!.url);
+        final File _file = File(iconUrl!.url);
 
-      if (extension(_file.path) == ".svg") {
-        Widget _card() {
-          return Card(
-            elevation: 10,
-            key: UniqueKey(),
+        if (extension(_file.path) == ".svg") {
+          Widget _card() {
+            return Card(
+              elevation: 10,
+              key: UniqueKey(),
 
-            //Set Card padding bottom and top
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16, top: 16),
+              //Set Card padding bottom and top
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16, top: 16),
 
-              //Set Card row with its Icon Button and content
-              child: Row(children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
+                //Set Card row with its Icon Button and content
+                child: Row(children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                    ),
                   ),
-                ),
-                IconButton(
-                  icon: SvgPicture.network(
-                    iconUrl.url,
-                    placeholderBuilder: (context) =>
-                        const CircularProgressIndicator(),
+                  IconButton(
+                    icon: SvgPicture.network(
+                      iconUrl.url,
+                      placeholderBuilder: (context) =>
+                          const CircularProgressIndicator(),
+                    ),
+                    //icon: const Icon(Icons.open_in_browser_rounded),
+                    tooltip: 'Open in browser',
+                    iconSize: 30,
+                    onPressed: () async {
+                      var url = 'http://' + passwordsFormURL[cardsNumber];
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
                   ),
-                  //icon: const Icon(Icons.open_in_browser_rounded),
-                  tooltip: 'Open in browser',
-                  iconSize: 30,
-                  onPressed: () async {
-                    var url = 'http://' + passwordsFormURL[cardsNumber];
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 15,
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                    ),
                   ),
-                ),
-                Flexible(
-                    child: Text(
-                  passwordsFormURL[cardsNumber],
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                )),
-              ]),
-            ),
+                  Flexible(
+                      child: Text(
+                    passwordsFormURL[cardsNumber],
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  )),
+                ]),
+              ),
 
-            //Make Card corners round with a 30 radius
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30))),
-          );
+              //Make Card corners round with a 30 radius
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+            );
+          }
+
+          cardsList.add(_card());
+        } else {
+          Widget _card() {
+            return Card(
+              elevation: 10,
+              key: UniqueKey(),
+
+              //Set Card padding bottom and top
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16, top: 16),
+
+                //Set Card row with its Icon Button and content
+                child: Row(children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                    ),
+                  ),
+                  IconButton(
+                    icon: CachedNetworkImage(
+                      imageUrl: iconUrl.url,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                    //icon: const Icon(Icons.open_in_browser_rounded),
+                    tooltip: 'Open in browser',
+                    iconSize: 30,
+                    onPressed: () async {
+                      var url = 'http://' + passwordsFormURL[cardsNumber];
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                    ),
+                  ),
+                  Flexible(
+                      child: Text(
+                    passwordsFormURL[cardsNumber],
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  )),
+                ]),
+              ),
+
+              //Make Card corners round with a 30 radius
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+            );
+          }
+
+          cardsList.add(_card());
         }
+      } catch (error) {
+        int cardsNumber = cardsList.length;
 
-        cardsList.add(_card());
-      } else {
         Widget _card() {
           return Card(
             elevation: 10,
@@ -107,17 +172,9 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
                   ),
                 ),
                 IconButton(
-                  icon: CachedNetworkImage(
-                    imageUrl: iconUrl.url,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
+                  icon: const Icon(Icons.error),
                   //icon: const Icon(Icons.open_in_browser_rounded),
-                  tooltip: 'Open in browser',
+                  tooltip: "Icon Can't be loaded",
                   iconSize: 30,
                   onPressed: () async {
                     var url = 'http://' + passwordsFormURL[cardsNumber];
