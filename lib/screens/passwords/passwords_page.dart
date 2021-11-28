@@ -9,7 +9,7 @@ import 'components/floating_action_button.dart'; //Float Action Button widget
 import 'components/top_app_bar.dart'; //Top App Bar Widget
 
 //Import the files needed for the event handler
-import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
+import 'package:first_app/bloc/passwords_bloc.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 

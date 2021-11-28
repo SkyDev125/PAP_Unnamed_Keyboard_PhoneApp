@@ -3,6 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
+String url = "";
+
+bool websiteOnline = false;
+
+Future<void> requestGET(value) async {
+  try {
+    final response = await http.get(Uri.parse("http://" + value));
+    switch (response.statusCode) {
+      case 200:
+      case 201:
+        websiteOnline = true;
+    }
+  } catch (err) {
+    websiteOnline = false;
+  }
+}
+
 // ignore: must_be_immutable
 class MyCustomInputBox extends StatefulWidget {
   String label;
@@ -25,21 +42,6 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
   final _formFieldKey = GlobalKey<FormFieldState>();
   final TextEditingController _textEditingController = TextEditingController();
 
-  bool websiteOnline = false;
-
-  Future<void> requestGET(value) async {
-    try {
-      final response = await http.get(Uri.parse("http://" + value));
-      switch (response.statusCode) {
-        case 200:
-        case 201:
-          websiteOnline = true;
-      }
-    } catch (err) {
-      websiteOnline = false;
-    }
-  }
-
   @override
   void dispose() {
     _debounce.cancel();
@@ -49,6 +51,10 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
   Timer _debounce = Timer(const Duration(milliseconds: 0), () {});
 
   _onSearchChanged(String value) {
+    if (widget.identifier == 0) {
+      url = value;
+    }
+
     if (_debounce.isActive) _debounce.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () async {
       if (widget.identifier == 0) {

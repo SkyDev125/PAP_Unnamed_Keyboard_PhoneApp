@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
 //Imports needed for the Pages
-import '/screens/passwords/bloc/passwords_bloc.dart';
+import '../../../bloc/passwords_bloc.dart';
 import 'custum_input_box.dart';
 
 //Create the widget Main Body Class
@@ -64,7 +64,7 @@ class MainBodyState extends State<MainBody> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      //TODO: figure out how to make the link be verified one last time before submiting!!!
+                      await requestGET(url);
                       if (_formKey.currentState!.validate()) {
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.

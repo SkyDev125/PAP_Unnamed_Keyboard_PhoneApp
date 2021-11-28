@@ -5,7 +5,7 @@
 //TODO 5: Get rid of the useless menu's and figure out something better
 
 //Import the files needed for the application
-import 'package:first_app/screens/passwords/bloc/passwords_bloc.dart';
+import 'package:first_app/bloc/passwords_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'routes.dart';

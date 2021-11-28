@@ -12,7 +12,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/src/provider.dart';
 
 //Imports needed for the Pages
-import '/screens/passwords/bloc/passwords_bloc.dart';
+import '../../../bloc/passwords_bloc.dart';
 
 //Create the widget Float Action Button Class
 class FloatActionButton extends StatefulWidget {

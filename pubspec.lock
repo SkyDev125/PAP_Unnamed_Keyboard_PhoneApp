@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
+  base32:
+    dependency: transitive
+    description:
+      name: base32
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
   bloc:
     dependency: transitive
     description:
@@ -485,6 +492,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0+1"
+  otp:
+    dependency: "direct main"
+    description:
+      name: otp
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
   package_config:
     dependency: transitive
     description:
