@@ -1,8 +1,7 @@
-//TODO 1: Set configuration of Passwords and 2FA(if possible)
-//TODO 2: Research about bluetooth or nfc connection between app and raspberry pi
-//TODO 3: Implement the data receive and sent of information based on NFC or Bluetooth
-//TODO 4: Figure a way to save the app data so it wont be lost if closed. (save widget)
-//TODO 5: Get rid of the useless menu's and figure out something better
+//TODO 1: Research about bluetooth or nfc connection between app and raspberry pi
+//TODO 2: Implement the data receive and sent of information based on NFC or Bluetooth
+//TODO 3: Figure a way to save the app data so it wont be lost if closed. (save widget)
+//TODO 4: Get rid of the useless menu's and figure out something better
 
 //Import the files needed for the application
 import 'package:first_app/bloc/passwords_bloc.dart';
@@ -73,6 +72,9 @@ class MyApp extends StatelessWidget {
           overlayColor: MaterialStateProperty.all<Color>(
               Colors.tealAccent.withOpacity(0.3)), //Change splash color
         )),
+
+        progressIndicatorTheme:
+            const ProgressIndicatorThemeData(color: Colors.tealAccent),
 
         textButtonTheme: TextButtonThemeData(
             //Override Text Button Theme
