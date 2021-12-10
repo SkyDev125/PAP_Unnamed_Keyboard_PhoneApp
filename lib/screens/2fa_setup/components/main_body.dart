@@ -9,6 +9,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:otp/otp.dart';
+import 'package:base32/base32.dart';
+
+import 'screens/qr_code_scanner.dart';
 
 late int timer1;
 
@@ -65,6 +68,7 @@ class MainBodyState extends State<MainBody> {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        IconButton(onPressed: () => Navigator.pushNamed(context, QRViewExample.routeName), icon: const Icon(Icons.qr_code_scanner)),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Stack(
             alignment: Alignment.center,
@@ -112,18 +116,78 @@ class _TOTPState extends State<TOTP> {
 
   int onlyonce = 0;
 
+  String totpCode = 'HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ';
+  String totpCode32 = 'JFSGRLY7K4Z3GABL2QRELPUCMFB4XW5H';
+  Algorithm algorithm = Algorithm.SHA1;
+
   @override
   Widget build(BuildContext context) {
     if (onlyonce == 0) {
       startTimer();
       onlyonce = 1;
+      //totpCode32 = base32.encodeString(totpCode);
     }
-    return Text(
-        OTP.generateTOTPCodeString('HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ',
-            DateTime.now().millisecondsSinceEpoch, algorithm: Algorithm.SHA1),
-        style: TextStyle(
-            fontSize: 30,
-            color: Theme.of(context).colorScheme.secondary,
-            fontWeight: FontWeight.bold));
+    print(totpCode);
+    print(totpCode32);
+    return Column(
+      children: [
+        Text(
+            OTP.generateTOTPCodeString(
+                totpCode32, DateTime.now().millisecondsSinceEpoch - 90000,
+                algorithm: algorithm),
+            style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold)),
+        Text(
+            OTP.generateTOTPCodeString(
+                totpCode32, DateTime.now().millisecondsSinceEpoch - 60000,
+                algorithm: algorithm),
+            style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold)),
+        Text(
+            OTP.generateTOTPCodeString(
+                totpCode32, DateTime.now().millisecondsSinceEpoch - 30000,
+                algorithm: algorithm),
+            style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold)),
+        Text(
+            OTP.generateTOTPCodeString(
+                totpCode32, DateTime.now().millisecondsSinceEpoch,
+                algorithm: algorithm),
+            style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold)),
+        Text(
+            OTP.generateTOTPCodeString(
+                totpCode32, DateTime.now().millisecondsSinceEpoch + 30000,
+                algorithm: algorithm),
+            style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold)),
+        Text(
+            OTP.generateTOTPCodeString(
+                totpCode32, DateTime.now().millisecondsSinceEpoch + 60000,
+                algorithm: algorithm),
+            style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold)),
+        Text(
+            OTP.generateTOTPCodeString(
+                totpCode32, DateTime.now().millisecondsSinceEpoch + 90000,
+                algorithm: algorithm),
+            style: TextStyle(
+                fontSize: 30,
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold)),
+      ],
+    );
   }
 }
