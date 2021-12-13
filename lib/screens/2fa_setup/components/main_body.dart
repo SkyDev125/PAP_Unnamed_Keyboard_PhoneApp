@@ -6,11 +6,8 @@
 
 //Import the files needed for widgets
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:otp/otp.dart';
-import 'package:base32/base32.dart';
-
 import 'screens/qr_code_scanner.dart';
 
 late int timer1;
