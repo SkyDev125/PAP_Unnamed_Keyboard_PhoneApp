@@ -27,15 +27,14 @@ class _FloatActionButtonState extends State<FloatActionButton> {
   @override
   Widget build(BuildContext context) {
     void passwordAdd() {
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       Navigator.pushNamed(context, PasswordSetupPage.routeName);
     }
 
     void twoFAadd() {
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       Navigator.pushNamed(context, TwoFAsetupPage.routeName);
     }
-
-    //cardsList.add(_card());
-    //context.read<PasswordsBloc>().add(const PasswordsEvent.cardAdd());
 
     void onOpen() {
       HapticFeedback.heavyImpact();
@@ -59,16 +58,24 @@ class _FloatActionButtonState extends State<FloatActionButton> {
         onClose: () => onClose(),
         overlayColor: Theme.of(context).scaffoldBackgroundColor,
         children: [
-          SpeedDialChild(
-            child: const Icon(Icons.password),
-            label: 'New Password',
-            onTap: () => passwordAdd(),
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.two_k),
-            label: 'New 2FA auth',
-            onTap: () => twoFAadd(),
-          ),
+          addPassword(passwordAdd),
+          twofaAdd(twoFAadd),
         ]);
+  }
+
+  SpeedDialChild twofaAdd(void Function() twoFAadd) {
+    return SpeedDialChild(
+          child: const Icon(Icons.two_k),
+          label: 'New 2FA auth',
+          onTap: () => twoFAadd(),
+        );
+  }
+
+  SpeedDialChild addPassword(void Function() passwordAdd) {
+    return SpeedDialChild(
+          child: const Icon(Icons.password),
+          label: 'New Password',
+          onTap: () => passwordAdd(),
+        );
   }
 }

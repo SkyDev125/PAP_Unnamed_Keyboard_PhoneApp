@@ -1,8 +1,5 @@
 //Import the files needed for widgets
-import 'dart:ui';
-
 import 'package:first_app/components/variables.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';

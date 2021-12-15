@@ -1,9 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:first_app/components/variables.dart';
+import 'package:first_app/screens/2fa_setup/passwords_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+import 'done/passwords_page.dart';
 
 class QRViewExample extends StatefulWidget {
   const QRViewExample({Key? key}) : super(key: key);
@@ -54,6 +58,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
+                        color: Colors.transparent,
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                             onPressed: () async {
@@ -68,6 +73,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                             )),
                       ),
                       Container(
+                        color: Colors.transparent,
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                             onPressed: () async {
@@ -81,7 +87,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                                   return Text(
                                       'Camera facing ${describeEnum(snapshot.data!)}');
                                 } else {
-                                  return const Text('loading');
+                                  return const Text('loading...');
                                 }
                               },
                             )),
@@ -99,10 +105,7 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea = (MediaQuery.of(context).size.width < 400 ||
-            MediaQuery.of(context).size.height < 400)
-        ? 150.0
-        : 300.0;
+    var scanArea = MediaQuery.of(context).size.width - 150;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
@@ -118,14 +121,51 @@ class _QRViewExampleState extends State<QRViewExample> {
     );
   }
 
+  late String temp;
+  late String totpSecret;
+  int onlyonce = 0;
   void _onQRViewCreated(QRViewController controller) {
     setState(() {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
+      if (scanData.format == BarcodeFormat.qrcode) {
+        if (onlyonce == 0) {
+          onlyonce = 1;
+          data = scanData;
+
+          //totpSecret
+          try {
+            temp = data.code.toString().substring(
+                data.code.toString().indexOf('secret='),
+                data.code.toString().length);
+            totpSecret = temp.substring(7, temp.indexOf('&'));
+          } catch (err) {
+            try {
+              temp = data.code.toString().substring(
+                  data.code.toString().indexOf('secret='),
+                  data.code.toString().length);
+              totpSecret = temp.substring(7, temp.length);
+            } catch (err) {
+              ScaffoldMessenger.of(context).removeCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text('QR Code Invalid or not Supported!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                ),
+              );
+              Navigator.pop(context);
+            }
+          }
+          log(totpSecret);
+
+          Navigator.pushNamed(context, TwoFA.routeName);
+        }
+      }
     });
   }
 

@@ -43,8 +43,6 @@ class MainBodyState extends State<MainBody> {
 
         //Return the reordable list once loaded
         loaded: () {
-
-          //TODO: Check how to make the condition work inside the child (when this changes to a dismissible) - make this dismissible
           return Scrollbar(
             child: ReorderableListView.builder(
                 padding: EdgeInsets.only(
@@ -80,7 +78,7 @@ class MainBodyState extends State<MainBody> {
                             IconButton(
                               icon: const CircularProgressIndicator(),
                               //icon: const Icon(Icons.open_in_browser_rounded),
-                              tooltip: 'Open in browser',
+                              tooltip: 'Loading...',
                               iconSize: 30,
                               onPressed: () async {},
                             ),
@@ -123,7 +121,7 @@ class MainBodyState extends State<MainBody> {
                           IconButton(
                             icon: const CircularProgressIndicator(),
                             //icon: const Icon(Icons.open_in_browser_rounded),
-                            tooltip: 'Open in browser',
+                            tooltip: 'Loading...',
                             iconSize: 30,
                             onPressed: () async {},
                           ),
@@ -256,6 +254,7 @@ class MainBodyState extends State<MainBody> {
                       });
           
                       //Create a snackbar once deleted, set its content, color and rounded corners
+                      ScaffoldMessenger.of(context).removeCurrentSnackBar();      
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('$index dismissed',

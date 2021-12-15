@@ -1,5 +1,6 @@
 //Import files for widgets
 import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 //Index for buttons
 int selectedIndex = 0;
@@ -13,4 +14,5 @@ List passwordsFormURL = [];
 List passwordsFormUsername = [];
 List passwordsFormPassword = [];
 
-var cardPasswordsIcon = [];
+//QrCode data
+Barcode data = Barcode("", BarcodeFormat.unknown, null);

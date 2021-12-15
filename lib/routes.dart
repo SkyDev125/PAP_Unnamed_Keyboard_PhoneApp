@@ -2,6 +2,7 @@
 import 'package:flutter/widgets.dart';
 
 //Import the Pages
+import 'screens/2fa_setup/components/screens/done/passwords_page.dart';
 import 'screens/2fa_setup/components/screens/qr_code_scanner.dart';
 import 'screens/2fa_setup/passwords_page.dart';
 import 'screens/password_setup/passwords_page.dart';
@@ -21,4 +22,5 @@ final Map<String, WidgetBuilder> routes = {
   PasswordSetupPage.routeName: (context) => const PasswordSetupPage(), 
   SettingsPage.routeName: (context) => const SettingsPage(),
   QRViewExample.routeName: (context) => const QRViewExample(),   
+  TwoFA.routeName: (context) => const TwoFA()
 };

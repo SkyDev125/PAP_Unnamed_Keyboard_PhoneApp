@@ -3,6 +3,7 @@
 //TODO 3: Figure a way to save the app data so it wont be lost if closed. (save widget) - Hive NOSQL package - save the passwords/2fa card info (website + 2fa + password).
 //TODO 4: Get rid of the useless menu's and figure out something better
 
+
 //Import the files needed for the application
 import 'package:first_app/bloc/passwords_bloc.dart';
 import 'package:flutter/material.dart';
