@@ -7,7 +7,6 @@
 //Import the files needed for widgets
 import 'dart:async';
 import 'dart:developer';
-import 'package:first_app/screens/2fa_setup/passwords_page.dart';
 import 'package:flutter/material.dart';
 import 'package:otp/otp.dart';
 import '../../../../../../components/variables.dart';

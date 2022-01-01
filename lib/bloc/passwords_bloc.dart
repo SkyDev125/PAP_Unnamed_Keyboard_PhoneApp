@@ -36,7 +36,6 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
         if (extension(_file.path) == ".svg") {
           Widget _card() {
             return Card(
-              elevation: 10,
               key: UniqueKey(),
 
               //Set Card padding bottom and top
@@ -93,7 +92,6 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
         } else {
           Widget _card() {
             return Card(
-              elevation: 10,
               key: UniqueKey(),
 
               //Set Card padding bottom and top
@@ -157,7 +155,6 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
 
         Widget _card() {
           return Card(
-            elevation: 10,
             key: UniqueKey(),
 
             //Set Card padding bottom and top
