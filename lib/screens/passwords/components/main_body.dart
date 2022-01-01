@@ -21,9 +21,11 @@ class MainBodyState extends State<MainBody> {
   //Reorders the cards in the array once a card is moved.
   void reorderData(int oldIndex, int newIndex) {
     setState(() {
-      if (newIndex > oldIndex) {
-        newIndex--;
+      if (oldIndex < newIndex) {
+        newIndex -= 1;
       }
+      final item = cardsList.removeAt(oldIndex);
+      cardsList.insert(newIndex, item);
     });
   }
 
@@ -53,7 +55,7 @@ class MainBodyState extends State<MainBody> {
                 ),
                 onReorder: reorderData,
                 itemCount: cardsListLoading,
-          
+
                 //Runs for each item in the itemCount (above)
                 itemBuilder: (BuildContext context, int index) {
                   if (cardsListLoading > 1) {
@@ -63,11 +65,11 @@ class MainBodyState extends State<MainBody> {
                       return Card(
                         key: UniqueKey(),
                         elevation: 10,
-          
+
                         //Set Card padding bottom and top
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 16, top: 16),
-          
+
                           //Set Card row with its Icon Button and content
                           child: Row(children: <Widget>[
                             const Padding(
@@ -96,21 +98,22 @@ class MainBodyState extends State<MainBody> {
                             )),
                           ]),
                         ),
-          
+
                         //Make Card corners round with a 30 radius
                         shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
                       );
                     }
                   } else {
                     return Card(
                       key: UniqueKey(),
                       elevation: 10,
-          
+
                       //Set Card padding bottom and top
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 16, top: 16),
-          
+
                         //Set Card row with its Icon Button and content
                         child: Row(children: <Widget>[
                           const Padding(
@@ -139,7 +142,7 @@ class MainBodyState extends State<MainBody> {
                           )),
                         ]),
                       ),
-          
+
                       //Make Card corners round with a 30 radius
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30))),
@@ -148,7 +151,7 @@ class MainBodyState extends State<MainBody> {
                 }),
           );
         },
-        
+
         //Update the reordable list once card finishes to load
         cardsLoaded: () {
           if (snackbarOn == 1) {
@@ -167,23 +170,23 @@ class MainBodyState extends State<MainBody> {
               ),
               onReorder: reorderData,
               itemCount: cardsList.length,
-          
+
               //Runs for each item in the itemCount (above)
               itemBuilder: (BuildContext context, int index) {
                 //Sets the current widget
                 final card = cardsList[index];
-          
+
                 //Returns the dismissible inside the card, so it can be dismissed
                 return Dismissible(
                     direction: DismissDirection
                         .endToStart, //Direction of where widget can be dismissed (right to left)
                     key: ValueKey(card), //Unique Identifier for the widget
-          
+
                     //Run to confirm the dismission, exhibit a dialogBox for comfirmation
                     confirmDismiss: (DismissDirection direction) async {
                       return await showDialog(
                         context: context,
-          
+
                         //Build the dialogBox
                         builder: (BuildContext context) {
                           return AlertDialog(
@@ -193,12 +196,12 @@ class MainBodyState extends State<MainBody> {
                                     BorderRadius.all(Radius.circular(30))),
                             title: const Text("Confirm",
                                 style: TextStyle(fontSize: 25)),
-          
+
                             //Define the content in the middle of the box
                             content: const Text(
                                 "Are you sure you wish to delete this PassWord?",
                                 style: TextStyle(fontSize: 20)),
-          
+
                             //Set the buttons for the user to confirm
                             actions: <Widget>[
                               TextButton(
@@ -217,12 +220,12 @@ class MainBodyState extends State<MainBody> {
                         },
                       );
                     },
-          
+
                     //Set Background of Dismissible
                     background: ClipRRect(
                       //Cut corners to be equal to the rounded card
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
-          
+
                       //TODO: Search about slideable flutter to use instead of this
                       //Set Color and Icon for dismissible
                       child: Container(
@@ -238,7 +241,7 @@ class MainBodyState extends State<MainBody> {
                         ),
                       ),
                     ),
-          
+
                     //Run once Dismissed, set the state and run accordingly
                     onDismissed: (direction) {
                       setState(() {
@@ -252,9 +255,9 @@ class MainBodyState extends State<MainBody> {
                               .add(const PasswordsEvent.allCardsRemoved());
                         }
                       });
-          
+
                       //Create a snackbar once deleted, set its content, color and rounded corners
-                      ScaffoldMessenger.of(context).removeCurrentSnackBar();      
+                      ScaffoldMessenger.of(context).removeCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('$index dismissed',
@@ -269,7 +272,7 @@ class MainBodyState extends State<MainBody> {
                         ),
                       );
                     },
-          
+
                     //Card to be dismissed
                     child: cardsList[index]);
               },
