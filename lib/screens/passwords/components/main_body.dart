@@ -1,5 +1,5 @@
 //Import the files needed for the variables
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:first_app/components/variables.dart';
 
@@ -93,6 +93,19 @@ class MainBodyState extends State<MainBody> {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             snackbarOn = 0;
           }
+
+          //?log variables info:
+          //?log(cardsList.length.toString());
+          //?log(passwordsFormURL.length.toString());
+          //?log(passwordsFormUsername.length.toString());
+          //?log(passwordsFormPassword.length.toString());
+          //?log(passwordsTOTPUrl.length.toString());
+          //?
+          //?log(passwordsFormURL[cardsList.length - 1].toString());
+          //?log(passwordsFormUsername[cardsList.length - 1].toString());
+          //?log(passwordsFormPassword[cardsList.length - 1].toString());
+          //?log(passwordsTOTPUrl[cardsList.length - 1].toString());
+
           //Define Reordable list padding, onreorder function,
           //total items in the list and start building the widgets inside
           return Scrollbar(
@@ -155,7 +168,7 @@ class MainBodyState extends State<MainBody> {
                             ),
                             SlidableAction(
                               onPressed: (_) async {
-                                //TODO: make de edit page
+                                //TODO: make the edit page
                               },
                               backgroundColor: const Color(0xFF21B7CA),
                               foregroundColor: Colors.white,
@@ -183,7 +196,7 @@ class MainBodyState extends State<MainBody> {
                             //Edit function
                             SlidableAction(
                               onPressed: (_) async {
-                                //TODO: make de edit page
+                                //TODO: make the edit page
                               },
                               backgroundColor: const Color(0xFF21B7CA),
                               foregroundColor: Colors.white,
@@ -221,8 +234,8 @@ class MainBodyState extends State<MainBody> {
       passwordsFormPassword.removeAt(index);
       passwordsFormUsername.removeAt(index);
       passwordsFormURL.removeAt(index);
-      log(cardsList.length);
-      //TODO: after adding totp codes to the card, add an if to check and remove it from the list
+      passwordsTOTPUrl.removeAt(index);
+
       if (cardsList.isEmpty) {
         context
             .read<PasswordsBloc>()

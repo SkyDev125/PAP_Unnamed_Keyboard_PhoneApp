@@ -1,3 +1,4 @@
+//TODO 1: Make cards expandable
 //TODO 1: Research about bluetooth or nfc connection between app and raspberry pi
 //TODO 2: Implement the data receive and sent of information based on NFC or Bluetooth
 //TODO 3: Figure a way to save the app data so it wont be lost if closed. (save widget) - Hive NOSQL package - save the passwords/2fa card info (website + 2fa + password).

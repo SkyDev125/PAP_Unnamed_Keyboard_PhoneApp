@@ -6,19 +6,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import 'done/passwords_page.dart';
+import 'passwords_page.dart';
 
-class QRViewExample extends StatefulWidget {
-  const QRViewExample({Key? key}) : super(key: key);
+class QrCodeScan extends StatefulWidget {
+  const QrCodeScan({Key? key}) : super(key: key);
 
   static String routeName =
       "/qr_code_scanner"; //Setting the route name to "/" makes it the default page so the app starts here
 
   @override
-  State<StatefulWidget> createState() => _QRViewExampleState();
+  State<StatefulWidget> createState() => _QrCodeScanState();
 }
 
-class _QRViewExampleState extends State<QRViewExample> {
+class _QrCodeScanState extends State<QrCodeScan> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -160,7 +160,6 @@ class _QRViewExampleState extends State<QRViewExample> {
               Navigator.pop(context);
             }
           }
-          log(totpSecret);
 
           Navigator.pushNamed(context, TwoFA.routeName);
         }

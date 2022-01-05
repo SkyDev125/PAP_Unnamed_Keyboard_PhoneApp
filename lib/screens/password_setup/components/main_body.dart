@@ -79,6 +79,8 @@ class MainBodyState extends State<MainBody> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)))),
                         );
+
+                        passwordsTOTPUrl.add(null);
                         _formKey.currentState!.save();
                         snackbarOn = 1;
                         Navigator.of(context).pop();

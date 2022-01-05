@@ -13,6 +13,7 @@ final List<Widget> cardsList = [];
 List passwordsFormURL = [];
 List passwordsFormUsername = [];
 List passwordsFormPassword = [];
+List passwordsTOTPUrl = [];
 
 //QrCode data
 Barcode data = Barcode("", BarcodeFormat.unknown, null);

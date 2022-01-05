@@ -119,6 +119,8 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
                 case 2:
                   passwordsFormPassword.add(value);
                   break;
+                case 3:
+                  passwordsTOTPUrl.add(value);
               }
             },
             cursorColor: Theme.of(context).colorScheme.secondary,
