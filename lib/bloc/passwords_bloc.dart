@@ -33,6 +33,8 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
 
         final File _file = File(iconUrl!.url);
 
+        final String website = passwordsFormURL[cardsNumber];
+
         if (extension(_file.path) == ".svg") {
           Widget _card() {
             return Card(
@@ -59,7 +61,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
                     tooltip: 'Open in browser',
                     iconSize: 30,
                     onPressed: () async {
-                      var url = 'http://' + passwordsFormURL[cardsNumber];
+                      var url = 'http://' + website;
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
@@ -119,7 +121,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
                     tooltip: 'Open in browser',
                     iconSize: 30,
                     onPressed: () async {
-                      var url = 'http://' + passwordsFormURL[cardsNumber];
+                      var url = 'http://' + website;
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
@@ -152,6 +154,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
         }
       } catch (error) {
         int cardsNumber = cardsList.length;
+        final String website = passwordsFormURL[cardsNumber];
 
         Widget _card() {
           return Card(
@@ -174,7 +177,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
                   tooltip: "Icon Can't be loaded",
                   iconSize: 30,
                   onPressed: () async {
-                    var url = 'http://' + passwordsFormURL[cardsNumber];
+                    var url = 'http://' + website;
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {
@@ -212,8 +215,10 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
     //Run on Passwords Card Edit Event
     on<PasswordsCardEdit>((event, emit) async {
       emit(const PasswordsState.loading());
-      
+
       emit(const PasswordsState.cardEdited());
+
+      final String website = passwordsFormURL[cardOnEdit];
 
       try {
         //Define _card Widget to be created
@@ -248,7 +253,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
                     tooltip: 'Open in browser',
                     iconSize: 30,
                     onPressed: () async {
-                      var url = 'http://' + passwordsFormURL[cardOnEdit];
+                      var url = 'http://' + website;
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
@@ -308,7 +313,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
                     tooltip: 'Open in browser',
                     iconSize: 30,
                     onPressed: () async {
-                      var url = 'http://' + passwordsFormURL[cardOnEdit];
+                      var url = 'http://' + website;
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
@@ -340,6 +345,8 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
           cardsList[cardOnEdit] = _card();
         }
       } catch (error) {
+        final String website = passwordsFormURL[cardOnEdit];
+
         Widget _card() {
           return Card(
             key: UniqueKey(),
@@ -361,7 +368,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
                   tooltip: "Icon Can't be loaded",
                   iconSize: 30,
                   onPressed: () async {
-                    var url = 'http://' + passwordsFormURL[cardOnEdit];
+                    var url = 'http://' + website;
                     if (await canLaunch(url)) {
                       await launch(url);
                     } else {

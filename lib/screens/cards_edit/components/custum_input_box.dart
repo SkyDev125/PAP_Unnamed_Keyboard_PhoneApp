@@ -5,7 +5,7 @@ import 'dart:async';
 
 String url = "";
 
-bool websiteOnline = false;
+bool websiteOnline = true;
 
 Future<void> requestGET(value) async {
   try {
@@ -25,12 +25,14 @@ class MyCustomInputBox extends StatefulWidget {
   String label;
   String inputHint;
   int identifier;
+  String initialValue;
 
   MyCustomInputBox({
     Key? key,
     required this.label,
     required this.inputHint,
     required this.identifier,
+    required this.initialValue,
   }) : super(key: key);
   @override
   _MyCustomInputBoxState createState() => _MyCustomInputBoxState();
@@ -46,6 +48,12 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
   void dispose() {
     _debounce.cancel();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    _textEditingController.text = widget.initialValue;
+    return super.initState();
   }
 
   Timer _debounce = Timer(const Duration(milliseconds: 0), () {});

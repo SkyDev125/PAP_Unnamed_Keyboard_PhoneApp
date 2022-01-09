@@ -56,12 +56,14 @@ class FormWidget extends StatelessWidget {
             visible: passwordsTOTPUrl[cardOnEdit] == null ? false : true,
             child: MyCustomInputBox(
               label: "Key",
-              inputHint: "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ",
+              initialValue: passwordsTOTPUrl[cardOnEdit] ?? "",
+              inputHint: passwordsTOTPUrl[cardOnEdit] ?? "",
               identifier: 3,
             ),
           ),
           MyCustomInputBox(
             label: "Website",
+            initialValue: passwordsFormURL[cardOnEdit],
             inputHint: passwordsFormURL[cardOnEdit],
             identifier: 0,
           ),
@@ -70,6 +72,7 @@ class FormWidget extends StatelessWidget {
           ),
           MyCustomInputBox(
             label: "Username",
+            initialValue: passwordsFormUsername[cardOnEdit],
             inputHint: passwordsFormUsername[cardOnEdit],
             identifier: 1,
           ),
@@ -78,6 +81,7 @@ class FormWidget extends StatelessWidget {
           ),
           MyCustomInputBox(
             label: "Password",
+            initialValue: passwordsFormPassword[cardOnEdit],
             inputHint: passwordsFormPassword[cardOnEdit],
             identifier: 2,
           ),
