@@ -7,24 +7,23 @@ class TopAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-
     //Return the top App Bar with its elevation, title and shape
     return AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 10,
+      automaticallyImplyLeading: false,
+      elevation: 10,
 
-          //Center the title
-          title: const Center(
-            child: Text('2FA'),
-          ),
+      //Center the title
+      title: const Center(
+        child: Text('Edit Password/2FA'),
+      ),
 
-          //Round the bottom corners
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
-            ),
-          ),
-        );
+      //Round the bottom corners
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(30),
+        ),
+      ),
+    );
   }
 
   //Preffered Size

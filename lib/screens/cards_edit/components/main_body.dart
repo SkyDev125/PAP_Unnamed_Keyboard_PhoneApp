@@ -2,7 +2,7 @@
 import 'package:first_app/bloc/passwords_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/components/variables.dart';
-import 'package:first_app/screens/password_setup/components/custum_input_box.dart';
+import 'package:first_app/screens/cards_edit/components/custum_input_box.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
@@ -20,7 +20,6 @@ class MainBodyState extends State<MainBody> {
 
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: EdgeInsets.only(
@@ -53,14 +52,17 @@ class FormWidget extends StatelessWidget {
     return Form(
         key: _formKey,
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          MyCustomInputBox(
-            label: "Key",
-            inputHint: "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ",
-            identifier: 3,
+          Visibility(
+            visible: passwordsTOTPUrl[cardOnEdit] == null ? false : true,
+            child: MyCustomInputBox(
+              label: "Key",
+              inputHint: "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ",
+              identifier: 3,
+            ),
           ),
           MyCustomInputBox(
             label: "Website",
-            inputHint: "www.example.com",
+            inputHint: passwordsFormURL[cardOnEdit],
             identifier: 0,
           ),
           const Padding(
@@ -68,7 +70,7 @@ class FormWidget extends StatelessWidget {
           ),
           MyCustomInputBox(
             label: "Username",
-            inputHint: "Example312",
+            inputHint: passwordsFormUsername[cardOnEdit],
             identifier: 1,
           ),
           const Padding(
@@ -76,7 +78,7 @@ class FormWidget extends StatelessWidget {
           ),
           MyCustomInputBox(
             label: "Password",
-            inputHint: "Ex@mple",
+            inputHint: passwordsFormPassword[cardOnEdit],
             identifier: 2,
           ),
           const Padding(
@@ -100,14 +102,14 @@ class FormWidget extends StatelessWidget {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)))),
                 );
-                
+
                 _formKey.currentState!.save();
                 snackbarOn = 1;
                 Navigator.of(context).popUntil(ModalRoute.withName("/"));
 
                 context
                     .read<PasswordsBloc>()
-                    .add(const PasswordsEvent.cardAdd());
+                    .add(const PasswordsEvent.cardEdited());
               }
             },
             child: const Text('Submit', style: TextStyle(fontSize: 20)),

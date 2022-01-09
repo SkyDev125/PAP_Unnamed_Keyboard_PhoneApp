@@ -17,3 +17,6 @@ List passwordsTOTPUrl = [];
 
 //QrCode data
 Barcode data = Barcode("", BarcodeFormat.unknown, null);
+
+//Currently Editing Card
+int cardOnEdit = 0;

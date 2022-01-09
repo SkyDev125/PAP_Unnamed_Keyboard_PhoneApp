@@ -11,6 +11,9 @@ class PasswordsEvent with _$PasswordsEvent {
   const factory PasswordsEvent.cardAdd() =
       PasswordsCardAdd; //Passwords Card added event
 
+  const factory PasswordsEvent.cardEdited() =
+      PasswordsCardEdit; //Passwords Card edited event
+
   const factory PasswordsEvent.allCardsRemoved() =
       PasswordsAllCardsRemoved; //Passwords All cards removed event
 }

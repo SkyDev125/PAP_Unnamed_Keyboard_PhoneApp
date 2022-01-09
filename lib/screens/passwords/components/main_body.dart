@@ -90,11 +90,50 @@ class MainBodyState extends State<MainBody> {
                           ),
                           child: cardsList[index]);
                     } else {
-                      return SingleWidgetLoaded(key: UniqueKey(), index: index);
+                      return SingleWidgetLoading(
+                          key: UniqueKey(), index: index);
                     }
                   } else {
-                    return SingleWidgetLoaded(key: UniqueKey(), index: index);
+                    return SingleWidgetLoading(key: UniqueKey(), index: index);
                   }
+                }),
+          );
+        },
+        
+        //Return the reordable list once loaded
+        cardEdited: () {
+          return Scrollbar(
+            child: ReorderableListView.builder(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 15,
+                  bottom: MediaQuery.of(context).padding.bottom + 30,
+                  left: MediaQuery.of(context).padding.left + 10,
+                  right: MediaQuery.of(context).padding.right + 10,
+                ),
+                onReorder: reorderData,
+                itemCount: cardsListLoading,
+
+                //Runs for each item in the itemCount (above)
+                itemBuilder: (BuildContext context, int index) {
+
+                  if (cardOnEdit == index) {
+                    return SingleWidgetLoading(key: UniqueKey(), index: index);
+                  }
+
+                  return Container(
+                          key: UniqueKey(),
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(15, 0, 0, 0),
+                                blurRadius: 12.0,
+                                spreadRadius: 0.0,
+                                offset: Offset(
+                                    0, 10), // shadow direction: bottom right
+                              )
+                            ],
+                          ),
+                          child: cardsList[index]);
                 }),
           );
         },
@@ -182,6 +221,7 @@ class MainBodyState extends State<MainBody> {
                             ),
                             SlidableAction(
                               onPressed: (_) async {
+                                cardOnEdit = index;
                                 Navigator.pushNamed(
                                     context, CardsEdit.routeName);
                               },
@@ -211,6 +251,7 @@ class MainBodyState extends State<MainBody> {
                             //Edit function
                             SlidableAction(
                               onPressed: (_) async {
+                                cardOnEdit = index;
                                 Navigator.pushNamed(
                                     context, CardsEdit.routeName);
                               },
@@ -305,9 +346,9 @@ class MainBodyState extends State<MainBody> {
   }
 }
 
-class SingleWidgetLoaded extends StatelessWidget {
+class SingleWidgetLoading extends StatelessWidget {
   final int index;
-  const SingleWidgetLoaded({
+  const SingleWidgetLoading({
     Key? key,
     required this.index,
   }) : super(key: key);

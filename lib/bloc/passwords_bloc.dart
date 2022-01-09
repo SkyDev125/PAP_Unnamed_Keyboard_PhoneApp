@@ -19,7 +19,7 @@ part 'passwords_state.dart';
 //React to events and emit states
 class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
   PasswordsBloc() : super(const PasswordsState.initial()) {
-    //Run on Passwords Card Add event
+    //Run on Passwords Card Add Event
     on<PasswordsCardAdd>((event, emit) async {
       emit(const PasswordsState.loading());
       cardsListLoading = cardsList.length + 1;
@@ -204,6 +204,193 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
         }
 
         cardsList.add(_card());
+      }
+
+      emit(const PasswordsState.cardsLoaded());
+    });
+
+    //Run on Passwords Card Edit Event
+    on<PasswordsCardEdit>((event, emit) async {
+      emit(const PasswordsState.loading());
+      
+      emit(const PasswordsState.cardEdited());
+
+      try {
+        //Define _card Widget to be created
+        var iconUrl = (await favicon.Favicon.getBest(
+            'http://' + passwordsFormURL[cardOnEdit]));
+
+        final File _file = File(iconUrl!.url);
+
+        if (extension(_file.path) == ".svg") {
+          Widget _card() {
+            return Card(
+              key: UniqueKey(),
+
+              //Set Card padding bottom and top
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16, top: 16),
+
+                //Set Card row with its Icon Button and content
+                child: Row(children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                    ),
+                  ),
+                  IconButton(
+                    icon: SvgPicture.network(
+                      iconUrl.url,
+                      placeholderBuilder: (context) =>
+                          const CircularProgressIndicator(),
+                    ),
+                    //icon: const Icon(Icons.open_in_browser_rounded),
+                    tooltip: 'Open in browser',
+                    iconSize: 30,
+                    onPressed: () async {
+                      var url = 'http://' + passwordsFormURL[cardOnEdit];
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                    ),
+                  ),
+                  Flexible(
+                      child: Text(
+                    passwordsFormURL[cardOnEdit],
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  )),
+                ]),
+              ),
+
+              //Make Card corners round with a 30 radius
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+            );
+          }
+
+          cardsList[cardOnEdit] = _card();
+        } else {
+          Widget _card() {
+            return Card(
+              key: UniqueKey(),
+
+              //Set Card padding bottom and top
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16, top: 16),
+
+                //Set Card row with its Icon Button and content
+                child: Row(children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                    ),
+                  ),
+                  IconButton(
+                    icon: CachedNetworkImage(
+                      imageUrl: iconUrl.url,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                    //icon: const Icon(Icons.open_in_browser_rounded),
+                    tooltip: 'Open in browser',
+                    iconSize: 30,
+                    onPressed: () async {
+                      var url = 'http://' + passwordsFormURL[cardOnEdit];
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                    ),
+                  ),
+                  Flexible(
+                      child: Text(
+                    passwordsFormURL[cardOnEdit],
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  )),
+                ]),
+              ),
+
+              //Make Card corners round with a 30 radius
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+            );
+          }
+
+          cardsList[cardOnEdit] = _card();
+        }
+      } catch (error) {
+        Widget _card() {
+          return Card(
+            key: UniqueKey(),
+
+            //Set Card padding bottom and top
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16, top: 16),
+
+              //Set Card row with its Icon Button and content
+              child: Row(children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: 15,
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.error),
+                  //icon: const Icon(Icons.open_in_browser_rounded),
+                  tooltip: "Icon Can't be loaded",
+                  iconSize: 30,
+                  onPressed: () async {
+                    var url = 'http://' + passwordsFormURL[cardOnEdit];
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: 15,
+                  ),
+                ),
+                Flexible(
+                    child: Text(
+                  passwordsFormURL[cardOnEdit],
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                )),
+              ]),
+            ),
+
+            //Make Card corners round with a 30 radius
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30))),
+          );
+        }
+
+        cardsList[cardOnEdit] = _card();
       }
 
       emit(const PasswordsState.cardsLoaded());
