@@ -1,7 +1,9 @@
 //Import the files needed for the variables
+// ignore: unused_import
 import 'dart:developer';
 
 import 'package:first_app/components/variables.dart';
+import 'package:first_app/screens/cards_edit/passwords_page.dart';
 
 //Import the files needed for widgets
 import 'package:flutter/material.dart';
@@ -27,8 +29,18 @@ class MainBodyState extends State<MainBody> {
       if (oldIndex < newIndex) {
         newIndex -= 1;
       }
+
       final item = cardsList.removeAt(oldIndex);
+      final url = passwordsFormURL.removeAt(oldIndex);
+      final username = passwordsFormUsername.removeAt(oldIndex);
+      final password = passwordsFormPassword.removeAt(oldIndex);
+      final totpUrl = passwordsTOTPUrl.removeAt(oldIndex);
+
       cardsList.insert(newIndex, item);
+      passwordsFormURL.insert(newIndex, url);
+      passwordsFormUsername.insert(newIndex, username);
+      passwordsFormPassword.insert(newIndex, password);
+      passwordsTOTPUrl.insert(newIndex, totpUrl);
     });
   }
 
@@ -157,6 +169,8 @@ class MainBodyState extends State<MainBody> {
                           children: [
                             SlidableAction(
                               onPressed: (_) async {
+                                log(index.toString());
+                                log(passwordsFormURL[index]);
                                 await confirmDialogBox(context)
                                     ? cardDismissed(index, context)
                                     : false;
@@ -168,7 +182,8 @@ class MainBodyState extends State<MainBody> {
                             ),
                             SlidableAction(
                               onPressed: (_) async {
-                                //TODO: make the edit page
+                                Navigator.pushNamed(
+                                    context, CardsEdit.routeName);
                               },
                               backgroundColor: const Color(0xFF21B7CA),
                               foregroundColor: Colors.white,
@@ -196,7 +211,8 @@ class MainBodyState extends State<MainBody> {
                             //Edit function
                             SlidableAction(
                               onPressed: (_) async {
-                                //TODO: make the edit page
+                                Navigator.pushNamed(
+                                    context, CardsEdit.routeName);
                               },
                               backgroundColor: const Color(0xFF21B7CA),
                               foregroundColor: Colors.white,
@@ -206,6 +222,8 @@ class MainBodyState extends State<MainBody> {
                             //Delete function
                             SlidableAction(
                               onPressed: (_) async {
+                                log(index.toString());
+                                log(passwordsFormURL[index]);
                                 await confirmDialogBox(context)
                                     ? cardDismissed(index, context)
                                     : false;
@@ -255,7 +273,7 @@ class MainBodyState extends State<MainBody> {
     });
   }
 
-  Future<dynamic> confirmDialogBox(BuildContext context) {
+  Future confirmDialogBox(BuildContext context) {
     return showDialog(
       context: context,
 

@@ -6,6 +6,7 @@ import 'screens/2fa_setup/components/screens/manual_setup/passwords_page.dart';
 import 'screens/2fa_setup/components/screens/qr_code_setup/passwords_page.dart';
 import 'screens/2fa_setup/components/screens/qr_code_setup/qr_code_scanner.dart';
 import 'screens/2fa_setup/passwords_page.dart';
+import 'screens/cards_edit/passwords_page.dart';
 import 'screens/password_setup/passwords_page.dart';
 import 'screens/passwords/passwords_page.dart';
 import 'screens/settings/passwords_page.dart';
@@ -25,4 +26,5 @@ final Map<String, WidgetBuilder> routes = {
   QrCodeScan.routeName: (context) => const QrCodeScan(),   
   TwoFA.routeName: (context) => const TwoFA(),
   TwoFAManual.routeName: (context) => const TwoFAManual(),
+  CardsEdit.routeName: (context) => const CardsEdit(),
 };
