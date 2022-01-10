@@ -195,8 +195,9 @@ class MainBodyState extends State<MainBody> {
                     child: Slidable(
                         key: ValueKey(card),
 
-                        //slidable animation from right to left
+                        //slidable animation from left to right
                         startActionPane: ActionPane(
+                          extentRatio: 3 / 5,
                           motion: const DrawerMotion(),
                           dismissible: DismissiblePane(
                               closeOnCancel: true,
@@ -244,8 +245,9 @@ class MainBodyState extends State<MainBody> {
                             ),
                           ],
                         ),
-                        //slidable animation from left to right
+                        //slidable animation from right to left
                         endActionPane: ActionPane(
+                          extentRatio: 3 / 5,
                           motion: const DrawerMotion(),
 
                           //Dismiss the card if slided completely.
