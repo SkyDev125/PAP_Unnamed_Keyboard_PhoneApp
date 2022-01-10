@@ -189,118 +189,126 @@ class MainBodyState extends State<MainBody> {
                       )
                     ],
                   ),
-                  child: ClipRRect(
+                  child: ClipPath(
+                    clipper: Customshape(),
                     key: ValueKey(card),
-                    borderRadius: BorderRadius.circular(30.0),
-                    child: Slidable(
-                        key: ValueKey(card),
+                    child: Container(
+                      color: const Color(0xFF912CEE),
+                      key: ValueKey(card),
+                      child: Slidable(
+                          key: ValueKey(card),
 
-                        //slidable animation from left to right
-                        startActionPane: ActionPane(
-                          extentRatio: 3 / 5,
-                          motion: const DrawerMotion(),
-                          dismissible: DismissiblePane(
-                              closeOnCancel: true,
-                              dismissThreshold: 0.90,
-                              confirmDismiss: () async {
-                                return await confirmDialogBox(context);
-                              },
-                              onDismissed: () => cardDismissed(index, context)),
-                          children: [
-                            //Delete function
-                            SlidableAction(
-                              onPressed: (_) async {
-                                await confirmDialogBox(context)
-                                    ? cardDismissed(index, context)
-                                    : false;
-                              },
-                              backgroundColor: const Color(0xFFFE4A49),
-                              foregroundColor: Colors.white,
-                              icon: Icons.delete,
-                              label: 'Delete',
-                            ),
-                            //Edit function
-                            SlidableAction(
-                              onPressed: (_) async {
-                                cardOnEdit = index;
-                                Navigator.pushNamed(
-                                    context, CardsEdit.routeName);
-                              },
-                              backgroundColor: const Color(0xFF21B7CA),
-                              foregroundColor: Colors.white,
-                              icon: Icons.edit,
-                              label: 'Edit',
-                            ),
-                            //View Function
-                            SlidableAction(
-                              onPressed: (_) async {
-                                cardOnEdit = index;
-                                Navigator.pushNamed(
-                                    context, CardsView.routeName);
-                              },
-                              backgroundColor: const Color(0xFF912CEE),
-                              foregroundColor: Colors.white,
-                              icon: Icons.visibility,
-                              label: 'View',
-                            ),
-                          ],
-                        ),
-                        //slidable animation from right to left
-                        endActionPane: ActionPane(
-                          extentRatio: 3 / 5,
-                          motion: const DrawerMotion(),
+                          //slidable animation from left to right
+                          startActionPane: ActionPane(
+                            extentRatio: 3 / 5,
+                            motion: const DrawerMotion(),
+                            dismissible: DismissiblePane(
+                                resizeDuration: const Duration(seconds: 0),
+                                closeOnCancel: true,
+                                dismissThreshold: 0.90,
+                                confirmDismiss: () async {
+                                  return await confirmDialogBox(context);
+                                },
+                                onDismissed: () =>
+                                    cardDismissed(index, context)),
+                            children: [
+                              //Delete function
+                              SlidableAction(
+                                onPressed: (_) async {
+                                  await confirmDialogBox(context)
+                                      ? cardDismissed(index, context)
+                                      : false;
+                                },
+                                backgroundColor: const Color(0xFFFE4A49),
+                                foregroundColor: Colors.white,
+                                icon: Icons.delete,
+                                label: 'Delete',
+                              ),
+                              //Edit function
+                              SlidableAction(
+                                onPressed: (_) async {
+                                  cardOnEdit = index;
+                                  Navigator.pushNamed(
+                                      context, CardsEdit.routeName);
+                                },
+                                backgroundColor: const Color(0xFF21B7CA),
+                                foregroundColor: Colors.white,
+                                icon: Icons.edit,
+                                label: 'Edit',
+                              ),
+                              //View Function
+                              SlidableAction(
+                                onPressed: (_) async {
+                                  cardOnEdit = index;
+                                  Navigator.pushNamed(
+                                      context, CardsView.routeName);
+                                },
+                                backgroundColor: const Color(0xFF912CEE),
+                                foregroundColor: Colors.white,
+                                icon: Icons.visibility,
+                                label: 'View',
+                              ),
+                            ],
+                          ),
+                          //slidable animation from right to left
+                          endActionPane: ActionPane(
+                            extentRatio: 3 / 5,
+                            motion: const DrawerMotion(),
 
-                          //Dismiss the card if slided completely.
-                          dismissible: DismissiblePane(
-                              closeOnCancel: true,
-                              dismissThreshold: 0.80,
-                              //Confirm if the user wants to delete the card
-                              confirmDismiss: () async =>
-                                  await confirmDialogBox(context),
-                              //Delete the card
-                              onDismissed: () => cardDismissed(index, context)),
+                            //Dismiss the card if slided completely.
+                            dismissible: DismissiblePane(
+                                resizeDuration: const Duration(seconds: 0),
+                                closeOnCancel: true,
+                                dismissThreshold: 0.90,
+                                //Confirm if the user wants to delete the card
+                                confirmDismiss: () async =>
+                                    await confirmDialogBox(context),
+                                //Delete the card
+                                onDismissed: () =>
+                                    cardDismissed(index, context)),
 
-                          //IconButtons for the slidable
-                          children: [
-                            //View Function
-                            SlidableAction(
-                              onPressed: (_) async {
-                                cardOnEdit = index;
-                                Navigator.pushNamed(
-                                    context, CardsView.routeName);
-                              },
-                              backgroundColor: const Color(0xFF912CEE),
-                              foregroundColor: Colors.white,
-                              icon: Icons.visibility,
-                              label: 'View',
-                            ),
-                            //Edit function
-                            SlidableAction(
-                              onPressed: (_) async {
-                                cardOnEdit = index;
-                                Navigator.pushNamed(
-                                    context, CardsEdit.routeName);
-                              },
-                              backgroundColor: const Color(0xFF21B7CA),
-                              foregroundColor: Colors.white,
-                              icon: Icons.edit,
-                              label: 'Edit',
-                            ),
-                            //Delete function
-                            SlidableAction(
-                              onPressed: (_) async {
-                                await confirmDialogBox(context)
-                                    ? cardDismissed(index, context)
-                                    : false;
-                              },
-                              backgroundColor: const Color(0xFFFE4A49),
-                              foregroundColor: Colors.white,
-                              icon: Icons.delete,
-                              label: 'Delete',
-                            ),
-                          ],
-                        ),
-                        child: cardsList[index]),
+                            //IconButtons for the slidable
+                            children: [
+                              //View Function
+                              SlidableAction(
+                                onPressed: (_) async {
+                                  cardOnEdit = index;
+                                  Navigator.pushNamed(
+                                      context, CardsView.routeName);
+                                },
+                                backgroundColor: const Color(0xFF912CEE),
+                                foregroundColor: Colors.white,
+                                icon: Icons.visibility,
+                                label: 'View',
+                              ),
+                              //Edit function
+                              SlidableAction(
+                                onPressed: (_) async {
+                                  cardOnEdit = index;
+                                  Navigator.pushNamed(
+                                      context, CardsEdit.routeName);
+                                },
+                                backgroundColor: const Color(0xFF21B7CA),
+                                foregroundColor: Colors.white,
+                                icon: Icons.edit,
+                                label: 'Edit',
+                              ),
+                              //Delete function
+                              SlidableAction(
+                                onPressed: (_) async {
+                                  await confirmDialogBox(context)
+                                      ? cardDismissed(index, context)
+                                      : false;
+                                },
+                                backgroundColor: const Color(0xFFFE4A49),
+                                foregroundColor: Colors.white,
+                                icon: Icons.delete,
+                                label: 'Delete',
+                              ),
+                            ],
+                          ),
+                          child: cardsList[index]),
+                    ),
                   ),
                 );
               },
@@ -431,5 +439,32 @@ class SingleWidgetLoading extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(30))),
       ),
     );
+  }
+}
+
+class Customshape extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    double height = size.height;
+    double width = size.width;
+    double temp = 4.5;
+
+    var path = Path();
+    path.moveTo(temp + 40, temp);
+    path.quadraticBezierTo(temp, temp, temp, temp + 40);
+    path.lineTo(temp, height - 40);
+    path.quadraticBezierTo(temp, height - temp, 40, height - temp);
+    path.lineTo(width - temp - 40, height - temp);
+    path.quadraticBezierTo(
+        width - temp, height - temp, width - temp, height - 40);
+    path.lineTo(width - temp, temp + 40);
+    path.quadraticBezierTo(width - temp, temp, width - temp - 40, temp);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
   }
 }
