@@ -23,7 +23,6 @@ class FloatActionButton extends StatefulWidget {
 }
 
 class _FloatActionButtonState extends State<FloatActionButton> {
-  
   @override
   Widget build(BuildContext context) {
     void passwordAdd() {
@@ -65,17 +64,17 @@ class _FloatActionButtonState extends State<FloatActionButton> {
 
   SpeedDialChild twofaAdd(void Function() twoFAadd) {
     return SpeedDialChild(
-          child: const Icon(Icons.two_k),
-          label: 'New 2FA auth',
-          onTap: () => twoFAadd(),
-        );
+      child: const Icon(Icons.lock),
+      label: 'New 2FA auth',
+      onTap: () => twoFAadd(),
+    );
   }
 
   SpeedDialChild addPassword(void Function() passwordAdd) {
     return SpeedDialChild(
-          child: const Icon(Icons.password),
-          label: 'New Password',
-          onTap: () => passwordAdd(),
-        );
+      child: const Icon(Icons.password),
+      label: 'New Password',
+      onTap: () => passwordAdd(),
+    );
   }
 }
