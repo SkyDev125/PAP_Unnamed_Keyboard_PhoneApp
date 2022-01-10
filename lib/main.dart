@@ -1,4 +1,3 @@
-//TODO 1: Make cards expandable
 //TODO 2: Comment the whole code
 //TODO 3: Research about bluetooth or nfc connection between app and raspberry pi
 //TODO 4: Implement the data receive and sent of information based on NFC or Bluetooth

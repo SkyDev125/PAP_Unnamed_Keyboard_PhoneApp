@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:first_app/components/variables.dart';
 import 'package:first_app/screens/cards_edit/passwords_page.dart';
+import 'package:first_app/screens/cards_view/passwords_page.dart';
 
 //Import the files needed for widgets
 import 'package:flutter/material.dart';
@@ -99,7 +100,7 @@ class MainBodyState extends State<MainBody> {
                 }),
           );
         },
-        
+
         //Return the reordable list once loaded
         cardEdited: () {
           return Scrollbar(
@@ -115,25 +116,24 @@ class MainBodyState extends State<MainBody> {
 
                 //Runs for each item in the itemCount (above)
                 itemBuilder: (BuildContext context, int index) {
-
                   if (cardOnEdit == index) {
                     return SingleWidgetLoading(key: UniqueKey(), index: index);
                   }
 
                   return Container(
-                          key: UniqueKey(),
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(15, 0, 0, 0),
-                                blurRadius: 12.0,
-                                spreadRadius: 0.0,
-                                offset: Offset(
-                                    0, 10), // shadow direction: bottom right
-                              )
-                            ],
-                          ),
-                          child: cardsList[index]);
+                      key: UniqueKey(),
+                      decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(15, 0, 0, 0),
+                            blurRadius: 12.0,
+                            spreadRadius: 0.0,
+                            offset:
+                                Offset(0, 10), // shadow direction: bottom right
+                          )
+                        ],
+                      ),
+                      child: cardsList[index]);
                 }),
           );
         },
@@ -200,16 +200,15 @@ class MainBodyState extends State<MainBody> {
                           motion: const DrawerMotion(),
                           dismissible: DismissiblePane(
                               closeOnCancel: true,
-                              dismissThreshold: 0.80,
+                              dismissThreshold: 0.90,
                               confirmDismiss: () async {
                                 return await confirmDialogBox(context);
                               },
                               onDismissed: () => cardDismissed(index, context)),
                           children: [
+                            //Delete function
                             SlidableAction(
                               onPressed: (_) async {
-                                log(index.toString());
-                                log(passwordsFormURL[index]);
                                 await confirmDialogBox(context)
                                     ? cardDismissed(index, context)
                                     : false;
@@ -219,6 +218,7 @@ class MainBodyState extends State<MainBody> {
                               icon: Icons.delete,
                               label: 'Delete',
                             ),
+                            //Edit function
                             SlidableAction(
                               onPressed: (_) async {
                                 cardOnEdit = index;
@@ -229,6 +229,18 @@ class MainBodyState extends State<MainBody> {
                               foregroundColor: Colors.white,
                               icon: Icons.edit,
                               label: 'Edit',
+                            ),
+                            //View Function
+                            SlidableAction(
+                              onPressed: (_) async {
+                                cardOnEdit = index;
+                                Navigator.pushNamed(
+                                    context, CardsView.routeName);
+                              },
+                              backgroundColor: const Color(0xFF912CEE),
+                              foregroundColor: Colors.white,
+                              icon: Icons.visibility,
+                              label: 'View',
                             ),
                           ],
                         ),
@@ -248,6 +260,18 @@ class MainBodyState extends State<MainBody> {
 
                           //IconButtons for the slidable
                           children: [
+                            //View Function
+                            SlidableAction(
+                              onPressed: (_) async {
+                                cardOnEdit = index;
+                                Navigator.pushNamed(
+                                    context, CardsView.routeName);
+                              },
+                              backgroundColor: const Color(0xFF912CEE),
+                              foregroundColor: Colors.white,
+                              icon: Icons.visibility,
+                              label: 'View',
+                            ),
                             //Edit function
                             SlidableAction(
                               onPressed: (_) async {
@@ -263,8 +287,6 @@ class MainBodyState extends State<MainBody> {
                             //Delete function
                             SlidableAction(
                               onPressed: (_) async {
-                                log(index.toString());
-                                log(passwordsFormURL[index]);
                                 await confirmDialogBox(context)
                                     ? cardDismissed(index, context)
                                     : false;

@@ -1,4 +1,6 @@
 //Import the files needed for widgets
+import 'dart:developer';
+
 import 'package:first_app/bloc/passwords_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/components/variables.dart';
@@ -91,6 +93,7 @@ class FormWidget extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               await requestGET(url);
+              log(url);
               if (_formKey.currentState!.validate()) {
                 // If the form is valid, display a snackbar. In the real world,
                 // you'd often call a server or save the information in a database.

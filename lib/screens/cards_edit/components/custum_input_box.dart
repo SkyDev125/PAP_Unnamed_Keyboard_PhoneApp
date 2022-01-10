@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-String url = "";
+String url = "google.com";
 
 bool websiteOnline = true;
 
