@@ -1,5 +1,6 @@
 //Import files necessary for Bloc (event/state manager) and freezed (easier development with bloc)
 import 'dart:io';
+import 'package:hive/hive.dart';
 import 'package:path/path.dart';
 
 import 'package:bloc/bloc.dart';
@@ -22,6 +23,8 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
     //Run on Passwords Card Add Event
     on<PasswordsCardAdd>((event, emit) async {
       emit(const PasswordsState.loading());
+      //get box's length
+      //int boxsize = Hive.box('cards_data').keys.toList().length;
       cardsListLoading = cardsList.length + 1;
       emit(const PasswordsState.loaded());
 

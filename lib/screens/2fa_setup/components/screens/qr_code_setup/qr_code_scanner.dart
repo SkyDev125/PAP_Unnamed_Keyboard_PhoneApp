@@ -123,10 +123,12 @@ class _QrCodeScanState extends State<QrCodeScan> {
   late String temp;
   late String totpSecret;
   int onlyonce = 0;
+
   void _onQRViewCreated(QRViewController controller) {
     setState(() {
       this.controller = controller;
     });
+
     controller.scannedDataStream.listen((scanData) {
       if (scanData.format == BarcodeFormat.qrcode) {
         if (onlyonce == 0) {
@@ -139,13 +141,18 @@ class _QrCodeScanState extends State<QrCodeScan> {
                 data.code.toString().indexOf('secret='),
                 data.code.toString().length);
             totpSecret = temp.substring(7, temp.indexOf('&'));
+            log("found secret and &");
+            Navigator.pushNamed(context, TwoFA.routeName);
           } catch (err) {
             try {
               temp = data.code.toString().substring(
                   data.code.toString().indexOf('secret='),
                   data.code.toString().length);
               totpSecret = temp.substring(7, temp.length);
+              log("Found Secret without &");
+              Navigator.pushNamed(context, TwoFA.routeName);
             } catch (err) {
+              Navigator.pop(context);
               ScaffoldMessenger.of(context).removeCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -157,11 +164,8 @@ class _QrCodeScanState extends State<QrCodeScan> {
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                 ),
               );
-              Navigator.pop(context);
             }
           }
-
-          Navigator.pushNamed(context, TwoFA.routeName);
         }
       }
     });

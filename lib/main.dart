@@ -1,18 +1,29 @@
-//TODO 2: Comment the whole code
-//TODO 3: Research about bluetooth or nfc connection between app and raspberry pi
-//TODO 4: Implement the data receive and sent of information based on NFC or Bluetooth
-//TODO 5: Figure a way to save the app data so it wont be lost if closed. (save widget) - Hive NOSQL package - save the passwords/2fa card info (website + 2fa + password).
-//TODO 6: Get rid of the useless menu's and figure out something better
-
+//TODO 1: Comment the whole code
+//TODO 2: Research about bluetooth or nfc connection between app and raspberry pi
+//TODO 3: Implement the data receive and sent of information based on NFC or Bluetooth
+//TODO 4: Figure a way to save the app data so it wont be lost if closed. (save widget) - Hive NOSQL package - save the passwords/2fa card info (website + 2fa + password).
+//TODO 5: Get rid of the useless menu's and figure out something better
 
 //Import the files needed for the application
+import 'dart:developer';
+
 import 'package:first_app/bloc/passwords_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'cards_store.dart';
 import 'routes.dart';
 
+late Box box;
+
 //Create main function which will run when the application starts
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(CardInfoAdapter());
+  await Hive.openBox('cards_data');
+
   //Run AppLoop
   runApp(MultiBlocProvider(
     //Assign the state-event managers
@@ -33,9 +44,14 @@ void main() {
 //StatelessWidget - Static widget, doesnt change midway/doesnt need to be updated
 //
 //StatefulWidget - Flexible widget, can be changed midway through events (event manager - bloc)
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override //Override the widget so it uses what we programmed
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -91,5 +107,11 @@ class MyApp extends StatelessWidget {
       //Set routes of the application (pages)
       routes: routes,
     );
+  }
+
+  @override
+  void dispose() {
+    Hive.close();
+    super.dispose();
   }
 }
