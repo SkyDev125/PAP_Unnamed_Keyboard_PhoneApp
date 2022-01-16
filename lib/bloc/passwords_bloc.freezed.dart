@@ -28,6 +28,10 @@ class _$PasswordsEventTearOff {
   PasswordsAllCardsRemoved allCardsRemoved() {
     return const PasswordsAllCardsRemoved();
   }
+
+  PasswordCardEditIgnore cardEditedIgnore() {
+    return const PasswordCardEditIgnore();
+  }
 }
 
 /// @nodoc
@@ -40,6 +44,7 @@ mixin _$PasswordsEvent {
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
+    required TResult Function() cardEditedIgnore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +52,7 @@ mixin _$PasswordsEvent {
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +60,7 @@ mixin _$PasswordsEvent {
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +69,7 @@ mixin _$PasswordsEvent {
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
+    required TResult Function(PasswordCardEditIgnore value) cardEditedIgnore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +77,7 @@ mixin _$PasswordsEvent {
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,6 +85,7 @@ mixin _$PasswordsEvent {
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,6 +152,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
+    required TResult Function() cardEditedIgnore,
   }) {
     return cardAdd();
   }
@@ -152,6 +163,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
   }) {
     return cardAdd?.call();
   }
@@ -162,6 +174,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
     required TResult orElse(),
   }) {
     if (cardAdd != null) {
@@ -176,6 +189,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
+    required TResult Function(PasswordCardEditIgnore value) cardEditedIgnore,
   }) {
     return cardAdd(this);
   }
@@ -186,6 +200,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
   }) {
     return cardAdd?.call(this);
   }
@@ -196,6 +211,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
     required TResult orElse(),
   }) {
     if (cardAdd != null) {
@@ -253,6 +269,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
+    required TResult Function() cardEditedIgnore,
   }) {
     return cardEdited();
   }
@@ -263,6 +280,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
   }) {
     return cardEdited?.call();
   }
@@ -273,6 +291,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
     required TResult orElse(),
   }) {
     if (cardEdited != null) {
@@ -287,6 +306,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
+    required TResult Function(PasswordCardEditIgnore value) cardEditedIgnore,
   }) {
     return cardEdited(this);
   }
@@ -297,6 +317,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
   }) {
     return cardEdited?.call(this);
   }
@@ -307,6 +328,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
     required TResult orElse(),
   }) {
     if (cardEdited != null) {
@@ -365,6 +387,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
+    required TResult Function() cardEditedIgnore,
   }) {
     return allCardsRemoved();
   }
@@ -375,6 +398,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
   }) {
     return allCardsRemoved?.call();
   }
@@ -385,6 +409,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
     required TResult orElse(),
   }) {
     if (allCardsRemoved != null) {
@@ -399,6 +424,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
+    required TResult Function(PasswordCardEditIgnore value) cardEditedIgnore,
   }) {
     return allCardsRemoved(this);
   }
@@ -409,6 +435,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
   }) {
     return allCardsRemoved?.call(this);
   }
@@ -419,6 +446,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
     required TResult orElse(),
   }) {
     if (allCardsRemoved != null) {
@@ -430,6 +458,123 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
 
 abstract class PasswordsAllCardsRemoved implements PasswordsEvent {
   const factory PasswordsAllCardsRemoved() = _$PasswordsAllCardsRemoved;
+}
+
+/// @nodoc
+abstract class $PasswordCardEditIgnoreCopyWith<$Res> {
+  factory $PasswordCardEditIgnoreCopyWith(PasswordCardEditIgnore value,
+          $Res Function(PasswordCardEditIgnore) then) =
+      _$PasswordCardEditIgnoreCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$PasswordCardEditIgnoreCopyWithImpl<$Res>
+    extends _$PasswordsEventCopyWithImpl<$Res>
+    implements $PasswordCardEditIgnoreCopyWith<$Res> {
+  _$PasswordCardEditIgnoreCopyWithImpl(PasswordCardEditIgnore _value,
+      $Res Function(PasswordCardEditIgnore) _then)
+      : super(_value, (v) => _then(v as PasswordCardEditIgnore));
+
+  @override
+  PasswordCardEditIgnore get _value => super._value as PasswordCardEditIgnore;
+}
+
+/// @nodoc
+
+class _$PasswordCardEditIgnore implements PasswordCardEditIgnore {
+  const _$PasswordCardEditIgnore();
+
+  @override
+  String toString() {
+    return 'PasswordsEvent.cardEditedIgnore()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is PasswordCardEditIgnore);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() cardAdd,
+    required TResult Function() cardEdited,
+    required TResult Function() allCardsRemoved,
+    required TResult Function() cardEditedIgnore,
+  }) {
+    return cardEditedIgnore();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? cardAdd,
+    TResult Function()? cardEdited,
+    TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
+  }) {
+    return cardEditedIgnore?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cardAdd,
+    TResult Function()? cardEdited,
+    TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
+    required TResult orElse(),
+  }) {
+    if (cardEditedIgnore != null) {
+      return cardEditedIgnore();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(PasswordsCardAdd value) cardAdd,
+    required TResult Function(PasswordsCardEdit value) cardEdited,
+    required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
+    required TResult Function(PasswordCardEditIgnore value) cardEditedIgnore,
+  }) {
+    return cardEditedIgnore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsCardEdit value)? cardEdited,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
+  }) {
+    return cardEditedIgnore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsCardEdit value)? cardEdited,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
+    required TResult orElse(),
+  }) {
+    if (cardEditedIgnore != null) {
+      return cardEditedIgnore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PasswordCardEditIgnore implements PasswordsEvent {
+  const factory PasswordCardEditIgnore() = _$PasswordCardEditIgnore;
 }
 
 /// @nodoc

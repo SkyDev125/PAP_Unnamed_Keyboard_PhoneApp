@@ -119,16 +119,21 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
             onSaved: (value) {
               switch (widget.identifier) {
                 case 0:
-                  passwordsFormURL[cardOnEdit] = value;
+                  formURL = value!;
                   break;
                 case 1:
-                  passwordsFormUsername[cardOnEdit] = value;
+                  formUsername = value!;
                   break;
                 case 2:
-                  passwordsFormPassword[cardOnEdit] = value;
+                  formPassword = value!;
                   break;
                 case 3:
-                  passwordsTOTPUrl[cardOnEdit] = value;
+                  if (value != "") {
+                    passwordTOTPUrl =
+                        "otpauth://totp/secret=" + value!.toUpperCase();
+                  } else {
+                    passwordTOTPUrl = value!;
+                  }
               }
             },
             cursorColor: Theme.of(context).colorScheme.secondary,

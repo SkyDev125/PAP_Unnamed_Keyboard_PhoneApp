@@ -14,6 +14,11 @@ final List passwordsFormUsername = [];
 final List passwordsFormPassword = [];
 final List passwordsTOTPUrl = [];
 
+String formURL = "";
+String formUsername = "";
+String formPassword = "";
+String passwordTOTPUrl = "";
+
 //QrCode data
 Barcode data = Barcode("", BarcodeFormat.unknown, null);
 

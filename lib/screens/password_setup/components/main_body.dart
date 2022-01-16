@@ -1,6 +1,8 @@
 //Import the files needed for widgets
+import 'package:first_app/cards_store.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
@@ -79,9 +81,11 @@ class MainBodyState extends State<MainBody> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)))),
                         );
-
-                        passwordsTOTPUrl.add(null);
                         _formKey.currentState!.save();
+
+                        final newCardInfo = CardInfo(
+                            formURL, formUsername, formPassword, "", "", "");
+                        Hive.box('cards_data').add(newCardInfo);
                         snackbarOn = 1;
                         Navigator.of(context).pop();
 

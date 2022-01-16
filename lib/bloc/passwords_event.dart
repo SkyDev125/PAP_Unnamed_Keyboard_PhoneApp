@@ -16,6 +16,9 @@ class PasswordsEvent with _$PasswordsEvent {
 
   const factory PasswordsEvent.allCardsRemoved() =
       PasswordsAllCardsRemoved; //Passwords All cards removed event
+
+  const factory PasswordsEvent.cardEditedIgnore() =
+      PasswordCardEditIgnore; // Passwords Card Edited without icon change event
 }
 
 @freezed

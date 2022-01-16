@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:first_app/components/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -113,18 +111,17 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
             onSaved: (value) {
               switch (widget.identifier) {
                 case 0:
-                  passwordsFormURL.add(value);
+                  formURL = value!;
                   break;
                 case 1:
-                  passwordsFormUsername.add(value);
+                  formUsername = value!;
                   break;
                 case 2:
-                  passwordsFormPassword.add(value);
+                  formPassword = value!;
                   break;
                 case 3:
-                  passwordsTOTPUrl
-                      .add("otpauth://totp/secret=" + value!.toUpperCase());
-                  log(passwordsTOTPUrl[0]);
+                  passwordTOTPUrl =
+                      "otpauth://totp/secret=" + value!.toUpperCase();
               }
             },
             cursorColor: Theme.of(context).colorScheme.secondary,

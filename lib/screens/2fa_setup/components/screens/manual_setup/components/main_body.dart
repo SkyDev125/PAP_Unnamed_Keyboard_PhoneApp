@@ -1,8 +1,10 @@
 //Import the files needed for widgets
 import 'package:first_app/bloc/passwords_bloc.dart';
+import 'package:first_app/cards_store.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:first_app/screens/password_setup/components/custum_input_box.dart';
+import 'package:hive/hive.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
@@ -20,7 +22,6 @@ class MainBodyState extends State<MainBody> {
 
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: EdgeInsets.only(
@@ -100,8 +101,11 @@ class FormWidget extends StatelessWidget {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)))),
                 );
-                
+
                 _formKey.currentState!.save();
+                final newCardInfo = CardInfo(formURL,
+                    formUsername, formPassword, passwordTOTPUrl, "", "");
+                Hive.box('cards_data').add(newCardInfo);
                 snackbarOn = 1;
                 Navigator.of(context).popUntil(ModalRoute.withName("/"));
 

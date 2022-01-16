@@ -1,10 +1,10 @@
 //Import the files needed for widgets
-import 'dart:developer';
-
 import 'package:first_app/bloc/passwords_bloc.dart';
+import 'package:first_app/cards_store.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:first_app/screens/cards_edit/components/custum_input_box.dart';
+import 'package:hive/hive.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
@@ -51,22 +51,25 @@ class FormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cardsBox = Hive.box('cards_data');
+    CardInfo card = cardsBox.get(cardOnEdit);
+
     return Form(
         key: _formKey,
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Visibility(
-            visible: passwordsTOTPUrl[cardOnEdit] == null ? false : true,
+            visible: card.passwordTOTPUrl == "" ? false : true,
             child: MyCustomInputBox(
               label: "Key",
-              initialValue: passwordsTOTPUrl[cardOnEdit] ?? "",
-              inputHint: passwordsTOTPUrl[cardOnEdit] ?? "",
+              initialValue: card.passwordTOTPUrl,
+              inputHint: card.passwordTOTPUrl,
               identifier: 3,
             ),
           ),
           MyCustomInputBox(
             label: "Website",
-            initialValue: passwordsFormURL[cardOnEdit],
-            inputHint: passwordsFormURL[cardOnEdit],
+            initialValue: card.passwordFormURL,
+            inputHint: card.passwordFormURL,
             identifier: 0,
           ),
           const Padding(
@@ -74,8 +77,8 @@ class FormWidget extends StatelessWidget {
           ),
           MyCustomInputBox(
             label: "Username",
-            initialValue: passwordsFormUsername[cardOnEdit],
-            inputHint: passwordsFormUsername[cardOnEdit],
+            initialValue: card.passwordFormUsername,
+            inputHint: card.passwordFormUsername,
             identifier: 1,
           ),
           const Padding(
@@ -83,8 +86,8 @@ class FormWidget extends StatelessWidget {
           ),
           MyCustomInputBox(
             label: "Password",
-            initialValue: passwordsFormPassword[cardOnEdit],
-            inputHint: passwordsFormPassword[cardOnEdit],
+            initialValue: card.passwordFormPassword,
+            inputHint: card.passwordFormPassword,
             identifier: 2,
           ),
           const Padding(
@@ -93,7 +96,6 @@ class FormWidget extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               await requestGET(url);
-              log(url);
               if (_formKey.currentState!.validate()) {
                 // If the form is valid, display a snackbar. In the real world,
                 // you'd often call a server or save the information in a database.
@@ -111,12 +113,36 @@ class FormWidget extends StatelessWidget {
                 );
 
                 _formKey.currentState!.save();
-                snackbarOn = 1;
-                Navigator.of(context).popUntil(ModalRoute.withName("/"));
 
-                context
-                    .read<PasswordsBloc>()
-                    .add(const PasswordsEvent.cardEdited());
+                if (card.passwordFormURL == formURL) {
+                  final newCardInfo = CardInfo(
+                      card.passwordFormURL,
+                      formUsername,
+                      formPassword,
+                      passwordTOTPUrl,
+                      card.iconUrl,
+                      card.iconType);
+
+                  cardsBox.putAt(cardOnEdit, newCardInfo);
+
+                  Navigator.of(context).popUntil(ModalRoute.withName("/"));
+                } else {
+                  final newCardInfo = CardInfo(
+                      formURL,
+                      formUsername,
+                      formPassword,
+                      passwordTOTPUrl,
+                      card.iconUrl,
+                      card.iconType);
+
+                  cardsBox.putAt(cardOnEdit, newCardInfo);
+
+                  snackbarOn = 1;
+                  Navigator.of(context).popUntil(ModalRoute.withName("/"));
+                  context
+                      .read<PasswordsBloc>()
+                      .add(const PasswordsEvent.cardEdited());
+                }
               }
             },
             child: const Text('Submit', style: TextStyle(fontSize: 20)),

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 part 'cards_store.g.dart';
 
@@ -8,19 +7,28 @@ part 'cards_store.g.dart';
 @HiveType(typeId: 0)
 class CardInfo extends HiveObject {
   @HiveField(0)
-  late final Widget card;
+  late String passwordFormURL;
 
   @HiveField(1)
-  late final String passwordFormURL;
+  late String passwordFormUsername;
 
   @HiveField(2)
-  late final String passwordFormUsername;
+  late String passwordFormPassword;
 
   @HiveField(3)
-  late final String passwordFormPassword;
+  late String passwordTOTPUrl;
 
   @HiveField(4)
-  late final String passwordTOTPUrl;
+  late String iconUrl;
 
-  CardInfo(this.card, this.passwordFormURL, this.passwordFormUsername, this.passwordFormPassword, this.passwordTOTPUrl);
+  @HiveField(5)
+  late String iconType;
+
+  CardInfo(
+      this.passwordFormURL,
+      this.passwordFormUsername,
+      this.passwordFormPassword,
+      this.passwordTOTPUrl,
+      this.iconUrl,
+      this.iconType);
 }

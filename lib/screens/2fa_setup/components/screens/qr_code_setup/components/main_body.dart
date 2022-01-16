@@ -1,7 +1,9 @@
 //Import the files needed for widgets
 import 'dart:async';
 import 'package:first_app/bloc/passwords_bloc.dart';
+import 'package:first_app/cards_store.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:otp/otp.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:first_app/screens/password_setup/components/custum_input_box.dart';
@@ -100,12 +102,6 @@ class MainBodyState extends State<MainBody> {
         }
       }
 
-      //log(totpUrl);
-      //log(totpSecret);
-      //log(totpAlgorithm.toString());
-      //log(totpDigits.toString());
-      //log(totpPeriod.toString());
-
       _start = totpPeriod;
       onlyonce = 1;
     }
@@ -193,8 +189,12 @@ class FormWidget extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(20)))),
                 );
 
-                passwordsTOTPUrl.add(data.code.toString());
                 _formKey.currentState!.save();
+
+                final newCardInfo = CardInfo(formURL,
+                    formUsername, formPassword, data.code.toString(), "", "");
+                Hive.box('cards_data').add(newCardInfo);
+
                 snackbarOn = 1;
                 Navigator.of(context).popUntil(ModalRoute.withName("/"));
 

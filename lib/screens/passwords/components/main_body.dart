@@ -2,6 +2,7 @@
 // ignore: unused_import
 import 'dart:developer';
 
+import 'package:first_app/cards_store.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:first_app/screens/cards_edit/passwords_page.dart';
 import 'package:first_app/screens/cards_view/passwords_page.dart';
@@ -11,9 +12,13 @@ import 'package:flutter/material.dart';
 
 //Import the files needed for the event handler
 import 'package:first_app/bloc/passwords_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:hive/hive.dart';
 // ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //Create the widget Main Body Class
 class MainBody extends StatefulWidget {
@@ -31,17 +36,13 @@ class MainBodyState extends State<MainBody> {
         newIndex -= 1;
       }
 
-      final item = cardsList.removeAt(oldIndex);
-      final url = passwordsFormURL.removeAt(oldIndex);
-      final username = passwordsFormUsername.removeAt(oldIndex);
-      final password = passwordsFormPassword.removeAt(oldIndex);
-      final totpUrl = passwordsTOTPUrl.removeAt(oldIndex);
+      final cardsBox = Hive.box('cards_data');
 
-      cardsList.insert(newIndex, item);
-      passwordsFormURL.insert(newIndex, url);
-      passwordsFormUsername.insert(newIndex, username);
-      passwordsFormPassword.insert(newIndex, password);
-      passwordsTOTPUrl.insert(newIndex, totpUrl);
+      final oldItem = cardsBox.getAt(oldIndex);
+      final newItem = cardsBox.getAt(newIndex);
+
+      cardsBox.putAt(oldIndex, newItem);
+      cardsBox.putAt(newIndex, oldItem);
     });
   }
 
@@ -89,7 +90,9 @@ class MainBodyState extends State<MainBody> {
                               )
                             ],
                           ),
-                          child: cardsList[index]);
+                          child: CardWidget(
+                            index: index,
+                          ));
                     } else {
                       return SingleWidgetLoading(
                           key: UniqueKey(), index: index);
@@ -133,7 +136,9 @@ class MainBodyState extends State<MainBody> {
                           )
                         ],
                       ),
-                      child: cardsList[index]);
+                      child: CardWidget(
+                        index: index,
+                      ));
                 }),
           );
         },
@@ -157,6 +162,8 @@ class MainBodyState extends State<MainBody> {
           //?log(passwordsFormPassword[cardsList.length - 1].toString());
           //?log(passwordsTOTPUrl[cardsList.length - 1].toString());
 
+          final cardsBox = Hive.box('cards_data');
+
           //Define Reordable list padding, onreorder function,
           //total items in the list and start building the widgets inside
           return Scrollbar(
@@ -168,17 +175,14 @@ class MainBodyState extends State<MainBody> {
                 right: MediaQuery.of(context).padding.right + 10,
               ),
               onReorder: reorderData,
-              itemCount: cardsList.length,
+              itemCount: cardsBox.length,
 
               //Runs for each item in the itemCount (above)
               itemBuilder: (BuildContext context, int index) {
-                //Sets the current widget
-                final card = cardsList[index];
-
                 //Returns the dismissible inside the card, so it can be dismissed
                 //edit, delete
                 return Container(
-                  key: ValueKey(card),
+                  key: UniqueKey(),
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -191,12 +195,12 @@ class MainBodyState extends State<MainBody> {
                   ),
                   child: ClipPath(
                     clipper: Customshape(),
-                    key: ValueKey(card),
+                    key: UniqueKey(),
                     child: Container(
                       color: const Color(0xFF912CEE),
-                      key: ValueKey(card),
+                      key: UniqueKey(),
                       child: Slidable(
-                          key: ValueKey(card),
+                          key: UniqueKey(),
 
                           //slidable animation from left to right
                           startActionPane: ActionPane(
@@ -307,7 +311,7 @@ class MainBodyState extends State<MainBody> {
                               ),
                             ],
                           ),
-                          child: cardsList[index]),
+                          child: CardWidget(index: index, key: UniqueKey())),
                     ),
                   ),
                 );
@@ -319,15 +323,14 @@ class MainBodyState extends State<MainBody> {
 
   void cardDismissed(int index, BuildContext context) {
     return setState(() {
-      final String cardName = passwordsFormURL[index];
-      final String cardUserName = passwordsFormUsername[index];
-      cardsList.removeAt(index);
-      passwordsFormPassword.removeAt(index);
-      passwordsFormUsername.removeAt(index);
-      passwordsFormURL.removeAt(index);
-      passwordsTOTPUrl.removeAt(index);
+      final cardsBox = Hive.box('cards_data');
+      CardInfo card = cardsBox.get(index);
 
-      if (cardsList.isEmpty) {
+      final String cardName = card.passwordFormURL;
+      final String cardUserName = card.passwordFormUsername;
+      cardsBox.deleteAt(index);
+
+      if (cardsBox.isEmpty) {
         context
             .read<PasswordsBloc>()
             .add(const PasswordsEvent.allCardsRemoved());
@@ -387,6 +390,8 @@ class SingleWidgetLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cardsBox = Hive.box('cards_data');
+    CardInfo card = cardsBox.get(index);
     return Container(
       key: UniqueKey(),
       decoration: const BoxDecoration(
@@ -427,7 +432,7 @@ class SingleWidgetLoading extends StatelessWidget {
             ),
             Flexible(
                 child: Text(
-              passwordsFormURL[index],
+              card.passwordFormURL,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             )),
@@ -466,5 +471,82 @@ class Customshape extends CustomClipper<Path> {
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return true;
+  }
+}
+
+class CardWidget extends StatelessWidget {
+  final int index;
+  const CardWidget({
+    required this.index,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final cardsBox = Hive.box('cards_data');
+    CardInfo card = cardsBox.get(index);
+
+    return Card(
+      key: UniqueKey(),
+
+      //Set Card padding bottom and top
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 16, top: 16),
+
+        //Set Card row with its Icon Button and content
+        child: Row(children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 15,
+            ),
+          ),
+          IconButton(
+            icon: card.iconType == "svg"
+                ? SvgPicture.network(
+                    card.iconUrl,
+                    placeholderBuilder: (context) =>
+                        const CircularProgressIndicator(),
+                  )
+                : CachedNetworkImage(
+                    imageUrl: card.iconUrl,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+            //icon: const Icon(Icons.open_in_browser_rounded),
+            tooltip: card.iconType == "error"
+                ? "Icon Couldn't be loaded"
+                : 'Open in browser',
+            iconSize: 30,
+            onPressed: () async {
+              var url = 'http://' + card.passwordFormURL;
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          ),
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 15,
+            ),
+          ),
+          Flexible(
+              child: Text(
+            card.passwordFormURL,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          )),
+        ]),
+      ),
+
+      //Make Card corners round with a 30 radius
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
+    );
   }
 }

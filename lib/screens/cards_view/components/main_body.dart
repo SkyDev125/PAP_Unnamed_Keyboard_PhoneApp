@@ -2,8 +2,10 @@
 import 'dart:async';
 
 import 'package:clipboard/clipboard.dart';
+import 'package:first_app/cards_store.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/components/variables.dart';
+import 'package:hive/hive.dart';
 import 'package:otp/otp.dart';
 // ignore: implementation_imports
 
@@ -31,8 +33,11 @@ class MainBodyState extends State<MainBody> {
 
   @override
   Widget build(BuildContext context) {
+    final cardsBox = Hive.box('cards_data');
+    CardInfo card = cardsBox.get(cardOnEdit);
+
     if (onlyonce == 0) {
-      String totpUrl = data.code.toString();
+      String totpUrl = card.passwordTOTPUrl;
 
       //totpSecret
       try {
@@ -101,12 +106,6 @@ class MainBodyState extends State<MainBody> {
         }
       }
 
-      //log(totpUrl);
-      //log(totpSecret);
-      //log(totpAlgorithm.toString());
-      //log(totpDigits.toString());
-      //log(totpPeriod.toString());
-
       _start = totpPeriod;
       onlyonce = 1;
     }
@@ -123,7 +122,7 @@ class MainBodyState extends State<MainBody> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Visibility(
-              visible: passwordsTOTPUrl[cardOnEdit] == null ? false : true,
+              visible: card.passwordTOTPUrl == "" ? false : true,
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 const TimerAnimation(),
@@ -149,13 +148,13 @@ class MainBodyState extends State<MainBody> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(passwordsFormURL[cardOnEdit],
+                Text(card.passwordFormURL,
                     style: TextStyle(
                         fontSize: textSize,
                         color: Theme.of(context).colorScheme.secondary)),
                 IconButton(
                     onPressed: () {
-                      FlutterClipboard.copy(passwordsFormURL[cardOnEdit])
+                      FlutterClipboard.copy(card.passwordFormURL)
                           .then((result) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(clipboardSnackbarUrl(context));
@@ -173,13 +172,13 @@ class MainBodyState extends State<MainBody> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(passwordsFormUsername[cardOnEdit],
+                Text(card.passwordFormUsername,
                     style: TextStyle(
                         fontSize: textSize,
                         color: Theme.of(context).colorScheme.secondary)),
                 IconButton(
                     onPressed: () {
-                      FlutterClipboard.copy(passwordsFormUsername[cardOnEdit])
+                      FlutterClipboard.copy(card.passwordFormUsername)
                           .then((result) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(clipboardSnackbarUsername(context));
@@ -197,7 +196,7 @@ class MainBodyState extends State<MainBody> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(passwordsFormPassword[cardOnEdit],
+                Text(card.passwordFormPassword,
                     style: TextStyle(
                         fontSize: textSize,
                         color: Theme.of(context).colorScheme.secondary)),
