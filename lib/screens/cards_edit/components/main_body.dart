@@ -1,4 +1,6 @@
 //Import the files needed for widgets
+import 'dart:developer';
+
 import 'package:first_app/bloc/passwords_bloc.dart';
 import 'package:first_app/cards_store.dart';
 import 'package:flutter/material.dart';
@@ -114,35 +116,17 @@ class FormWidget extends StatelessWidget {
 
                 _formKey.currentState!.save();
 
-                if (card.passwordFormURL == formURL) {
-                  final newCardInfo = CardInfo(
-                      card.passwordFormURL,
-                      formUsername,
-                      formPassword,
-                      passwordTOTPUrl,
-                      card.iconUrl,
-                      card.iconType);
+                log("yeah no");
+                final newCardInfo = CardInfo(formURL, formUsername,
+                    formPassword, passwordTOTPUrl, card.iconUrl, card.iconType);
 
-                  cardsBox.putAt(cardOnEdit, newCardInfo);
+                cardsBox.putAt(cardOnEdit, newCardInfo);
 
-                  Navigator.of(context).popUntil(ModalRoute.withName("/"));
-                } else {
-                  final newCardInfo = CardInfo(
-                      formURL,
-                      formUsername,
-                      formPassword,
-                      passwordTOTPUrl,
-                      card.iconUrl,
-                      card.iconType);
-
-                  cardsBox.putAt(cardOnEdit, newCardInfo);
-
-                  snackbarOn = 1;
-                  Navigator.of(context).popUntil(ModalRoute.withName("/"));
-                  context
-                      .read<PasswordsBloc>()
-                      .add(const PasswordsEvent.cardEdited());
-                }
+                snackbarOn = 1;
+                Navigator.of(context).popUntil(ModalRoute.withName("/"));
+                context
+                    .read<PasswordsBloc>()
+                    .add(const PasswordsEvent.cardEdited());
               }
             },
             child: const Text('Submit', style: TextStyle(fontSize: 20)),

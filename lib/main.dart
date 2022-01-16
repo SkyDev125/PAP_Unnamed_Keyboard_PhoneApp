@@ -5,8 +5,6 @@
 //TODO 5: Get rid of the useless menu's and figure out something better
 
 //Import the files needed for the application
-import 'dart:developer';
-
 import 'package:first_app/bloc/passwords_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +21,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(CardInfoAdapter());
   await Hive.openBox('cards_data');
+  //Hive.deleteFromDisk();
 
   //Run AppLoop
   runApp(MultiBlocProvider(
