@@ -150,8 +150,22 @@ class MainBodyState extends State<MainBody> {
             snackbarOn = 0;
           }
 
+          //?log variables info:
+          //?log(cardsList.length.toString());
+          //?log(passwordsFormURL.length.toString());
+          //?log(passwordsFormUsername.length.toString());
+          //?log(passwordsFormPassword.length.toString());
+          //?log(passwordsTOTPUrl.length.toString());
+          //?
+          //?log(passwordsFormURL[cardsList.length - 1].toString());
+          //?log(passwordsFormUsername[cardsList.length - 1].toString());
+          //?log(passwordsFormPassword[cardsList.length - 1].toString());
+          //?log(passwordsTOTPUrl[cardsList.length - 1].toString());
+
           final cardsBox = Hive.box('cards_data');
 
+          //Define Reordable list padding, onreorder function,
+          //total items in the list and start building the widgets inside
           return Scrollbar(
             child: ReorderableListView.builder(
               padding: EdgeInsets.only(
@@ -160,10 +174,13 @@ class MainBodyState extends State<MainBody> {
                 left: MediaQuery.of(context).padding.left + 10,
                 right: MediaQuery.of(context).padding.right + 10,
               ),
-              onReorder: (int oldIndex, int newIndex) {},
-              itemCount: 1,
-              itemBuilder: (BuildContext context, int index) {
+              onReorder: reorderData,
+              itemCount: cardsBox.length,
 
+              //Runs for each item in the itemCount (above)
+              itemBuilder: (BuildContext context, int index) {
+                //Returns the dismissible inside the card, so it can be dismissed
+                //edit, delete
                 return Container(
                   key: UniqueKey(),
                   decoration: const BoxDecoration(
