@@ -54,7 +54,7 @@ class FormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardsBox = Hive.box('cards_data');
-    CardInfo card = cardsBox.get(cardOnEdit);
+    CardInfo card = cardsBox.getAt(cardOnEdit);
 
     return Form(
         key: _formKey,

@@ -128,7 +128,7 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
                   formPassword = value!;
                   break;
                 case 3:
-                  if (value != "") {
+                  if (value == "") {
                     passwordTOTPUrl =
                         "otpauth://totp/secret=" + value!.toUpperCase();
                   } else {

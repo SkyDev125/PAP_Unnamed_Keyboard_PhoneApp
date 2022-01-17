@@ -35,7 +35,8 @@ class MainBodyState extends State<MainBody> {
       if (oldIndex < newIndex) {
         newIndex -= 1;
       }
-
+      log(newIndex.toString());
+      log(oldIndex.toString());
       final cardsBox = Hive.box('cards_data');
 
       final oldItem = cardsBox.getAt(oldIndex);
@@ -54,8 +55,17 @@ class MainBodyState extends State<MainBody> {
     //returns the Widget based on the state defined by the bloc
     return state.when(
         //Initial state, show logo in center
-        initial: () =>
-            Center(child: Image.asset('assets/app_image_dark/gift.png')),
+        initial: () {
+          log(init.toString());
+          if (init == 1) {
+            final cardsBox = Hive.box('cards_data');
+            if (cardsBox.isNotEmpty) {
+              context.read<PasswordsBloc>().add(const PasswordsEvent.initial());
+            }
+          }
+          init = 0;
+          return Center(child: Image.asset('assets/app_image_dark/gift.png'));
+        },
 
         //Wait for reordable list to load and show loading progress indicator
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -314,7 +324,8 @@ class MainBodyState extends State<MainBody> {
   void cardDismissed(int index, BuildContext context) {
     return setState(() {
       final cardsBox = Hive.box('cards_data');
-      CardInfo card = cardsBox.get(index);
+      log("index:" + index.toString());
+      CardInfo card = cardsBox.getAt(index);
 
       final String cardName = card.passwordFormURL;
       final String cardUserName = card.passwordFormUsername;
@@ -381,7 +392,7 @@ class SingleWidgetLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardsBox = Hive.box('cards_data');
-    CardInfo card = cardsBox.get(index);
+    CardInfo card = cardsBox.getAt(index);
     return Container(
       key: UniqueKey(),
       decoration: const BoxDecoration(
@@ -474,7 +485,7 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardsBox = Hive.box('cards_data');
-    CardInfo card = cardsBox.get(index);
+    CardInfo card = cardsBox.getAt(index);
 
     return Card(
       //Set Card padding bottom and top

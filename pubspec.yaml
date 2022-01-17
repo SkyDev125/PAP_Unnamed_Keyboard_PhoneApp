@@ -49,6 +49,7 @@ dependencies:
   lint: ^1.7.2
   otp: ^3.0.1
   permission_handler: ^8.2.6
+  pull_to_refresh: ^2.0.0
   qr_code_scanner: ^0.6.1
   url_launcher: ^6.0.12
 

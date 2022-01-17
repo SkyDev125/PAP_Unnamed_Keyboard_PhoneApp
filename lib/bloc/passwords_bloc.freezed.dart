@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PasswordsEventTearOff {
   const _$PasswordsEventTearOff();
 
+  Initial initial() {
+    return const Initial();
+  }
+
   PasswordsCardAdd cardAdd() {
     return const PasswordsCardAdd();
   }
@@ -41,6 +45,7 @@ const $PasswordsEvent = _$PasswordsEventTearOff();
 mixin _$PasswordsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
@@ -49,6 +54,7 @@ mixin _$PasswordsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -57,6 +63,7 @@ mixin _$PasswordsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -66,6 +73,7 @@ mixin _$PasswordsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
@@ -74,6 +82,7 @@ mixin _$PasswordsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -82,6 +91,7 @@ mixin _$PasswordsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -106,6 +116,126 @@ class _$PasswordsEventCopyWithImpl<$Res>
   final PasswordsEvent _value;
   // ignore: unused_field
   final $Res Function(PasswordsEvent) _then;
+}
+
+/// @nodoc
+abstract class $InitialCopyWith<$Res> {
+  factory $InitialCopyWith(Initial value, $Res Function(Initial) then) =
+      _$InitialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$InitialCopyWithImpl<$Res> extends _$PasswordsEventCopyWithImpl<$Res>
+    implements $InitialCopyWith<$Res> {
+  _$InitialCopyWithImpl(Initial _value, $Res Function(Initial) _then)
+      : super(_value, (v) => _then(v as Initial));
+
+  @override
+  Initial get _value => super._value as Initial;
+}
+
+/// @nodoc
+
+class _$Initial implements Initial {
+  const _$Initial();
+
+  @override
+  String toString() {
+    return 'PasswordsEvent.initial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is Initial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() cardAdd,
+    required TResult Function() cardEdited,
+    required TResult Function() allCardsRemoved,
+    required TResult Function() cardEditedIgnore,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? cardAdd,
+    TResult Function()? cardEdited,
+    TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? cardAdd,
+    TResult Function()? cardEdited,
+    TResult Function()? allCardsRemoved,
+    TResult Function()? cardEditedIgnore,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(PasswordsCardAdd value) cardAdd,
+    required TResult Function(PasswordsCardEdit value) cardEdited,
+    required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
+    required TResult Function(PasswordCardEditIgnore value) cardEditedIgnore,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsCardEdit value)? cardEdited,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(PasswordsCardAdd value)? cardAdd,
+    TResult Function(PasswordsCardEdit value)? cardEdited,
+    TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
+    TResult Function(PasswordCardEditIgnore value)? cardEditedIgnore,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Initial implements PasswordsEvent {
+  const factory Initial() = _$Initial;
 }
 
 /// @nodoc
@@ -149,6 +279,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
@@ -160,6 +291,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -171,6 +303,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -186,6 +319,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
@@ -197,6 +331,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -208,6 +343,7 @@ class _$PasswordsCardAdd implements PasswordsCardAdd {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -266,6 +402,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
@@ -277,6 +414,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -288,6 +426,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -303,6 +442,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
@@ -314,6 +454,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -325,6 +466,7 @@ class _$PasswordsCardEdit implements PasswordsCardEdit {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -384,6 +526,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
@@ -395,6 +538,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -406,6 +550,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -421,6 +566,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
@@ -432,6 +578,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -443,6 +590,7 @@ class _$PasswordsAllCardsRemoved implements PasswordsAllCardsRemoved {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -501,6 +649,7 @@ class _$PasswordCardEditIgnore implements PasswordCardEditIgnore {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function() cardAdd,
     required TResult Function() cardEdited,
     required TResult Function() allCardsRemoved,
@@ -512,6 +661,7 @@ class _$PasswordCardEditIgnore implements PasswordCardEditIgnore {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -523,6 +673,7 @@ class _$PasswordCardEditIgnore implements PasswordCardEditIgnore {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function()? cardAdd,
     TResult Function()? cardEdited,
     TResult Function()? allCardsRemoved,
@@ -538,6 +689,7 @@ class _$PasswordCardEditIgnore implements PasswordCardEditIgnore {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
     required TResult Function(PasswordsCardAdd value) cardAdd,
     required TResult Function(PasswordsCardEdit value) cardEdited,
     required TResult Function(PasswordsAllCardsRemoved value) allCardsRemoved,
@@ -549,6 +701,7 @@ class _$PasswordCardEditIgnore implements PasswordCardEditIgnore {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,
@@ -560,6 +713,7 @@ class _$PasswordCardEditIgnore implements PasswordCardEditIgnore {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
     TResult Function(PasswordsCardAdd value)? cardAdd,
     TResult Function(PasswordsCardEdit value)? cardEdited,
     TResult Function(PasswordsAllCardsRemoved value)? allCardsRemoved,

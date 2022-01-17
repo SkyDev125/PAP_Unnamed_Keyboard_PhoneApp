@@ -7,13 +7,6 @@ int snackbarOn = 0;
 int cardsListLoading = 0;
 
 //CardList to store the cards for the Passwords page
-final List cardsList = [];
-
-final List passwordsFormURL = [];
-final List passwordsFormUsername = [];
-final List passwordsFormPassword = [];
-final List passwordsTOTPUrl = [];
-
 String formURL = "";
 String formUsername = "";
 String formPassword = "";
@@ -24,3 +17,5 @@ Barcode data = Barcode("", BarcodeFormat.unknown, null);
 
 //Currently Editing Card
 int cardOnEdit = 0;
+
+late int init = 0;

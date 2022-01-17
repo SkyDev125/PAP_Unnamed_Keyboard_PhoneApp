@@ -34,7 +34,7 @@ class MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     final cardsBox = Hive.box('cards_data');
-    CardInfo card = cardsBox.get(cardOnEdit);
+    CardInfo card = cardsBox.getAt(cardOnEdit);
 
     if (onlyonce == 0) {
       String totpUrl = card.passwordTOTPUrl;
@@ -202,7 +202,7 @@ class MainBodyState extends State<MainBody> {
                         color: Theme.of(context).colorScheme.secondary)),
                 IconButton(
                     onPressed: () {
-                      FlutterClipboard.copy(passwordsFormPassword[cardOnEdit])
+                      FlutterClipboard.copy(card.passwordFormPassword)
                           .then((result) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(clipboardSnackbarPassword(context));

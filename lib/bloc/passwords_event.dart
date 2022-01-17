@@ -7,6 +7,9 @@ part of 'passwords_bloc.dart';
 //Freeze the class to make development easier
 @freezed
 class PasswordsEvent with _$PasswordsEvent {
+  const factory PasswordsEvent.initial() =
+      Initial; 
+
   //Set events to be called:
   const factory PasswordsEvent.cardAdd() =
       PasswordsCardAdd; //Passwords Card added event

@@ -17,13 +17,19 @@ part 'passwords_state.dart';
 //React to events and emit states
 class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
   PasswordsBloc() : super(const PasswordsState.initial()) {
+    on<Initial>((event, emit) {
+      emit(const PasswordsState.loading());
+      emit(const PasswordsState.loaded());
+      emit(const PasswordsState.cardsLoaded());
+    });
+
     //Run on Passwords Card Add Event
     on<PasswordsCardAdd>((event, emit) async {
       emit(const PasswordsState.loading());
       //get box's length
       final cardsBox = Hive.box('cards_data');
       final int boxsize = cardsBox.length - 1;
-      CardInfo card = cardsBox.get(boxsize);
+      CardInfo card = cardsBox.getAt(boxsize);
       log(card.passwordFormURL);
       log(card.passwordFormUsername);
       log(card.passwordFormPassword);
@@ -73,7 +79,7 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
     on<PasswordsCardEdit>((event, emit) async {
       emit(const PasswordsState.loading());
       final cardsBox = Hive.box('cards_data');
-      CardInfo card = cardsBox.get(cardOnEdit);
+      CardInfo card = cardsBox.getAt(cardOnEdit);
       emit(const PasswordsState.cardEdited());
 
       try {
@@ -109,7 +115,6 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
 
     //Run on Passwords All cards removed
     on<PasswordsAllCardsRemoved>((event, emit) async {
-      emit(const PasswordsState.loading());
       emit(const PasswordsState.initial());
     });
 

@@ -1,7 +1,7 @@
+//TODO 1: Fix the reordable (step by step exchange between keys)
 //TODO 1: Comment the whole code
 //TODO 2: Research about bluetooth or nfc connection between app and raspberry pi
 //TODO 3: Implement the data receive and sent of information based on NFC or Bluetooth
-//TODO 4: Figure a way to save the app data so it wont be lost if closed. (save widget) - Hive NOSQL package - save the passwords/2fa card info (website + 2fa + password).
 //TODO 5: Get rid of the useless menu's and figure out something better
 
 //Import the files needed for the application
@@ -10,18 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'cards_store.dart';
+import 'components/variables.dart';
 import 'routes.dart';
 
 late Box box;
 
 //Create main function which will run when the application starts
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   await Hive.initFlutter();
   Hive.registerAdapter(CardInfoAdapter());
   await Hive.openBox('cards_data');
-  //Hive.deleteFromDisk();
+  init = 1;
 
   //Run AppLoop
   runApp(MultiBlocProvider(
