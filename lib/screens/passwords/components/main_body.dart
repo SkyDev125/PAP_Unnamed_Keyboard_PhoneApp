@@ -35,15 +35,70 @@ class MainBodyState extends State<MainBody> {
       if (oldIndex < newIndex) {
         newIndex -= 1;
       }
+
       log(newIndex.toString());
       log(oldIndex.toString());
-      final cardsBox = Hive.box('cards_data');
 
-      final oldItem = cardsBox.getAt(oldIndex);
-      final newItem = cardsBox.getAt(newIndex);
+      int o = newIndex - oldIndex;
+      log(o.toString());
 
-      cardsBox.putAt(oldIndex, newItem);
-      cardsBox.putAt(newIndex, oldItem);
+      for (int i = 1; o != 0; i++) {
+        
+        final cardsBox = Hive.box('cards_data');
+
+        if (o < 0) {
+          log("reducing index");
+          log(i.toString());
+          CardInfo oldPosCard = cardsBox.getAt(oldIndex - i + 1);
+          CardInfo newPosCard = cardsBox.getAt(oldIndex - i);
+
+          CardInfo oldToNew = CardInfo(
+              oldPosCard.passwordFormURL,
+              oldPosCard.passwordFormUsername,
+              oldPosCard.passwordFormPassword,
+              oldPosCard.passwordTOTPUrl,
+              oldPosCard.iconUrl,
+              oldPosCard.iconType);
+
+          CardInfo newToOld = CardInfo(
+              newPosCard.passwordFormURL,
+              newPosCard.passwordFormUsername,
+              newPosCard.passwordFormPassword,
+              newPosCard.passwordTOTPUrl,
+              newPosCard.iconUrl,
+              newPosCard.iconType);
+
+          cardsBox.putAt(oldIndex, newToOld);
+          cardsBox.putAt(newIndex, oldToNew);
+
+          o++;
+        } else if (o > 0) {
+          log("growing index");
+          CardInfo oldPosCard = cardsBox.getAt(oldIndex + i - 1);
+          CardInfo newPosCard = cardsBox.getAt(oldIndex + i);
+
+          CardInfo oldToNew = CardInfo(
+              oldPosCard.passwordFormURL,
+              oldPosCard.passwordFormUsername,
+              oldPosCard.passwordFormPassword,
+              oldPosCard.passwordTOTPUrl,
+              oldPosCard.iconUrl,
+              oldPosCard.iconType);
+
+          CardInfo newToOld = CardInfo(
+              newPosCard.passwordFormURL,
+              newPosCard.passwordFormUsername,
+              newPosCard.passwordFormPassword,
+              newPosCard.passwordTOTPUrl,
+              newPosCard.iconUrl,
+              newPosCard.iconType);
+
+          cardsBox.putAt(oldIndex, newToOld);
+          cardsBox.putAt(newIndex, oldToNew);
+
+          o--;
+        }
+      }
     });
   }
 
@@ -116,6 +171,7 @@ class MainBodyState extends State<MainBody> {
 
         //Return the reordable list once loaded
         cardEdited: () {
+          final cardsBox = Hive.box('cards_data');
           return Scrollbar(
             child: ReorderableListView.builder(
                 padding: EdgeInsets.only(
@@ -125,7 +181,7 @@ class MainBodyState extends State<MainBody> {
                   right: MediaQuery.of(context).padding.right + 10,
                 ),
                 onReorder: reorderData,
-                itemCount: cardsListLoading,
+                itemCount: cardsBox.length,
 
                 //Runs for each item in the itemCount (above)
                 itemBuilder: (BuildContext context, int index) {
@@ -178,11 +234,11 @@ class MainBodyState extends State<MainBody> {
               //Runs for each item in the itemCount (above)
               itemBuilder: (BuildContext context, int index) {
                 //Sets the current widget
-
+                Key key = ValueKey(cardsBox.getAt(index));
                 //Returns the dismissible inside the card, so it can be dismissed
                 //edit, delete
                 return Container(
-                  key: ValueKey(index),
+                  key: key,
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -194,13 +250,13 @@ class MainBodyState extends State<MainBody> {
                     ],
                   ),
                   child: ClipPath(
+                    key: key,
                     clipper: Customshape(),
-                    key: ValueKey(index),
                     child: Container(
+                      key: key,
                       color: const Color(0xFF912CEE),
-                      key: ValueKey(index),
                       child: Slidable(
-                          key: ValueKey(index),
+                          key: key,
 
                           //slidable animation from left to right
                           startActionPane: ActionPane(

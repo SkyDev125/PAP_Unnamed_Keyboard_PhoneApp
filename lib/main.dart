@@ -13,8 +13,6 @@ import 'cards_store.dart';
 import 'components/variables.dart';
 import 'routes.dart';
 
-late Box box;
-
 //Create main function which will run when the application starts
 Future<void> main() async {
   await Hive.initFlutter();
