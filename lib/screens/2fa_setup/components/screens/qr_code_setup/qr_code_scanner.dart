@@ -1,4 +1,4 @@
-import 'dart:developer';
+//import 'dart:developer';
 import 'dart:io';
 
 import 'package:first_app/components/variables.dart';
@@ -141,7 +141,6 @@ class _QrCodeScanState extends State<QrCodeScan> {
                 data.code.toString().indexOf('secret='),
                 data.code.toString().length);
             totpSecret = temp.substring(7, temp.indexOf('&'));
-            log("found secret and &");
             Navigator.pushNamed(context, TwoFA.routeName);
           } catch (err) {
             try {
@@ -149,7 +148,6 @@ class _QrCodeScanState extends State<QrCodeScan> {
                   data.code.toString().indexOf('secret='),
                   data.code.toString().length);
               totpSecret = temp.substring(7, temp.length);
-              log("Found Secret without &");
               Navigator.pushNamed(context, TwoFA.routeName);
             } catch (err) {
               Navigator.pop(context);
@@ -172,7 +170,7 @@ class _QrCodeScanState extends State<QrCodeScan> {
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
-    log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
+    //log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

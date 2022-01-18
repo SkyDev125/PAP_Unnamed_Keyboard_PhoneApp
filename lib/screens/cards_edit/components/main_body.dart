@@ -1,6 +1,4 @@
 //Import the files needed for widgets
-import 'dart:developer';
-
 import 'package:first_app/bloc/passwords_bloc.dart';
 import 'package:first_app/cards_store.dart';
 import 'package:flutter/material.dart';
@@ -116,7 +114,6 @@ class FormWidget extends StatelessWidget {
 
                 _formKey.currentState!.save();
 
-                log("yeah no");
                 final newCardInfo = CardInfo(formURL, formUsername,
                     formPassword, passwordTOTPUrl, card.iconUrl, card.iconType);
 

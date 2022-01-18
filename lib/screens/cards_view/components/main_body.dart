@@ -145,23 +145,29 @@ class MainBodyState extends State<MainBody> {
               style: TextStyle(
                   fontSize: textSize * 1.25, fontWeight: FontWeight.bold),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(card.passwordFormURL,
-                    style: TextStyle(
-                        fontSize: textSize,
-                        color: Theme.of(context).colorScheme.secondary)),
-                IconButton(
-                    onPressed: () {
-                      FlutterClipboard.copy(card.passwordFormURL)
-                          .then((result) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(clipboardSnackbarUrl(context));
-                      });
-                    },
-                    icon: const Icon(Icons.copy)),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(card.passwordFormURL,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: textSize,
+                            color: Theme.of(context).colorScheme.secondary)),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        FlutterClipboard.copy(card.passwordFormURL)
+                            .then((result) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(clipboardSnackbarUrl(context));
+                        });
+                      },
+                      icon: const Icon(Icons.copy)),
+                ],
+              ),
             ),
             const Padding(
               padding: EdgeInsets.all(2),
@@ -169,23 +175,29 @@ class MainBodyState extends State<MainBody> {
             Text("Username",
                 style: TextStyle(
                     fontSize: textSize * 1.25, fontWeight: FontWeight.bold)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(card.passwordFormUsername,
-                    style: TextStyle(
-                        fontSize: textSize,
-                        color: Theme.of(context).colorScheme.secondary)),
-                IconButton(
-                    onPressed: () {
-                      FlutterClipboard.copy(card.passwordFormUsername)
-                          .then((result) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(clipboardSnackbarUsername(context));
-                      });
-                    },
-                    icon: const Icon(Icons.copy)),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(card.passwordFormUsername,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: textSize,
+                            color: Theme.of(context).colorScheme.secondary)),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        FlutterClipboard.copy(card.passwordFormUsername)
+                            .then((result) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(clipboardSnackbarUsername(context));
+                        });
+                      },
+                      icon: const Icon(Icons.copy)),
+                ],
+              ),
             ),
             const Padding(
               padding: EdgeInsets.all(2),
@@ -193,23 +205,29 @@ class MainBodyState extends State<MainBody> {
             Text("Password",
                 style: TextStyle(
                     fontSize: textSize * 1.25, fontWeight: FontWeight.bold)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(card.passwordFormPassword,
-                    style: TextStyle(
-                        fontSize: textSize,
-                        color: Theme.of(context).colorScheme.secondary)),
-                IconButton(
-                    onPressed: () {
-                      FlutterClipboard.copy(card.passwordFormPassword)
-                          .then((result) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(clipboardSnackbarPassword(context));
-                      });
-                    },
-                    icon: const Icon(Icons.copy)),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(card.passwordFormPassword,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: textSize,
+                            color: Theme.of(context).colorScheme.secondary)),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        FlutterClipboard.copy(card.passwordFormPassword)
+                            .then((result) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(clipboardSnackbarPassword(context));
+                        });
+                      },
+                      icon: const Icon(Icons.copy)),
+                ],
+              ),
             ),
           ]),
         ));

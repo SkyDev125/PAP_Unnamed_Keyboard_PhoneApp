@@ -69,7 +69,7 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
         await requestGET(value);
       }
 
-      if (_formFieldKey.currentState!.validate()) {
+      if (_formFieldKey.currentState?.validate() ?? false) {
         setState(() {
           isSubmitted = true;
         });

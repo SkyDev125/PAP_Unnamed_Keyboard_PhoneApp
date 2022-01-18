@@ -546,10 +546,13 @@ class CardWidget extends StatelessWidget {
             ),
           ),
           Flexible(
-              child: Text(
-            card.passwordFormURL,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              child: Padding(
+            padding: const EdgeInsets.only(right: 30),
+            child: Text(
+              card.passwordFormURL,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           )),
         ]),
       ),
