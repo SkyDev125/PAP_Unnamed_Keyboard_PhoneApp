@@ -1,6 +1,4 @@
 //Import the files needed for the variables
-// ignore: unused_import
-import 'dart:developer';
 
 import 'package:first_app/cards_store.dart';
 import 'package:first_app/components/variables.dart';
@@ -36,67 +34,26 @@ class MainBodyState extends State<MainBody> {
         newIndex -= 1;
       }
 
-      log(newIndex.toString());
-      log(oldIndex.toString());
+      final cardBox = Hive.box('cards_data');
+      List<dynamic> cards = cardBox.values.toList();
 
-      int o = newIndex - oldIndex;
-      log(o.toString());
+      final c = cards.removeAt(oldIndex);
+      cards.insert(newIndex, c);
 
-      for (int i = 1; o != 0; i++) {
-        
-        final cardsBox = Hive.box('cards_data');
+      for (int i = 0; i < cards.length; i++) {
+        CardInfo card = cards[i];
+        final cardInBox = cardBox.getAt(i);
 
-        if (o < 0) {
-          log("reducing index");
-          log(i.toString());
-          CardInfo oldPosCard = cardsBox.getAt(oldIndex - i + 1);
-          CardInfo newPosCard = cardsBox.getAt(oldIndex - i);
+        if (card != cardInBox) {
+          CardInfo newcard = CardInfo(
+              card.passwordFormURL,
+              card.passwordFormUsername,
+              card.passwordFormPassword,
+              card.passwordTOTPUrl,
+              card.iconUrl,
+              card.iconType);
 
-          CardInfo oldToNew = CardInfo(
-              oldPosCard.passwordFormURL,
-              oldPosCard.passwordFormUsername,
-              oldPosCard.passwordFormPassword,
-              oldPosCard.passwordTOTPUrl,
-              oldPosCard.iconUrl,
-              oldPosCard.iconType);
-
-          CardInfo newToOld = CardInfo(
-              newPosCard.passwordFormURL,
-              newPosCard.passwordFormUsername,
-              newPosCard.passwordFormPassword,
-              newPosCard.passwordTOTPUrl,
-              newPosCard.iconUrl,
-              newPosCard.iconType);
-
-          cardsBox.putAt(oldIndex, newToOld);
-          cardsBox.putAt(newIndex, oldToNew);
-
-          o++;
-        } else if (o > 0) {
-          log("growing index");
-          CardInfo oldPosCard = cardsBox.getAt(oldIndex + i - 1);
-          CardInfo newPosCard = cardsBox.getAt(oldIndex + i);
-
-          CardInfo oldToNew = CardInfo(
-              oldPosCard.passwordFormURL,
-              oldPosCard.passwordFormUsername,
-              oldPosCard.passwordFormPassword,
-              oldPosCard.passwordTOTPUrl,
-              oldPosCard.iconUrl,
-              oldPosCard.iconType);
-
-          CardInfo newToOld = CardInfo(
-              newPosCard.passwordFormURL,
-              newPosCard.passwordFormUsername,
-              newPosCard.passwordFormPassword,
-              newPosCard.passwordTOTPUrl,
-              newPosCard.iconUrl,
-              newPosCard.iconType);
-
-          cardsBox.putAt(oldIndex, newToOld);
-          cardsBox.putAt(newIndex, oldToNew);
-
-          o--;
+          cardBox.putAt(i, newcard);
         }
       }
     });
@@ -111,7 +68,6 @@ class MainBodyState extends State<MainBody> {
     return state.when(
         //Initial state, show logo in center
         initial: () {
-          log(init.toString());
           if (init == 1) {
             final cardsBox = Hive.box('cards_data');
             if (cardsBox.isNotEmpty) {
@@ -380,7 +336,6 @@ class MainBodyState extends State<MainBody> {
   void cardDismissed(int index, BuildContext context) {
     return setState(() {
       final cardsBox = Hive.box('cards_data');
-      log("index:" + index.toString());
       CardInfo card = cardsBox.getAt(index);
 
       final String cardName = card.passwordFormURL;

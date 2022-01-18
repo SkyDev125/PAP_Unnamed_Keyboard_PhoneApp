@@ -1,5 +1,4 @@
 //Import files necessary for Bloc (event/state manager) and freezed (easier development with bloc)
-import 'dart:developer';
 import 'dart:io';
 import 'package:first_app/cards_store.dart';
 import 'package:hive/hive.dart';
@@ -30,19 +29,11 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
       final cardsBox = Hive.box('cards_data');
       final int boxsize = cardsBox.length - 1;
       CardInfo card = cardsBox.getAt(boxsize);
-      log(card.passwordFormURL);
-      log(card.passwordFormUsername);
-      log(card.passwordFormPassword);
-      log(card.passwordTOTPUrl);
-      log(card.iconType);
-      log(card.iconUrl);
-      log("bitch");
       cardsListLoading = boxsize + 1;
       emit(const PasswordsState.loaded());
 
       try {
         //Define _card Widget to be created
-        log("going to try");
         var iconUrl =
             await favicon.Favicon.getBest('http://' + card.passwordFormURL);
 
@@ -67,9 +58,6 @@ class PasswordsBloc extends Bloc<PasswordsEvent, PasswordsState> {
         card.iconUrl = "error";
         card.iconType = "error";
       }
-
-      log(card.iconUrl);
-      log(card.iconType);
 
       cardsBox.putAt(boxsize, card);
       emit(const PasswordsState.cardsLoaded());

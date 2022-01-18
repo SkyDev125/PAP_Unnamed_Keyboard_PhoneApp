@@ -86,7 +86,7 @@ class FormWidget extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               await requestGET(url);
-              if (_formKey.currentState!.validate()) {
+              if (_formKey.currentState?.validate() ?? false) {
                 // If the form is valid, display a snackbar. In the real world,
                 // you'd often call a server or save the information in a database.
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -103,8 +103,8 @@ class FormWidget extends StatelessWidget {
                 );
 
                 _formKey.currentState!.save();
-                final newCardInfo = CardInfo(formURL,
-                    formUsername, formPassword, passwordTOTPUrl, "", "");
+                final newCardInfo = CardInfo(formURL, formUsername,
+                    formPassword, passwordTOTPUrl, "", "");
                 Hive.box('cards_data').add(newCardInfo);
                 snackbarOn = 1;
                 Navigator.of(context).popUntil(ModalRoute.withName("/"));

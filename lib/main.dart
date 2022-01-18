@@ -1,4 +1,3 @@
-//TODO 1: Fix the reordable (step by step exchange between keys)
 //TODO 1: Comment the whole code
 //TODO 2: Research about bluetooth or nfc connection between app and raspberry pi
 //TODO 3: Implement the data receive and sent of information based on NFC or Bluetooth

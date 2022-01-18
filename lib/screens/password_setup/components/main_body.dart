@@ -23,7 +23,6 @@ class MainBodyState extends State<MainBody> {
 
   @override
   Widget build(BuildContext context) {
-    //Define _card Widget to be created by FAB
     return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.only(
@@ -64,7 +63,8 @@ class MainBodyState extends State<MainBody> {
                   ElevatedButton(
                     onPressed: () async {
                       await requestGET(url);
-                      if (_formKey.currentState!.validate()) {
+                      if (_formKey.currentState?.validate() ?? false) {
+
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -87,11 +87,12 @@ class MainBodyState extends State<MainBody> {
                             formURL, formUsername, formPassword, "", "", "");
                         Hive.box('cards_data').add(newCardInfo);
                         snackbarOn = 1;
-                        Navigator.of(context).pop();
 
                         context
                             .read<PasswordsBloc>()
                             .add(const PasswordsEvent.cardAdd());
+                            
+                        Navigator.of(context).pop();
                       }
                     },
                     child: const Text('Submit', style: TextStyle(fontSize: 20)),
