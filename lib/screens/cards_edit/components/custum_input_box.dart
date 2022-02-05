@@ -115,6 +115,7 @@ class _MyCustomInputBoxState extends State<MyCustomInputBox> {
                   return 'Website is Unreacheable';
                 }
               }
+              return 'Please enter some text';
             },
             onSaved: (value) {
               switch (widget.identifier) {
