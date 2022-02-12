@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 const bottomAppBarMenuIcons = [
   Icons.vpn_key,
   Icons.search_sharp,
-  Icons.delete,
+  Icons.file_present_sharp,
   Icons.settings
 ];
 
