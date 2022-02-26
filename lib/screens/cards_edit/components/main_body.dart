@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:first_app/screens/cards_edit/components/custum_input_box.dart';
 import 'package:hive/hive.dart';
-// ignore: implementation_imports
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 //Create the widget Main Body Class
 class MainBody extends StatefulWidget {
@@ -17,7 +16,6 @@ class MainBody extends StatefulWidget {
 }
 
 class MainBodyState extends State<MainBody> {
-  int onlyonce = 0;
   final _formKey = GlobalKey<FormState>();
 
   @override

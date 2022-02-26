@@ -10,14 +10,6 @@ class MainBody extends StatefulWidget {
 }
 
 class MainBodyState extends State<MainBody> {
-  //Reorders the cards in the array once a card is moved.
-  void reorderData(int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) {
-        newIndex--;
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

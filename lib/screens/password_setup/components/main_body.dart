@@ -3,8 +3,7 @@ import 'package:first_app/cards_store.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-// ignore: implementation_imports
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 //Imports needed for the Pages
 import '../../../bloc/passwords_bloc.dart';
@@ -36,7 +35,7 @@ class MainBodyState extends State<MainBody> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  MyCustomInputBox(
+                  const MyCustomInputBox(
                     label: "Website",
                     inputHint: "www.example.com",
                     identifier: 0,
@@ -44,7 +43,7 @@ class MainBodyState extends State<MainBody> {
                   const Padding(
                     padding: EdgeInsets.all(2),
                   ),
-                  MyCustomInputBox(
+                  const MyCustomInputBox(
                     label: "Username",
                     inputHint: "Example312",
                     identifier: 1,
@@ -52,7 +51,7 @@ class MainBodyState extends State<MainBody> {
                   const Padding(
                     padding: EdgeInsets.all(2),
                   ),
-                  MyCustomInputBox(
+                  const MyCustomInputBox(
                     label: "Password",
                     inputHint: "Ex@mple",
                     identifier: 2,

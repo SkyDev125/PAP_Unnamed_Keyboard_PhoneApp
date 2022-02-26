@@ -207,7 +207,7 @@ class MainBodyState extends State<MainBody> {
                   ),
                   child: ClipPath(
                     key: key,
-                    clipper: Customshape(),
+                    clipper: CustomShape(),
                     child: Container(
                       key: key,
                       color: const Color(0xFF912CEE),
@@ -459,7 +459,7 @@ class SingleWidgetLoading extends StatelessWidget {
   }
 }
 
-class Customshape extends CustomClipper<Path> {
+class CustomShape extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     double height = size.height;

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:hive/hive.dart';
 import 'package:otp/otp.dart';
-// ignore: implementation_imports
 
 late String code;
 late String temp;
@@ -29,14 +28,14 @@ class MainBody extends StatefulWidget {
 class MainBodyState extends State<MainBody> {
   double textSize = 25;
 
-  int onlyonce = 0;
+  bool onlyonce = false;
 
   @override
   Widget build(BuildContext context) {
     final cardsBox = Hive.box('cards_data');
     CardInfo card = cardsBox.getAt(cardOnEdit);
 
-    if (onlyonce == 0) {
+    if (onlyonce == false) {
       String totpUrl = card.passwordTOTPUrl;
 
       //totpSecret
@@ -107,7 +106,7 @@ class MainBodyState extends State<MainBody> {
       }
 
       _start = totpPeriod;
-      onlyonce = 1;
+      onlyonce = true;
     }
 
     return SingleChildScrollView(
@@ -281,7 +280,7 @@ class TimerAnimation extends StatefulWidget {
 }
 
 class _TimerAnimationState extends State<TimerAnimation> {
-  Timer _timer = Timer(const Duration(milliseconds: 0), () {});
+  late Timer _timer;
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
@@ -308,14 +307,14 @@ class _TimerAnimationState extends State<TimerAnimation> {
     super.dispose();
   }
 
-  int onlyonce = 0;
+  bool onlyonce = false;
   late UniqueKey animationKey;
 
   @override
   Widget build(BuildContext context) {
-    if (onlyonce == 0) {
+    if (onlyonce == false) {
       startTimer();
-      onlyonce = 1;
+      onlyonce = true;
       animationKey = UniqueKey();
     }
 
@@ -353,7 +352,7 @@ class TOTP extends StatefulWidget {
 }
 
 class _TOTPState extends State<TOTP> {
-  Timer _timer = Timer(const Duration(milliseconds: 0), () {});
+  late Timer _timer;
 
   void startTimer() {
     final time = Duration(seconds: totpPeriod);
@@ -369,13 +368,13 @@ class _TOTPState extends State<TOTP> {
     super.dispose();
   }
 
-  int onlyonce = 0;
+  bool onlyonce = false;
 
   @override
   Widget build(BuildContext context) {
-    if (onlyonce == 0) {
+    if (onlyonce == false) {
       startTimer();
-      onlyonce = 1;
+      onlyonce = true;
     }
 
     code = OTP.generateTOTPCodeString(

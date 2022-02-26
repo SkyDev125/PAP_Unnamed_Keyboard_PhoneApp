@@ -27,12 +27,12 @@ class MainBody extends StatefulWidget {
 }
 
 class MainBodyState extends State<MainBody> {
-  int onlyonce = 0;
+  bool onlyonce = false;
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    if (onlyonce == 0) {
+    if (onlyonce == false) {
       String totpUrl = data.code.toString();
 
       //totpSecret
@@ -103,7 +103,7 @@ class MainBodyState extends State<MainBody> {
       }
 
       _start = totpPeriod;
-      onlyonce = 1;
+      onlyonce = true;
     }
 
     return SingleChildScrollView(
@@ -146,7 +146,7 @@ class FormWidget extends StatelessWidget {
     return Form(
         key: _formKey,
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          MyCustomInputBox(
+          const MyCustomInputBox(
             label: "Website",
             inputHint: "www.example.com",
             identifier: 0,
@@ -154,7 +154,7 @@ class FormWidget extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(2),
           ),
-          MyCustomInputBox(
+          const MyCustomInputBox(
             label: "Username",
             inputHint: "Example312",
             identifier: 1,
@@ -162,7 +162,7 @@ class FormWidget extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(2),
           ),
-          MyCustomInputBox(
+          const MyCustomInputBox(
             label: "Password",
             inputHint: "Ex@mple",
             identifier: 2,
@@ -217,7 +217,7 @@ class TimerAnimation extends StatefulWidget {
 }
 
 class _TimerAnimationState extends State<TimerAnimation> {
-  Timer _timer = Timer(const Duration(milliseconds: 0), () {});
+  late Timer _timer;
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);
@@ -244,14 +244,14 @@ class _TimerAnimationState extends State<TimerAnimation> {
     super.dispose();
   }
 
-  int onlyonce = 0;
+  bool onlyonce = false;
   late UniqueKey animationKey;
 
   @override
   Widget build(BuildContext context) {
-    if (onlyonce == 0) {
+    if (onlyonce == false) {
       startTimer();
-      onlyonce = 1;
+      onlyonce = true;
       animationKey = UniqueKey();
     }
 
@@ -289,7 +289,7 @@ class TOTP extends StatefulWidget {
 }
 
 class _TOTPState extends State<TOTP> {
-  Timer _timer = Timer(const Duration(milliseconds: 0), () {});
+  late Timer _timer;
 
   void startTimer() {
     final time = Duration(seconds: totpPeriod);
@@ -305,13 +305,13 @@ class _TOTPState extends State<TOTP> {
     super.dispose();
   }
 
-  int onlyonce = 0;
+  bool onlyonce = false;
 
   @override
   Widget build(BuildContext context) {
-    if (onlyonce == 0) {
+    if (onlyonce == false) {
       startTimer();
-      onlyonce = 1;
+      onlyonce = true;
     }
     return Column(children: [
       Text(

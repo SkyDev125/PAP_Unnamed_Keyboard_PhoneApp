@@ -20,13 +20,12 @@ Future<void> requestGET(value) async {
   }
 }
 
-// ignore: must_be_immutable
 class MyCustomInputBox extends StatefulWidget {
-  String label;
-  String inputHint;
-  int identifier;
+  final String label;
+  final String inputHint;
+  final int identifier;
 
-  MyCustomInputBox({
+  const MyCustomInputBox({
     Key? key,
     required this.label,
     required this.inputHint,

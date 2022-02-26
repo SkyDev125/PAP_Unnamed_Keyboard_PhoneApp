@@ -170,7 +170,6 @@ class _QrCodeScanState extends State<QrCodeScan> {
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
-    //log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

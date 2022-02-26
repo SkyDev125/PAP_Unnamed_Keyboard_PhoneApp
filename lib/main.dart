@@ -1,6 +1,9 @@
 //TODO 1: Comment the whole code
-//TODO 2: Research about bluetooth or nfc connection between app and raspberry pi
-//TODO 3: Implement the data receive and sent of information based on NFC or Bluetooth
+//TODO 2: Stop repeating the same code multiple times (appbar repetition, and others), add parameters instead!
+//TODO 3: Find a way to stop using global variables
+//TODO 4: Change 2fa code generation to "Switch case" statement, instead of else if.
+//TODO 5: Stop using nested trycatch, use int.tryParse to help.
+//TODO 6: Only use package: imports, dont use the hardcoded importing.
 //TODO 5: Get rid of the useless menu's and figure out something better
 
 //Import the files needed for the application

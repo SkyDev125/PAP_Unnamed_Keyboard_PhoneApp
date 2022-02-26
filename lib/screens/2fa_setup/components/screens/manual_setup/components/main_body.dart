@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:first_app/components/variables.dart';
 import 'package:first_app/screens/password_setup/components/custum_input_box.dart';
 import 'package:hive/hive.dart';
-// ignore: implementation_imports
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 //Create the widget Main Body Class
 class MainBody extends StatefulWidget {
@@ -17,7 +16,6 @@ class MainBody extends StatefulWidget {
 }
 
 class MainBodyState extends State<MainBody> {
-  int onlyonce = 0;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -54,12 +52,12 @@ class FormWidget extends StatelessWidget {
     return Form(
         key: _formKey,
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          MyCustomInputBox(
+          const MyCustomInputBox(
             label: "Key",
             inputHint: "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ",
             identifier: 3,
           ),
-          MyCustomInputBox(
+          const MyCustomInputBox(
             label: "Website",
             inputHint: "www.example.com",
             identifier: 0,
@@ -67,7 +65,7 @@ class FormWidget extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(2),
           ),
-          MyCustomInputBox(
+          const MyCustomInputBox(
             label: "Username",
             inputHint: "Example312",
             identifier: 1,
@@ -75,7 +73,7 @@ class FormWidget extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(2),
           ),
-          MyCustomInputBox(
+          const MyCustomInputBox(
             label: "Password",
             inputHint: "Ex@mple",
             identifier: 2,
